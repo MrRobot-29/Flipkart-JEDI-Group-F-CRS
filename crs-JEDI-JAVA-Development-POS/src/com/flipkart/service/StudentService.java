@@ -4,12 +4,11 @@
 package com.flipkart.service;
 
 /**
- * @author ashwin.kumar
+ * @author ashwin.kumar2
  *
  */
+
 public class StudentService {
-	
-	
 	
 	public void courseList() {
 		// get the list of all the courses and return it.
@@ -21,15 +20,29 @@ public class StudentService {
 		
 	}
 	
-	public void approvedList() {
-		// add/drop for the courses
+	public void addCourse() {
+		// add the course
 		
 	}
 	
-	public void getTotalFee() {
+	public void dropCourse() {
+		// drop the course
+		
+	}
+	
+	public void approvedList() {
+		// get the list of approved registered courses
+		
+	}
+	
+	
+	
+	public void calculateTotalFee() {
 		// calculate the total fees based on the registered courses.
 		
 	}
+	
+	
 	
 	public void payFee() {
 		// pay for the fees and return receipt
@@ -42,11 +55,9 @@ public class StudentService {
 	}
 	
 	
-	
 	public void viewGrade() {
 		//view the grade card with exception handling
+		
 	}
-	
-	
 	
 }
