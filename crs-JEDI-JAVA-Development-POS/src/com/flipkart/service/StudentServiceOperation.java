@@ -8,7 +8,7 @@ package com.flipkart.service;
  *
  */
 
-public class StudentService {
+public class StudentServiceOperation {
 	
 	public void courseList() {
 		// get the list of all the courses and return it.

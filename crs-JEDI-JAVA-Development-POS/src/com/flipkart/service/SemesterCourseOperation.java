@@ -7,7 +7,7 @@ package com.flipkart.service;
  * @author ashwin.kumar2
  *
  */
-public class SemesterCourse {
+public class SemesterCourseOperation {
 	
 	public void viewCourses() {
 		// view the list of all the courses

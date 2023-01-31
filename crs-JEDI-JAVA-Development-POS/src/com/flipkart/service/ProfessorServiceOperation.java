@@ -7,7 +7,7 @@ package com.flipkart.service;
  * @author manish.kumar24
  *
  */
-public class ProfessorService {
+public class ProfessorServiceOperation {
 	
 	public void viewCourseList() {
 		// view List of courses taken by professor
