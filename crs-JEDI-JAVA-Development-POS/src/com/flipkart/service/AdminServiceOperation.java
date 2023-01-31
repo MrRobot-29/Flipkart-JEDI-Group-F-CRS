@@ -1,8 +1,6 @@
-
 package com.flipkart.service;
 
-
-public class AdminService(){
+public class AdminServiceOperation{
 
     // course services
     public void dropCourse(String courseCode) {
@@ -17,17 +15,17 @@ public class AdminService(){
 
     }
 
-    public List<Course> viewCourses(String catalogId) {
+    public void viewCourses(String catalogId) {
 
     }
 
 // student related services
 
-    public List<Student> viewPendingStudents() {
+    public void viewPendingStudents() {
 
     }
 
-    public List<Student> viewAllStudents() {
+    public void viewAllStudents() {
 
     }
 
@@ -46,7 +44,7 @@ public class AdminService(){
     public void dropProfessor(String professorId){
 
     }
-    public List<Professor> viewProfessors() {
+    public void viewProfessors() {
 
     }
 
