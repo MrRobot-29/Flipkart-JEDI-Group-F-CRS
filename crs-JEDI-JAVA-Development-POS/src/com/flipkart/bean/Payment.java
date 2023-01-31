@@ -1,9 +1,10 @@
 package com.flipkart.bean;
 
-public abstract class Payment {
+public class Payment {
 	public int studentID;
 	public String referenceID;
 	public float paymentAmount;
+	public String modeOfPayment;
 	public boolean status;
 	
 	
@@ -32,7 +33,12 @@ public abstract class Payment {
 		this.status = status;
 	}
 	
-	
+	public String getModeOfPayment() {
+		return modeOfPayment;
+	}
+	public void setModeOfPayment(String modeOfPayment) {
+		this.modeOfPayment = modeOfPayment;
+	}
 	
 	
 	
