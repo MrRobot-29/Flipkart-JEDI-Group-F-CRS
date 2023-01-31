@@ -17,7 +17,7 @@ public class AdminService(){
 
     }
 
-    public List<Course> viewCourses(int catalogId) {
+    public List<Course> viewCourses(String catalogId) {
 
     }
 
@@ -31,7 +31,7 @@ public class AdminService(){
 
     }
 
-    public void validateStudent(int studentId){
+    public void validateStudent(String studentId){
 
 
     }
