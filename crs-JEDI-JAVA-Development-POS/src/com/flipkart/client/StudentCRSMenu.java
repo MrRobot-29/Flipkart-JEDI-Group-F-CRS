@@ -9,7 +9,6 @@ public class StudentCRSMenu {
 		Scanner sc = new Scanner(System.in);
 		while(isLoggedIn == true)
 		{
-			System.out.println(isLoggedIn);
 			System.out.println("Welcome to Student Menu !!");
 			System.out.println("1. Generate Course List");
 			System.out.println("2. Register Course");

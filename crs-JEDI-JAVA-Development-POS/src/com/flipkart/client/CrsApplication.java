@@ -26,25 +26,33 @@ public class CrsApplication {
 			{
 			case 1:
 				System.out.println("Enter user name : ");
-				
+				String userName = sc.next();
 				System.out.println("Enter Password : ");
+				String password = sc.next();
 				System.out.println("Enter Role : ");
 				String role = sc.next();
-				if(role == "professor") {
+				if(role.equals("professor")) {
 					ProfessorCRSMenu professorMenu = new ProfessorCRSMenu();
 					professorMenu.createMenu();
 				}
-				
+				else if(role.equals("student")) {
+					StudentCRSMenu studentMenu = new StudentCRSMenu();
+					studentMenu.createMenu();
+				}
+				else if(role.equals("admin")) {
+					AdminCRSMenu adminMenu = new AdminCRSMenu();
+					adminMenu.createMenu();
+				}
+				else
+				{
+					System.out.println("Invalid Role!!");
+				}
 				break;
 			case 2:
-				System.out.println("Enter user name : ");
-				System.out.println("Enter Password : ");
-				System.out.println("Enter Role : ");
+				
 				break;
 			case 3:
-				System.out.println("Enter user name : ");
-				System.out.println("Enter Password : ");
-				System.out.println("Enter Role : ");
+				
 				break;
 			case 4:
 				isExit = true;
