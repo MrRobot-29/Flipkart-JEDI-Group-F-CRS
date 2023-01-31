@@ -7,12 +7,6 @@ public class Professor extends User {
 	private String department;
 	private String designation;
 	
-	
-	
-	public Professor() {
-
-	}
-	
 	public Professor(String userId, String name, Role role, String password, Gender gender, String address,
 			String country, String department, String designation) {
 		super(userId, name, role, password, gender, address, country);
