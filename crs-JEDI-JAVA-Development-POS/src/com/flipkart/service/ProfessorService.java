@@ -8,5 +8,17 @@ package com.flipkart.service;
  *
  */
 public class ProfessorService {
+	
+	public void viewCourseList() {
+		// view List of courses taken by professor
+	}
+	
+	public void viewEnrolledStudents() {
+		// view List of professor enrolled in professor's courses
+	}
+	
+	public void addGrade() {
+		
+	}
 
 }
