@@ -11,13 +11,13 @@ public class StudentCRSMenu {
 		{
 			System.out.println("Login as : " + user + "\n");
 			System.out.println("Welcome to Student Menu !!");
-			System.out.println("1. Generate Course List");
+			System.out.println("1. View available Course List");
 			System.out.println("2. Register Course");
 			System.out.println("3. Add Course");
 			System.out.println("4. Drop Course");
-			System.out.println("5. Approved Course");
+			System.out.println("5. View registered Course");
 			System.out.println("6. Pay Fee");
-			System.out.println("7. View Grades");
+			System.out.println("7. View Grade Card");
 			System.out.println("8. Log Out");
 			System.out.println("Enter Your Choice: ");
 			
