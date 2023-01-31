@@ -5,11 +5,11 @@ package com.flipkart.service;
 public class AdminService(){
 
     // course services
-    public void dropCourse(String dropCourseCode) {
+    public void dropCourse(String courseCode) {
 
     }
 
-    public void addCourse(Course newCourse) {
+    public void addCourse(String courseCode) {
 
     }
 
@@ -39,11 +39,11 @@ public class AdminService(){
 
 // professor related services
 
-    public void addProfessor(Professor professor) {
+    public void addProfessor(String professorId) {
 
     }
 
-    public void dropProfessor(Professor professor){
+    public void dropProfessor(String professorId){
 
     }
     public List<Professor> viewProfessors() {
