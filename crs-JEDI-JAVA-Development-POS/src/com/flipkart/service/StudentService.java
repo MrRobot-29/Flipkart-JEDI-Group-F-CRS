@@ -13,6 +13,7 @@ public class StudentService {
 	public void courseList() {
 		// get the list of all the courses and return it.
 		
+		
 	}
 	
 	public void registerCourse() {
