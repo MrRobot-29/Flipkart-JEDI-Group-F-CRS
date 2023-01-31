@@ -4,11 +4,12 @@ import java.util.Scanner;
 
 public class StudentCRSMenu {
 	static boolean isLoggedIn = true;
-	public void createMenu()
+	public void createMenu(String user)
 	{
 		Scanner sc = new Scanner(System.in);
 		while(isLoggedIn == true)
 		{
+			System.out.println("Login as : " + user + "\n");
 			System.out.println("Welcome to Student Menu !!");
 			System.out.println("1. Generate Course List");
 			System.out.println("2. Register Course");

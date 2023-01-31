@@ -4,11 +4,13 @@ import java.util.Scanner;
 public class AdminCRSMenu {
 	Scanner scanner = new Scanner(System.in); 
 	
-	public void createMenu() {
+	public void createMenu(String user) {
+		
 		
 		System.out.println("***********************************");
 		System.out.println("********* Admin *******************");
 		System.out.println("***********************************");
+		System.out.println("Login as : " + user + "\n");
 		System.out.println("1. View course in catalog");
 		System.out.println("2. Add Course to catalog");
 		System.out.println("3. Delete Course from catalog");

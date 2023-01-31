@@ -33,15 +33,15 @@ public class CrsApplication {
 				String role = sc.next();
 				if(role.equals("professor")) {
 					ProfessorCRSMenu professorMenu = new ProfessorCRSMenu();
-					professorMenu.createMenu();
+					professorMenu.createMenu(userName);
 				}
 				else if(role.equals("student")) {
 					StudentCRSMenu studentMenu = new StudentCRSMenu();
-					studentMenu.createMenu();
+					studentMenu.createMenu(userName);
 				}
 				else if(role.equals("admin")) {
 					AdminCRSMenu adminMenu = new AdminCRSMenu();
-					adminMenu.createMenu();
+					adminMenu.createMenu(userName);
 				}
 				else
 				{
