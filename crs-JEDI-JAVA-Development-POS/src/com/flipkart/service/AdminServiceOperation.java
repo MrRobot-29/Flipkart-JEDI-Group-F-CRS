@@ -1,6 +1,6 @@
 package com.flipkart.service;
 
-public class AdminServiceOperation{
+public class AdminServiceOperation implements AdminService {
 
     // course services
     public void dropCourse(String courseCode) {
