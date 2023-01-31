@@ -16,8 +16,7 @@ public class AdminCRSMenu {
 		System.out.println("3. Delete Course from catalog");
 		System.out.println("4. Approve Students");
 		System.out.println("5. Add Professor");
-		System.out.println("6. Assign Courses To Professor");
-		System.out.println("7. Logout");
+		System.out.println("6. Logout");
 		System.out.println("*****************************");
 		
 		int choice = scanner.nextInt();
@@ -45,9 +44,7 @@ public class AdminCRSMenu {
 			System.out.println("addProfessor()");
 			break;
 		
-		case 6:
-			System.out.println("assignCourseToProfessor()");
-			break;
+
 		
 		default:
 			System.out.println("Wrong Option");
