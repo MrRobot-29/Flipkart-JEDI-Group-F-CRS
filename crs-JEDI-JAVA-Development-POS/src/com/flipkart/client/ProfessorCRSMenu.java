@@ -6,10 +6,12 @@ public class ProfessorCRSMenu {
 	
 	
 	
-	public void createMenu() {
+	public void createMenu(String user) {
 		boolean isLogin = true;
 		while(isLogin) {
-			System.out.print("Enter your choise : ");
+			System.out.println("Login as : " + user + "\n");
+			
+			System.out.println("Enter your choise : ");
 			System.out.println("1. viewCourse");
 			System.out.println("2. View Enrolled Student");
 			System.out.println("3. Add Grade");

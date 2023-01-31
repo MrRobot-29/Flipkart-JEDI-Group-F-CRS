@@ -1,6 +1,9 @@
 package com.flipkart.client;
 
 import java.util.Scanner;
+import com.flipkart.client.*;
+import com.flipkart.service.StudentService;
+import com.flipkart.service.StudentServiceOperation;
 
 public class CrsApplication {
 
@@ -22,14 +25,38 @@ public class CrsApplication {
 			switch(selectedOption)
 			{
 			case 1:
+				System.out.println("Enter user name : ");
+				String userName = sc.next();
+				System.out.println("Enter Password : ");
+				String password = sc.next();
+				System.out.println("Enter Role : ");
+				String role = sc.next();
+				if(role.equals("professor")) {
+					ProfessorCRSMenu professorMenu = new ProfessorCRSMenu();
+					professorMenu.createMenu(userName);
+				}
+				else if(role.equals("student")) {
+					StudentCRSMenu studentMenu = new StudentCRSMenu();
+					studentMenu.createMenu(userName);
+				}
+				else if(role.equals("admin")) {
+					AdminCRSMenu adminMenu = new AdminCRSMenu();
+					adminMenu.createMenu(userName);
+				}
+				else
+				{
+					System.out.println("Invalid Role!!");
+				}
 				break;
 			case 2:
+				
 				break;
 			case 3:
+				
 				break;
 			case 4:
 				isExit = true;
-				System.exit(0);
+//				System.exit(0);
 				break;
 			default:
 				break;
