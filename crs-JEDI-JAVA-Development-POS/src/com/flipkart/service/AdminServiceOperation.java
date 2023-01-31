@@ -19,8 +19,7 @@ public class AdminServiceOperation implements AdminService {
 
     }
 
-// student related services
-
+    // student related services
     public void viewPendingStudents() {
 
     }
@@ -35,8 +34,7 @@ public class AdminServiceOperation implements AdminService {
     }
 
 
-// professor related services
-
+    // professor related services
     public void addProfessor(String professorId) {
 
     }
