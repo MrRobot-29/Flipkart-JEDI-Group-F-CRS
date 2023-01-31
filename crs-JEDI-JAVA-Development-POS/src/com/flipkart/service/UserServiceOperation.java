@@ -7,7 +7,7 @@ package com.flipkart.service;
  * @author ashwin.kumar2
  *
  */
-public class UserServiceOperation {
+public class UserServiceOperation implements UserService{
 	
 	public void registerAccount() {
 		// register student account
