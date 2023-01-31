@@ -22,12 +22,17 @@ public class CrsApplication {
 			switch(selectedOption)
 			{
 			case 1:
+				break;
 			case 2:
+				break;
 			case 3:
+				break;
 			case 4:
 				isExit = true;
 				System.exit(0);
+				break;
 			default:
+				break;
 					
 			}
 		}
