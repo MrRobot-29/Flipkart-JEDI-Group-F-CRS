@@ -17,11 +17,12 @@ public class CrsApplication {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		int selectedOption = sc.nextInt();
+		
 		
 		boolean isExit = false;
 		while(!isExit)
 		{
+			int selectedOption = sc.nextInt();
 			switch(selectedOption)
 			{
 			case 1:

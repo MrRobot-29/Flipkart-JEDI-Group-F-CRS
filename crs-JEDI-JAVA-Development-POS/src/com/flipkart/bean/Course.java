@@ -4,13 +4,17 @@ public class Course {
 	private String courseName;
 	private String courseId;
 	private String instructorId;
+	private Double courseFee;
 	private boolean isCourseAvailable;
 	
-	public Course(String courseName, String courseId, String instructorId, boolean isCourseAvailable) {
+	
+
+	public Course(String courseName, String courseId, String instructorId, boolean isCourseAvailable, Double fee) {
 		this.courseName = courseName;
 		this.courseId = courseId;
 		this.instructorId = instructorId;
 		this.isCourseAvailable = isCourseAvailable;
+		this.courseFee = fee;
 	}
 
 	public String getCourseName() {
@@ -45,6 +49,12 @@ public class Course {
 		this.isCourseAvailable = isCourseAvailable;
 	}
 	
-	
+	public Double getCourseFee() {
+		return courseFee;
+	}
+
+	public void setCourseFee(Double courseFee) {
+		this.courseFee = courseFee;
+	}
 
 }
