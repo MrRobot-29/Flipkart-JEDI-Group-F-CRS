@@ -20,7 +20,7 @@ public class UserServiceOperation implements UserService{
 	public void registerAccount() {
 		// register student account
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter Student's ID");
+		System.out.println("Enter Student's ID (Int)");
 		int sid = sc.nextInt();
 		System.out.println("Enter Student's Name");
 		String sname = sc.next();

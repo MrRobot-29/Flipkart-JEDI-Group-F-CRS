@@ -26,7 +26,6 @@ public class SemesterCourseOperation implements SemesterCourseService {
 		ArrayList<Course> courseList = td.getCourseList();
 		
 		return courseList;
-		
 	}
 	
 	public void addCourses() {

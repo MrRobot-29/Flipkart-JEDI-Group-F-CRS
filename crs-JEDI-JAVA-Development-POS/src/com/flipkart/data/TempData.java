@@ -17,6 +17,11 @@ public class TempData {
     private ArrayList<Course> studentCourseCart = new ArrayList<Course>();
     private ArrayList<Course> studentApprovedCourses = new ArrayList<Course>();
     private ArrayList<Grade> grades = new ArrayList<Grade>();
+    
+	
+
+	//private Hashtable<Integer, Integer> studentCourseMap = new Hashtable<Integer, Integer>();
+    
     private ArrayList<Professor> professor = new ArrayList<Professor>();
 
 
@@ -28,6 +33,8 @@ public class TempData {
     
 
     private ArrayList<Student> students = new ArrayList<Student>();
+    
+    
     
     
     
@@ -62,7 +69,7 @@ public class TempData {
         	Random rd = new Random(); // creating Random object
         	boolean isApproved = rd.nextBoolean();
         	
-//        	String userId, String name, Role role, String password, Gender gender, String address,
+//        	String studentId, String name, Role role, String password, Gender gender, String address,
 //			String country,String branchName,int studentId,int batch,boolean isApproved
         	
         	Student st = new Student("2019" + (i+1), "name" + (i+1), Role.STUDENT, "password", 
@@ -80,30 +87,20 @@ public class TempData {
     }
     
     
-	public ArrayList<Student> getApprovedStudents() {
-		return approvedStudents;
-	}
-
-	private Hashtable<Integer, Integer> studentCourseMap = new Hashtable<Integer, Integer>();
-	
-
-	public void setStudentCourseMap(int studentId, int courseId) {
-//		studentCourseMap.put(courseId);
-	
-	}
-	
-	public void getStudentCourseMap(int StudentId) {
-//		return 
-	}
 
 
 	/**
 	 * @param approvedStudents the approvedStudents to set
 	 */
-	public void setApprovedStudents(ArrayList<Student> approvedStudents) {
-		this.approvedStudents = approvedStudents;
+	public void setApprovedStudents(Student st) {
+		
+		this.approvedStudents.add(st);
+		
 	}
 
+	public ArrayList<Student> getApprovedStudents() {
+		return approvedStudents;
+	}
 
 
 
@@ -122,8 +119,30 @@ public class TempData {
 	public void setPendingStudents(ArrayList<Student> pendingStudents) {
 		this.pendingStudents = pendingStudents;
 	}
-
-
+	
+	public void removePendingStudents(Student st) {
+			
+		Iterator itr = this.pendingStudents.iterator();
+		
+		while(itr.hasNext()) {
+			Student it = (Student)itr.next();
+			if(it == st) {
+				itr.remove();
+				break;
+			}
+		}
+	}
+	
+	
+	
+	public void setStudentCourseMap(int studentId, int courseId) {
+//		studentCourseMap.put(courseId);
+	
+	}
+	
+	public void getStudentCourseMap(int StudentId) {
+//		return 
+	}
 
 
 
