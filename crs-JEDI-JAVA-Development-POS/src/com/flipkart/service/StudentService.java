@@ -18,7 +18,7 @@ public interface StudentService {
 	
 	public int calculateTotalFee();
 	
-	public void payFee(Student s);
+	public void payFee(String user);
 	
 	public String viewGrade(RegisteredCourse rc);
 }

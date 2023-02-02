@@ -86,16 +86,23 @@ public class StudentServiceOperation implements StudentService{
 	
 	
 	
-	public void payFee(Student st) {
+	public void payFee(String user) {
 		
+		Student st = null;
 		
+		for (Student student : td.getApprovedStudents()) {
+			if(student.getName() == user) {
+				st = student;
+				break;
+			}
+		}
 
 
 		int totalFee = this.calculateTotalFee();
-
+		System.out.println(totalFee);
 		PaymentServiceOperation pso = new PaymentServiceOperation();
 		
-		pso.initiatePayment(totalFee, st);
+		pso.initiatePayment(totalFee, st, td.getStudentApprovedCourses());
 		
 		
 		// pay for the fees and return receipt

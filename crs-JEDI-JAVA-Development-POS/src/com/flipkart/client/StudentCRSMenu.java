@@ -66,6 +66,7 @@ public class StudentCRSMenu {
 				break;
 			case 5:
 				
+				sso.payFee(user);
 				break;
 			case 6:
 				break;
