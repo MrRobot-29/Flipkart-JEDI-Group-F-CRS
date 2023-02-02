@@ -2,6 +2,10 @@
  * 
  */
 package com.flipkart.service;
+import java.util.ArrayList;
+
+import com.flipkart.bean.*;
+import com.flipkart.data.*;
 
 /**
  * @author ashwin.kumar2
@@ -9,8 +13,19 @@ package com.flipkart.service;
  */
 public class SemesterCourseOperation implements SemesterCourseService {
 	
-	public void viewCourses() {
+	
+	TempData td;
+	
+	public SemesterCourseOperation() {
+		td = new TempData();
+	}
+	
+	public ArrayList<Course> viewCourses() {
 		// view the list of all the courses
+		
+		ArrayList<Course> courseList = td.getCourseList();
+		
+		return courseList;
 		
 	}
 	

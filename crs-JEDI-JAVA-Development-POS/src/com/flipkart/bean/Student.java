@@ -16,7 +16,7 @@ public class Student extends User {
 	
 
 	public Student(String userId, String name, Role role, String password, Gender gender, String address,
-			String country,String branchName,int studentId,int batch,boolean isApproved) {
+			String country,String branchName,int studentId,int batch, boolean isApproved) {
 		super(userId, name, role, password, gender, address, country);
 		this.branch = branchName;
 		this.studentID = studentId;
