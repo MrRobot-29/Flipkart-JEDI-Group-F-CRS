@@ -3,6 +3,13 @@
  */
 package com.flipkart.service;
 
+import java.util.ArrayList;
+
+import com.flipkart.bean.Course;
+import com.flipkart.bean.RegisteredCourse;
+import com.flipkart.bean.Student;
+import com.flipkart.data.TempData;
+
 /**
  * @author ashwin.kumar2
  *
@@ -10,42 +17,68 @@ package com.flipkart.service;
 
 public class StudentServiceOperation implements StudentService{
 	
-	public void courseList() {
+	TempData td = new TempData();
+	
+	
+	public ArrayList<Course> courseList() {
 		// get the list of all the courses and return it.
 		
+		return td.getCourseList();
 		
 	}
 	
-	public void registerCourse() {
-		// register for the courses
-		
-	}
 	
-	public void addCourse() {
+	
+	public boolean addCourse(Course c) {
 		// add the course
-		
+		ArrayList<Course> stdCart = td.getStudentCourseCart();
+		if(stdCart.size() > 6) return false;	
+		stdCart.add(c);
+		return true;
+	
 	}
 	
-	public void dropCourse() {
+	public void dropCourse(Course c) {
 		// drop the course
 		
+		ArrayList<Course> stdCart = td.getStudentCourseCart();
+		
+		stdCart.remove(c);
+		
 	}
 	
-	public void approvedList() {
+	public ArrayList<Course> approvedList() {
 		// get the list of approved registered courses
-		
+		return td.getStudentApprovedCourses();
 	}
 	
 	
 	
-	public void calculateTotalFee() {
+	public int calculateTotalFee() {
 		// calculate the total fees based on the registered courses.
+		ArrayList<Course> approvedCourses = td.getStudentApprovedCourses();
 		
+		int totalFee = 0;
+		
+		for(var course: approvedCourses) {
+			totalFee += course.getCourseFee();
+		}
+		
+		return totalFee;
 	}
 	
 	
 	
-	public void payFee() {
+	public void payFee(Student s) {
+		
+		
+		int totalFee = this.calculateTotalFee();
+		
+		PaymentServiceOperation pso = new PaymentServiceOperation();
+		
+		pso.initiatePayment(totalFee, s);
+		
+		
 		// pay for the fees and return receipt
 		/*
 		 * 
@@ -56,8 +89,10 @@ public class StudentServiceOperation implements StudentService{
 	}
 	
 	
-	public void viewGrade() {
+	public String viewGrade(RegisteredCourse rc) {
 		//view the grade card with exception handling
+		
+		return rc.getGradesObtained();
 		
 	}
 	

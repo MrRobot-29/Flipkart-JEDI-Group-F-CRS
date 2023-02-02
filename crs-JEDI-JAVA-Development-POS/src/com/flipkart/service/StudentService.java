@@ -1,18 +1,20 @@
 package com.flipkart.service;
 
+import java.util.ArrayList;
+
+import com.flipkart.bean.Course;
+
 public interface StudentService {
 
-	public void courseList();
+	public ArrayList<Course> courseList();
 	
-	public void registerCourse();
+	public boolean addCourse(Course c);
 	
-	public void addCourse();
+	public void dropCourse(Course c);
 	
-	public void dropCourse();
+	public  ArrayList<Course> approvedList();
 	
-	public void approvedList();
-	
-	public void calculateTotalFee();
+	public int calculateTotalFee();
 	
 	public void payFee();
 	
