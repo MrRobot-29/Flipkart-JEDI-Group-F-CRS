@@ -1,15 +1,23 @@
 package com.flipkart.client;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import com.flipkart.bean.Course;
+import com.flipkart.service.ProfessorService;
+import com.flipkart.service.ProfessorServiceOperation;
 
 public class ProfessorCRSMenu {
 	
 	
-	
+	ProfessorService service = new ProfessorServiceOperation();
+	boolean isLogin = true;
 	public void createMenu(String user) {
-		boolean isLogin = true;
+		
+		System.out.println("Login as : " + user + "\n");
 		while(isLogin) {
-			System.out.println("Login as : " + user + "\n");
+			
 			
 			System.out.println("Enter your choise : ");
 			System.out.println("1. view Course");
@@ -21,27 +29,49 @@ public class ProfessorCRSMenu {
 			Scanner sc = new Scanner(System.in);
 			
 			int selectedOption = sc.nextInt();
-			
-			boolean isExit = false;
-			while(!isExit)
+
+			switch(selectedOption)
 			{
-				switch(selectedOption)
-				{
-				case 1:
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-				case 4:
-					
-				case 5:
-					isExit = true;
-					break;
-				default:
-					break;
+			case 1:
+				System.out.println("Enter Instructor Id: ");
+				String instructorId = sc.next();
+				List<String> takenCourses = service.viewCourseList("ins-"+instructorId);
+				for(String course: takenCourses)
+					System.out.println(course);
+				break;
+			case 2:
+				break;
+			case 3:
+				System.out.println("Enter Course Id: ");
+				String courseId = sc.next();
+				System.out.println("Enter Student Id: ");
+				String studentId = sc.next();
+				System.out.println("Enter Grade: ");
+				String grade = sc.next();
+				boolean status = service.addGrade("crs-id-"+courseId, studentId, grade);
+				if(status)
+					System.out.println("Grade Assigned");
+				else
+					System.out.println("Operation Unsuccessful");
+				break;
+			case 4:
+				System.out.println("Enter Course Id: ");
+				courseId = sc.next();
+				System.out.println("Enter Instructor Id: ");
+				instructorId = sc.next();
+				status = service.selectCourseToTeach("crs-id-"+courseId,"ins-"+instructorId);
+				if(status)
+					System.out.println("Successfully Assigned");
+				else
+					System.out.println("Operation Unsuccessful");
+				break;
+			case 5:
+				isLogin = false;
+				break;
+			default:
+				break;
 						
-				}
+				
 			}
 		}
 		
