@@ -114,6 +114,7 @@ public class AdminCRSMenu {
 			default:
 				System.out.println("Wrong Option");
 			}
-		}
+
 	}
+}
 }
