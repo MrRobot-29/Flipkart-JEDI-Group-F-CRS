@@ -1,8 +1,12 @@
 package com.flipkart.service;
 
+import java.util.ArrayList;
+
+import com.flipkart.bean.Course;
+
 public interface SemesterCourseService {
 	
-	public void viewCourses();
+	public ArrayList<Course> viewCourses();
 	
 	public void addCourses();
 	

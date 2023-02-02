@@ -92,14 +92,16 @@ public class StudentServiceOperation implements StudentService{
 	
 	
 	
-	public void payFee(Student s) {
+	public void payFee(Student st) {
 		
 		
+
+
 		int totalFee = this.calculateTotalFee();
-		
+
 		PaymentServiceOperation pso = new PaymentServiceOperation();
 		
-		pso.initiatePayment(totalFee, s);
+		pso.initiatePayment(totalFee, st);
 		
 		
 		// pay for the fees and return receipt
