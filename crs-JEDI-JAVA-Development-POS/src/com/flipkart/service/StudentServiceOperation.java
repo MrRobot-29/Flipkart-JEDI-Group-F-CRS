@@ -17,9 +17,15 @@ import com.flipkart.data.TempData;
 
 public class StudentServiceOperation implements StudentService{
 	
-	TempData td = new TempData();
+	TempData td;
 	
-	
+	public StudentServiceOperation() {
+		super();
+		td = new TempData();
+	}
+
+
+
 	public ArrayList<Course> courseList() {
 		// get the list of all the courses and return it.
 		
@@ -29,27 +35,44 @@ public class StudentServiceOperation implements StudentService{
 	
 	
 	
-	public boolean addCourse(Course c) {
+	public boolean addCourse(String courseId) {
 		// add the course
+		ArrayList<Course> courseList = td.getCourseList();
+		int ind = -1;
+		
+		for(int i = 0; i < courseList.size(); i++) {
+			if(courseList.get(i).getCourseId().compareTo(courseId) == 0) {
+				ind = i;
+				break;
+			}
+		}
+		
+		if(ind == -1) {
+			
+			return false;
+		}
 		ArrayList<Course> stdCart = td.getStudentCourseCart();
 		if(stdCart.size() > 6) return false;	
-		stdCart.add(c);
+		stdCart.add(courseList.get(ind));
+		td.setStudentCourseCart(stdCart);
 		return true;
 	
 	}
 	
-	public void dropCourse(Course c) {
+	public boolean dropCourse(String courseId) {
 		// drop the course
 		
 		ArrayList<Course> stdCart = td.getStudentCourseCart();
 		
-		stdCart.remove(c);
+		stdCart.removeIf(c -> c.getCourseId() == courseId);
+		
+		return true;
 		
 	}
 	
 	public ArrayList<Course> approvedList() {
 		// get the list of approved registered courses
-		return td.getStudentApprovedCourses();
+		return td.getStudentCourseCart();
 	}
 	
 	

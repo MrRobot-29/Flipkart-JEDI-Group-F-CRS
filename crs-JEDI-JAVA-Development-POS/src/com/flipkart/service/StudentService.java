@@ -10,9 +10,9 @@ public interface StudentService {
 
 	public ArrayList<Course> courseList();
 	
-	public boolean addCourse(Course c);
+	public  boolean addCourse(String courseId);
 	
-	public void dropCourse(Course c);
+	public boolean dropCourse(String courseId);
 	
 	public  ArrayList<Course> approvedList();
 	
