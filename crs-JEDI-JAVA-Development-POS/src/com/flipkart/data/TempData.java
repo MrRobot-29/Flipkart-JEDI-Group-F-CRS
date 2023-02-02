@@ -32,6 +32,22 @@ public class TempData {
     
     
     /**
+	 * @return the students
+	 */
+	public ArrayList<Student> getStudents() {
+		return students;
+	}
+
+
+	/**
+	 * @param students the students to set
+	 */
+	public void setStudents(ArrayList<Student> students) {
+		this.students = students;
+	}
+
+
+	/**
 	 * @return the approvedStudents
 	 */
 
