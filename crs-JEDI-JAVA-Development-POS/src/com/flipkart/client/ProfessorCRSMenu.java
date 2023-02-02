@@ -74,6 +74,7 @@ public class ProfessorCRSMenu {
 				
 			}
 		}
+		isLogin = true;
 		
 	}
 
