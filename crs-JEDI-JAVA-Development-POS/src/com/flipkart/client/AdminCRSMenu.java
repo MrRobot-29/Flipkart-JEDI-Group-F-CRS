@@ -1,9 +1,13 @@
 package com.flipkart.client;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import com.flipkart.bean.Course;
+import com.flipkart.service.AdminServiceOperation;
 
 public class AdminCRSMenu {
 	Scanner scanner = new Scanner(System.in); 
-	
+	AdminServiceOperation aso = new AdminServiceOperation();
 	public void createMenu(String user) {
 		
 		
@@ -23,15 +27,26 @@ public class AdminCRSMenu {
 		
 		switch(choice) {
 		case 1:
-			System.out.println("viewCoursesInCatalogue()");
+			ArrayList<Course> cl = aso.viewCourses();
+			int num = 1;
+			for(var c: cl) {
+				System.out.println(num);
+				System.out.println("Course Name: " + c.getCourseName());
+				System.out.println("Course ID: " + c.getCourseId());
+				num++;
+			}
 			break;
 			
 		case 2:
-			System.out.println("addCourseToCatalogue()");
+			if(aso.addCourse()) {
+				System.out.println("Course Added to the catalog");	
+			}
 			break;
 			
 		case 3:
-			System.out.println("deleteCourse()");
+			if(aso.dropCourse()) {
+			    System.out.println("Course Dropped Successfully from the catalog");	
+		    }
 			break;
 			
 		case 4:

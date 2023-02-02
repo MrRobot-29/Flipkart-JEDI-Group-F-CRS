@@ -1,14 +1,16 @@
 package com.flipkart.service;
 
+import java.util.ArrayList;
+
+import com.flipkart.bean.Course;
+
 public interface AdminService {
 	
-	public void dropCourse(String courseCode);
+	public boolean dropCourse();
 
-    public void addCourse(String courseCode);
+    public boolean addCourse();
 
-    public void assignCourse(String courseCode, String professorId);
-
-    public void viewCourses(String catalogId);
+    public ArrayList<Course> viewCourses();
 
 // student related services
 
