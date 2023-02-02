@@ -9,9 +9,10 @@ public class RegisteredCourse extends Course{
 	
 	
 	
+	
 	public RegisteredCourse(String courseName, String courseId, String instructorId, boolean isCourseAvailable, 
-			String courseCode, String semester, int studentId, String gradesObtained) {
-		super(courseName, courseId, instructorId, isCourseAvailable);
+			String courseCode, String semester, int studentId, String gradesObtained,double fee) {
+		super(courseName, courseId, instructorId, isCourseAvailable,fee);
 		this.courseCode = courseCode;
 		this.semester = semester;
 		this.studentId = studentId;
