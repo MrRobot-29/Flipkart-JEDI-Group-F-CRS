@@ -19,6 +19,7 @@ public class TempData {
     private ArrayList<Student> approvedStudents = new ArrayList<Student>();
 	private ArrayList<Student> pendingStudents = new ArrayList<Student>();
 	
+
     private ArrayList<Student> students = new ArrayList<Student>();
     
     
@@ -61,6 +62,17 @@ public class TempData {
 		return approvedStudents;
 	}
 
+	private Hashtable<Integer, Integer> studentCourseMap = new Hashtable<Integer, Integer>();
+	
+
+	public void setStudentCourseMap(int studentId, int courseId) {
+//		studentCourseMap.put(courseId);
+	
+	}
+	
+	public void getStudentCourseMap(int StudentId) {
+//		return 
+	}
 
 
 	/**
