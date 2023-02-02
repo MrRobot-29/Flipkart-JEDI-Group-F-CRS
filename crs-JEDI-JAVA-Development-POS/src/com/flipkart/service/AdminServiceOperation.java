@@ -8,11 +8,12 @@ import com.flipkart.bean.Student;
 import com.flipkart.bean.Professor;
 import com.flipkart.constant.Gender;
 import com.flipkart.constant.Role;
+import com.flipkart.data.SharedTempData;
 import com.flipkart.data.TempData;
 
 public class AdminServiceOperation implements AdminService {
 
-	TempData td = new TempData();
+	TempData td = SharedTempData.td;
 	
 	Scanner sc = new Scanner(System.in);
 	static int profId = 1;
@@ -49,6 +50,7 @@ public class AdminServiceOperation implements AdminService {
     // student related services
     public ArrayList<Student> viewPendingStudents() {
     	
+    	System.out.println(td.getPendingStudents().size());
     	ArrayList<Student> st1 = td.getPendingStudents();
     	
     	return st1;
