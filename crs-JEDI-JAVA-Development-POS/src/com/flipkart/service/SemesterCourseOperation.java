@@ -23,13 +23,11 @@ public class SemesterCourseOperation implements SemesterCourseService {
 	public ArrayList<Course> viewCourses() {
 		// view the list of all the courses
 		
-<<<<<<< HEAD
+
 		ArrayList<Course> courseList = td.getCourseList();
 		
 		return courseList;
-=======
->>>>>>> 4c0fcd2 (checkpoint)
-		
+
 	}
 	
 	public void addCourses() {
