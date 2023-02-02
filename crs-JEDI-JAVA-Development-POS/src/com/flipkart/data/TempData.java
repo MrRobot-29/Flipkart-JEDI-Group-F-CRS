@@ -4,14 +4,15 @@ package com.flipkart.data;
 
         import com.flipkart.bean.Course;
         import com.flipkart.bean.Grade;
+import com.flipkart.bean.Professor;
 
 public class TempData {
 
     private ArrayList<Course> courseList = new ArrayList<Course>();
     private ArrayList<Course> studentCourseCart = new ArrayList<Course>();
     private ArrayList<Course> studentApprovedCourses = new ArrayList<Course>();
-
     private ArrayList<Grade> grades = new ArrayList<Grade>();
+    private ArrayList<Professor> professor = new ArrayList<Professor>();
 
 
     public TempData() {
@@ -81,6 +82,22 @@ public class TempData {
     public void setStudentApprovedCourses(ArrayList<Course> studentApprovedCourses) {
         this.studentApprovedCourses = studentApprovedCourses;
     }
+
+
+
+
+	public ArrayList<Professor> getProfessor() {
+		return professor;
+	}
+
+
+
+
+	public void setProfessor(ArrayList<Professor> professor) {
+		this.professor = professor;
+	}
+    
+    
 
 
 }

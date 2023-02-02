@@ -56,7 +56,7 @@ public class AdminCRSMenu {
 
 		
 		case 5:
-			System.out.println("addProfessor()");
+			aso.addProfessor();
 			break;
 		
 
