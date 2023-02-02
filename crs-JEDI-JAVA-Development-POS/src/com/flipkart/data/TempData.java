@@ -18,7 +18,7 @@ public class TempData {
     
 	
 
-	private Hashtable<Integer, Integer> studentCourseMap = new Hashtable<Integer, Integer>();
+	//private Hashtable<Integer, Integer> studentCourseMap = new Hashtable<Integer, Integer>();
     
     private ArrayList<Student> approvedStudents = new ArrayList<Student>();
 	private ArrayList<Student> pendingStudents = new ArrayList<Student>();
@@ -65,7 +65,6 @@ public class TempData {
     
     
 
-	
 
 	/**
 	 * @param approvedStudents the approvedStudents to set
