@@ -107,6 +107,12 @@ public class StudentServiceOperation implements StudentService{
 		
 	}
 	
+	public void assignCourse(int studentId)
+	{
+		
+		td.getStudentTakenCourses().put(studentId, td.getStudentCourseCart());
+	}
+	
 	
 	public String viewGrade(RegisteredCourse rc) {
 		//view the grade card with exception handling

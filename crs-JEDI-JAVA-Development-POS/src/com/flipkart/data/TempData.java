@@ -33,12 +33,21 @@ public class TempData {
     
 
     private ArrayList<Student> students = new ArrayList<Student>();
+    private HashMap<Integer,ArrayList<Course>> studentTakenCourses = new HashMap<Integer,ArrayList<Course>>();
     
     
     
-    
-    
-    /**
+    public HashMap<Integer, ArrayList<Course>> getStudentTakenCourses() {
+		return studentTakenCourses;
+	}
+
+
+	public void setStudentTakenCourses(HashMap<Integer, ArrayList<Course>> studentTakenCourses) {
+		this.studentTakenCourses = studentTakenCourses;
+	}
+
+
+	/**
 	 * @return the students
 	 */
 	public ArrayList<Student> getStudents() {
@@ -215,6 +224,7 @@ public class TempData {
 	public void setProfessor(ArrayList<Professor> professor) {
 		this.professor = professor;
 	}
+
     
     
 
