@@ -59,11 +59,11 @@ public enum Gender {
 	public static Gender stringToGender(String val)
 	{
 		Gender gender=Gender.OTHER;
-		if(val.equalsIgnoreCase("male"))
+		if(val.equalsIgnoreCase("m"))
 			gender=Gender.MALE;
-		else if(val.equalsIgnoreCase("female"))
+		else if(val.equalsIgnoreCase("f"))
 			gender=Gender.FEMALE;
-		else if(val.equalsIgnoreCase("other"))
+		else if(val.equalsIgnoreCase("o"))
 			gender=Gender.OTHER;
 		
 		return gender;

@@ -1,9 +1,6 @@
 package com.flipkart.client;
 
 import java.util.Scanner;
-import com.flipkart.client.*;
-import com.flipkart.service.StudentService;
-import com.flipkart.service.StudentServiceOperation;
 import com.flipkart.service.UserServiceOperation;
 
 public class CrsApplication {
@@ -15,8 +12,6 @@ public class CrsApplication {
 		Scanner sc = new Scanner(System.in);
 		 
 		UserServiceOperation uso = new UserServiceOperation();
-		
-		
 		boolean isExit = false;
 		while(!isExit)
 		{

@@ -9,6 +9,7 @@ import java.util.Scanner;
 import com.flipkart.bean.Student;
 import com.flipkart.constant.Gender;
 import com.flipkart.constant.Role;
+import com.flipkart.data.SharedTempData;
 import com.flipkart.data.TempData;
 
 /**
@@ -16,7 +17,7 @@ import com.flipkart.data.TempData;
  *
  */
 public class UserServiceOperation implements UserService{
-	TempData td = new TempData();
+	TempData td = SharedTempData.td;
 	public void registerAccount() {
 		// register student account
 		Scanner sc = new Scanner(System.in);
@@ -28,7 +29,7 @@ public class UserServiceOperation implements UserService{
 		String sbranch = sc.next();
 		System.out.println("Enter Student's Address");
 		String sadd = sc.next();
-		System.out.println("Enter Student's Gender (M/F)");
+		System.out.println("Enter Student's Gender (M/F/O)");
 		String sgend = sc.next();
 		System.out.println("Enter Account Passoword");
 		String pwd = sc.next();
@@ -36,11 +37,16 @@ public class UserServiceOperation implements UserService{
 		Student std  = new Student("User98989", sname, Role.STUDENT, pwd, Gender.MALE, sadd, sadd, sbranch, sid, 2019, false);
 		ArrayList<Student> pending = td.getPendingStudents();
 		ArrayList<Student> allStudent = td.getStudents();
+		System.out.println("Old Size - "+td.getPendingStudents().size());
+		
 		pending.add(std);
 		allStudent.add(std);
 		
-		td.setStudents(allStudent);
 		td.setPendingStudents(pending);
+		
+		System.out.println("New size " + td.getPendingStudents().size());
+		td.setStudents(allStudent);
+		
 		
 		System.out.println("Student registration complete. Approval request sent to admin");
 		
