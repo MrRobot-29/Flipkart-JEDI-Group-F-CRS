@@ -15,10 +15,8 @@ public class AdminCRSMenu {
 		System.out.println("2. Add Course to catalog");
 		System.out.println("3. Delete Course from catalog");
 		System.out.println("4. Approve Students");
-		System.out.println("5. View Pending Admission");
-		System.out.println("6. Add Professor");
-		System.out.println("7. Assign Courses To Professor");
-		System.out.println("8. Logout");
+		System.out.println("5. Add Professor");
+		System.out.println("6. Logout");
 		System.out.println("*****************************");
 		
 		int choice = scanner.nextInt();
@@ -40,17 +38,13 @@ public class AdminCRSMenu {
 			System.out.println("approveStudent()");
 			break;
 		
-		case 5:
-			System.out.println("viewPendingAdmissions()");
-			break;
+
 		
-		case 6:
+		case 5:
 			System.out.println("addProfessor()");
 			break;
 		
-		case 7:
-			System.out.println("assignCourseToProfessor()");
-			break;
+
 		
 		default:
 			System.out.println("Wrong Option");

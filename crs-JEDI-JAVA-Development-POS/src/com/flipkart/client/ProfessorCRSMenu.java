@@ -12,10 +12,11 @@ public class ProfessorCRSMenu {
 			System.out.println("Login as : " + user + "\n");
 			
 			System.out.println("Enter your choise : ");
-			System.out.println("1. viewCourse");
+			System.out.println("1. view Course");
 			System.out.println("2. View Enrolled Student");
 			System.out.println("3. Add Grade");
-			System.out.println("4. log out");
+			System.out.println("4. Select course to teach");
+			System.out.println("5. log out");
 			
 			Scanner sc = new Scanner(System.in);
 			
@@ -33,6 +34,8 @@ public class ProfessorCRSMenu {
 				case 3:
 					break;
 				case 4:
+					
+				case 5:
 					isExit = true;
 					break;
 				default:
