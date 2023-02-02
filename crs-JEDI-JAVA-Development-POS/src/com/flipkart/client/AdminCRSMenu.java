@@ -27,6 +27,7 @@ public class AdminCRSMenu {
 		
 		switch(choice) {
 		case 1:
+
 			ArrayList<Course> cl = aso.viewCourses();
 			int num = 1;
 			for(var c: cl) {
@@ -35,6 +36,11 @@ public class AdminCRSMenu {
 				System.out.println("Course ID: " + c.getCourseId());
 				num++;
 			}
+
+			
+			System.out.println("viewCoursesInCatalogue()");
+			
+
 			break;
 			
 		case 2:
