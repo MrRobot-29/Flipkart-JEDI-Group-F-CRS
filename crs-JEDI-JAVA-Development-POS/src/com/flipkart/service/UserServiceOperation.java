@@ -37,14 +37,11 @@ public class UserServiceOperation implements UserService{
 		Student std  = new Student("User98989", sname, Role.STUDENT, pwd, Gender.MALE, sadd, sadd, sbranch, sid, 2019, false);
 		ArrayList<Student> pending = td.getPendingStudents();
 		ArrayList<Student> allStudent = td.getStudents();
-		System.out.println("Old Size - "+td.getPendingStudents().size());
 		
 		pending.add(std);
 		allStudent.add(std);
 		
 		td.setPendingStudents(pending);
-		
-		System.out.println("New size " + td.getPendingStudents().size());
 		td.setStudents(allStudent);
 		
 		
