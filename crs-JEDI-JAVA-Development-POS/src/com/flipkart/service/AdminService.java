@@ -24,9 +24,9 @@ public interface AdminService {
 
 // professor related services
 
-    public void addProfessor(String professorId);
+    public void addProfessor();
 
-    public void dropProfessor(String professorId);
+    public void dropProfessor();
     
     public void viewProfessors();
 

@@ -11,16 +11,11 @@ public class AdminCRSMenu {
 	AdminServiceOperation aso = new AdminServiceOperation();
 	
 	
-	
+		
+	boolean isLoggedIn = true;
 	public void createMenu(String user) {
 		
-		boolean logged = true;
-		
-		while(logged) {
-			
-		
-		
-		
+		while(isLoggedIn) {
 			System.out.println("***********************************");
 			System.out.println("********* Admin *******************");
 			System.out.println("***********************************");
@@ -51,6 +46,11 @@ public class AdminCRSMenu {
 				System.out.println("viewCoursesInCatalogue()");
 				
 	
+
+				
+				System.out.println("viewCoursesInCatalogue()");
+				
+
 				break;
 				
 			case 2:
@@ -111,15 +111,14 @@ public class AdminCRSMenu {
 				
 				aso.validateStudent(stId);
 				
-				
 			case 6:
 				System.out.println("addProfessor()");
 				break;
 			
 			case 7:
-				logged = false;
+				isLoggedIn = false;
 				break;
-				
+			
 			default:
 				System.out.println("Wrong Option");
 			}

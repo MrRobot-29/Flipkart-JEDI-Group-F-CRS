@@ -70,15 +70,14 @@ public class StudentCRSMenu {
 			case 6:
 				break;
 			case 7:
-				break;
-			case 8:
 				isLoggedIn = false;
 				break;
-			case 9:
+			default:
 				System.out.println("Invalid Choice!! Try Again");
 			}
 			
 		}
+		isLoggedIn = true;
 		
 	}
 

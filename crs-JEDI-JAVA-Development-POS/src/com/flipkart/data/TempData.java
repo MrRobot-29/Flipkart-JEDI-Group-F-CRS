@@ -8,6 +8,8 @@ import com.flipkart.constant.Role;
 import com.flipkart.bean.*;
 import java.util.*;
 
+import com.flipkart.bean.Grade;
+import com.flipkart.bean.Professor;
 
 public class TempData {
 
@@ -20,9 +22,15 @@ public class TempData {
 
 	//private Hashtable<Integer, Integer> studentCourseMap = new Hashtable<Integer, Integer>();
     
+    private ArrayList<Professor> professor = new ArrayList<Professor>();
+
+
+
     private ArrayList<Student> approvedStudents = new ArrayList<Student>();
 	private ArrayList<Student> pendingStudents = new ArrayList<Student>();
 	
+
+    
 
     private ArrayList<Student> students = new ArrayList<Student>();
     
@@ -31,10 +39,25 @@ public class TempData {
     
     
     /**
+	 * @return the students
+	 */
+	public ArrayList<Student> getStudents() {
+		return students;
+	}
+
+
+	/**
+	 * @param students the students to set
+	 */
+	public void setStudents(ArrayList<Student> students) {
+		this.students = students;
+	}
+
+
+	/**
 	 * @return the approvedStudents
 	 */
-    
-    
+
     public TempData() {
         super();
         for(int i = 0; i < 10; i++) {
@@ -178,6 +201,22 @@ public class TempData {
     public void setStudentApprovedCourses(ArrayList<Course> studentApprovedCourses) {
         this.studentApprovedCourses = studentApprovedCourses;
     }
+
+
+
+
+	public ArrayList<Professor> getProfessor() {
+		return professor;
+	}
+
+
+
+
+	public void setProfessor(ArrayList<Professor> professor) {
+		this.professor = professor;
+	}
+    
+    
 
 
 }

@@ -4,24 +4,27 @@ import java.util.Scanner;
 import com.flipkart.client.*;
 import com.flipkart.service.StudentService;
 import com.flipkart.service.StudentServiceOperation;
+import com.flipkart.service.UserServiceOperation;
 
 public class CrsApplication {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Welcome to the CRS Applicatoin Choose the Option given below ->");
-		System.out.println("1. Login ");
-		System.out.println("2. Registration of Student");
-		System.out.println("3. Update Password ");
-		System.out.println("4. Exit ");
+		
 		
 		Scanner sc = new Scanner(System.in);
-		
+		 
+		UserServiceOperation uso = new UserServiceOperation();
 		
 		
 		boolean isExit = false;
 		while(!isExit)
 		{
+			System.out.println("Welcome to the CRS Applicatoin Choose the Option given below ->");
+			System.out.println("1. Login ");
+			System.out.println("2. Registration of Student");
+			System.out.println("3. Update Password ");
+			System.out.println("4. Exit ");
 			int selectedOption = sc.nextInt();
 			switch(selectedOption)
 			{
@@ -50,7 +53,7 @@ public class CrsApplication {
 				}
 				break;
 			case 2:
-				
+				uso.registerAccount();
 				break;
 			case 3:
 				

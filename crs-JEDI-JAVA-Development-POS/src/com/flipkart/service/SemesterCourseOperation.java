@@ -23,7 +23,6 @@ public class SemesterCourseOperation implements SemesterCourseService {
 	public ArrayList<Course> viewCourses() {
 		// view the list of all the courses
 		
-
 		ArrayList<Course> courseList = td.getCourseList();
 		
 		return courseList;
