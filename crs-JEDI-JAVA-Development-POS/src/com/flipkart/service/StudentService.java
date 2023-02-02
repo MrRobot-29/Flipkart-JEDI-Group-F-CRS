@@ -3,6 +3,8 @@ package com.flipkart.service;
 import java.util.ArrayList;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.RegisteredCourse;
+import com.flipkart.bean.Student;
 
 public interface StudentService {
 
@@ -16,7 +18,7 @@ public interface StudentService {
 	
 	public int calculateTotalFee();
 	
-	public void payFee();
+	public void payFee(Student s);
 	
-	public void viewGrade();
+	public String viewGrade(RegisteredCourse rc);
 }
