@@ -102,7 +102,8 @@ public class AdminCRSMenu {
 				int stId = scanner.nextInt();
 				
 				aso.validateStudent(stId);
-				
+				System.out.println("Student Approved!");
+				break;
 			case 6:
 				aso.addProfessor();
 				break;
