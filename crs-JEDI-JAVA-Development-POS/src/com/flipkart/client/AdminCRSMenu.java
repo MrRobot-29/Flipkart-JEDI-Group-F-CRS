@@ -40,6 +40,7 @@ public class AdminCRSMenu {
 					System.out.println(num);
 					System.out.println("Course Name: " + c.getCourseName());
 					System.out.println("Course ID: " + c.getCourseId());
+					System.out.println("Course Price: "+ c.getCourseFee());
 					num++;
 				}
 
