@@ -42,14 +42,6 @@ public class AdminCRSMenu {
 					System.out.println("Course ID: " + c.getCourseId());
 					num++;
 				}
-				
-				System.out.println("viewCoursesInCatalogue()");
-				
-	
-
-				
-				System.out.println("viewCoursesInCatalogue()");
-				
 
 				break;
 				
@@ -113,7 +105,7 @@ public class AdminCRSMenu {
 				System.out.println("Student Approved!");
 				break;
 			case 6:
-				System.out.println("addProfessor()");
+				aso.addProfessor();
 				break;
 			
 			case 7:
@@ -123,6 +115,7 @@ public class AdminCRSMenu {
 			default:
 				System.out.println("Wrong Option");
 			}
-		}
+
 	}
+}
 }
