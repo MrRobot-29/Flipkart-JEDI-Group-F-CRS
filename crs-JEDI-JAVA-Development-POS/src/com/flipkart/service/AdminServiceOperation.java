@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Student;
 import com.flipkart.data.TempData;
 
 public class AdminServiceOperation implements AdminService {
 
 	TempData td = new TempData();
+	
     // course services
     public boolean dropCourse() {
     	Scanner sc = new Scanner(System.in);
@@ -42,17 +44,49 @@ public class AdminServiceOperation implements AdminService {
     	
     }
     // student related services
-    public void viewPendingStudents() {
-
+    public ArrayList<Student> viewPendingStudents() {
+    	
+    	ArrayList<Student> st1 = td.getPendingStudents();
+    	
+    	return st1;
     }
 
-    public void viewAllStudents() {
-
+    public ArrayList<Student> viewAllStudents() {
+    	
+    	ArrayList<Student> st1 = td.getApprovedStudents();
+    	
+    	return st1;
+    	
     }
 
-    public void validateStudent(String studentId){
-
-
+    public boolean validateStudent(int studentId){
+    	
+    	ArrayList<Student> st1 = td.getPendingStudents();
+    	
+    	int flag = -1;
+    	
+    	for(Student at : st1) {
+    		if(at.getStudentID() == studentId) {
+    			flag = at.getStudentID();
+    			
+    			// validate
+    			at.setApproved(true);
+    			
+    			td.removePendingStudents(at);
+    			
+    			td.setApprovedStudents(at);
+    			
+    			break;
+    		}
+    	}
+    	
+    	if(flag == -1) {
+    		return false;
+    	}
+    	
+    	
+    	
+    	return true;
     }
 
 
