@@ -3,6 +3,7 @@ package com.flipkart.service;
 import java.util.ArrayList;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Student;
 
 public interface AdminService {
 	
@@ -14,11 +15,11 @@ public interface AdminService {
 
 // student related services
 
-    public void viewPendingStudents();
+    public ArrayList<Student> viewPendingStudents();
 
-    public void viewAllStudents();
+    public ArrayList<Student> viewAllStudents();
 
-    public void validateStudent(String studentId);
+    public boolean validateStudent(int studentId);
 
 
 // professor related services

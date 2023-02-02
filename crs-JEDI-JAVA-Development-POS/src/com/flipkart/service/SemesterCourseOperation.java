@@ -14,11 +14,9 @@ import com.flipkart.data.*;
 public class SemesterCourseOperation implements SemesterCourseService {
 	
 	
-	TempData td;
+	TempData td = SharedTempData.td;
 	
-	public SemesterCourseOperation() {
-		td = new TempData();
-	}
+	
 	
 	public ArrayList<Course> viewCourses() {
 		// view the list of all the courses
@@ -26,7 +24,6 @@ public class SemesterCourseOperation implements SemesterCourseService {
 		ArrayList<Course> courseList = td.getCourseList();
 		
 		return courseList;
-		
 	}
 	
 	public void addCourses() {

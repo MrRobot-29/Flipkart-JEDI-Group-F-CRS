@@ -4,7 +4,8 @@ package com.flipkart.service;
 
         import com.flipkart.bean.Course;
         import com.flipkart.bean.Grade;
-        import com.flipkart.data.TempData;
+import com.flipkart.data.SharedTempData;
+import com.flipkart.data.TempData;
 
 /**
  * @author manish.kumar24
@@ -13,7 +14,7 @@ package com.flipkart.service;
         
 public class ProfessorServiceOperation implements ProfessorService {
 
-    static TempData data = new TempData();
+    static TempData data = SharedTempData.td;
     public  List<String> viewCourseList(String instructorId) {
         // view List of courses taken by professor
         List<String> takenCourses = new ArrayList<String>();

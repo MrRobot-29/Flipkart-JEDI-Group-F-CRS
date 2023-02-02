@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
+import com.flipkart.data.SharedTempData;
 import com.flipkart.data.TempData;
 
 /**
@@ -17,15 +18,8 @@ import com.flipkart.data.TempData;
 
 public class StudentServiceOperation implements StudentService{
 	
-	TempData td;
+	TempData td = SharedTempData.td;
 	
-	public StudentServiceOperation() {
-		super();
-		td = new TempData();
-	}
-
-
-
 	public ArrayList<Course> courseList() {
 		// get the list of all the courses and return it.
 		
