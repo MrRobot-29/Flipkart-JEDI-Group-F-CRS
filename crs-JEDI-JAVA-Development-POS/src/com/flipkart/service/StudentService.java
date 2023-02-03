@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.RegisteredCourse;
-import com.flipkart.bean.Student;
 
 public interface StudentService {
 
@@ -21,4 +20,8 @@ public interface StudentService {
 	public void payFee(String user);
 	
 	public String viewGrade(RegisteredCourse rc);
+	
+	public ArrayList<Course> viewSelectedCourses();
+	
+	public boolean registerCourses();
 }

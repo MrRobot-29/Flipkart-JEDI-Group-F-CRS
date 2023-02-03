@@ -93,6 +93,12 @@ public class TempData {
         		pendingStudents.add(st);
         	}
         }
+        
+        Student st = new Student("201969", "GD", Role.STUDENT, "password", 
+    			Gender.MALE, "Lucknow", "India", "ECE", 10001, 2019, true);
+        
+        students.add(st);
+        approvedStudents.add(st);
     }
     
     

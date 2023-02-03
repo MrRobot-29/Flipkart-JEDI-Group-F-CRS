@@ -33,6 +33,21 @@ public class StudentServiceOperation implements StudentService{
 		// add the course
 		ArrayList<Course> courseList = td.getCourseList();
 		int ind = -1;
+		boolean flag = false;
+		for(var c: td.getStudentCourseCart()) {
+			if(c.getCourseId().compareTo(courseId) == 0) {
+				flag = true;
+				break;
+			}
+		}
+		
+		
+		if(flag) {
+			System.out.println("Course already present");
+			return false;
+		}
+		
+		
 		
 		for(int i = 0; i < courseList.size(); i++) {
 			if(courseList.get(i).getCourseId().compareTo(courseId) == 0) {
@@ -58,7 +73,7 @@ public class StudentServiceOperation implements StudentService{
 		
 		ArrayList<Course> stdCart = td.getStudentCourseCart();
 		
-		stdCart.removeIf(c -> c.getCourseId() == courseId);
+		stdCart.removeIf(c -> c.getCourseId().compareTo(courseId) == 0);
 		
 		return true;
 		
@@ -69,6 +84,18 @@ public class StudentServiceOperation implements StudentService{
 		return td.getStudentCourseCart();
 	}
 	
+	public ArrayList<Course> viewSelectedCourses(){
+		return td.getStudentCourseCart();
+	}
+	
+	public boolean registerCourses() {
+		ArrayList<Course> registeredCourses = new ArrayList<Course>();
+		for(var c: td.getStudentCourseCart()) {
+			registeredCourses.add(c);
+		}
+		td.setStudentApprovedCourses(registeredCourses);
+		return true;
+	}
 	
 	
 	public double calculateTotalFee(ArrayList<Course> approvedCourses) {
