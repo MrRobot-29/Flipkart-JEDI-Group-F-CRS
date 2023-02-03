@@ -16,7 +16,7 @@ public interface StudentService {
 	
 	public  ArrayList<Course> approvedList();
 	
-	public int calculateTotalFee();
+	public double calculateTotalFee(ArrayList<Course> approvedCourses);
 	
 	public void payFee(String user);
 	

@@ -17,7 +17,6 @@ import com.flipkart.bean.Student;
 public class PaymentServiceOperation implements PaymentService {
 	
 	Scanner sc = new Scanner(System.in);
-	Console cnsl= System.console();
 	
 	public void initiatePayment(double fee, Student st, ArrayList<Course> studentApprovedCourses) {
 		
@@ -65,17 +64,21 @@ public class PaymentServiceOperation implements PaymentService {
 		case 1:
 			System.out.println("UPI payment opted");
 			System.out.println("Enter upi ID");
+			sc.nextLine();
 			String upiID = sc.nextLine();
 			System.out.println("Bill requested on upi ID "+ upiID);
 			break;
 		
 		case 2:
 			System.out.println("Enter name on Debit Card: ");
+			sc.nextLine();
 			String name = sc.nextLine();
 			System.out.println("Enter Debit Card Number: ");
+			sc.nextLine();
 			String cardNum = sc.nextLine();
 			System.out.println("Enter CVV");
-			char[] cvv = cnsl.readPassword();
+			sc.nextLine();
+			String cvv = sc.nextLine();
 			System.out.println("Payment requested");
 			break;
 			
@@ -85,7 +88,7 @@ public class PaymentServiceOperation implements PaymentService {
 			System.out.println("Enter Credit Card Number: ");
 			cardNum = sc.nextLine();
 			System.out.println("Enter CVV");
-			cvv = cnsl.readPassword();
+			cvv = sc.nextLine();
 			System.out.println("Payment requested");
 			break;
 			

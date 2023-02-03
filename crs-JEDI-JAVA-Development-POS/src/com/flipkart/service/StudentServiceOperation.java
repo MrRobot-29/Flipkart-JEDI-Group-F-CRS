@@ -71,11 +71,11 @@ public class StudentServiceOperation implements StudentService{
 	
 	
 	
-	public int calculateTotalFee() {
+	public double calculateTotalFee(ArrayList<Course> approvedCourses) {
 		// calculate the total fees based on the registered courses.
-		ArrayList<Course> approvedCourses = td.getStudentApprovedCourses();
 		
-		int totalFee = 0;
+		
+		double totalFee = 0.0;
 		
 		for(var course: approvedCourses) {
 			totalFee += course.getCourseFee();
@@ -91,18 +91,18 @@ public class StudentServiceOperation implements StudentService{
 		Student st = null;
 		
 		for (Student student : td.getApprovedStudents()) {
-			if(student.getName() == user) {
+			if(student.getStudentID() == Integer.parseInt(user)) {
 				st = student;
 				break;
 			}
 		}
 
-
-		int totalFee = this.calculateTotalFee();
+		ArrayList<Course> approvedCourses = td.getStudentCourseCart();
+		double totalFee = this.calculateTotalFee(approvedCourses);
 		System.out.println(totalFee);
 		PaymentServiceOperation pso = new PaymentServiceOperation();
 		
-		pso.initiatePayment(totalFee, st, td.getStudentApprovedCourses());
+		pso.initiatePayment(totalFee, st, td.getStudentCourseCart());
 		
 		
 		// pay for the fees and return receipt
