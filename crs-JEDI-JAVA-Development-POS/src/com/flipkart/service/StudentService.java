@@ -3,7 +3,6 @@ package com.flipkart.service;
 import java.util.ArrayList;
 
 import com.flipkart.bean.Course;
-import com.flipkart.bean.RegisteredCourse;
 
 public interface StudentService {
 
@@ -19,7 +18,7 @@ public interface StudentService {
 	
 	public void payFee(String user);
 	
-	public String viewGrade(RegisteredCourse rc);
+	public ArrayList<ArrayList<String>> viewGrade(int studentId);
 	
 	public ArrayList<Course> viewSelectedCourses();
 	

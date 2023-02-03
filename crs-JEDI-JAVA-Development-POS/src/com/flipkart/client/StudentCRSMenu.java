@@ -100,6 +100,11 @@ public class StudentCRSMenu {
 				sso.payFee(user);
 				break;
 			case 7:
+				ArrayList<ArrayList<String>>  grades = sso.viewGrade(10001);
+				for(var c: grades) {
+					System.out.print("Course Name - " + c.get(0));
+					System.out.println(": Course Grade - " + c.get(1));
+				}
 				break;
 			case 8:
 				isLoggedIn = false;

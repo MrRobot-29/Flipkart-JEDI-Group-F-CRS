@@ -2,10 +2,10 @@ package com.flipkart.bean;
 
 public class Grade {
 	private String courseId;
-	private String studentId;
+	private int studentId;
 	private String grade;
 	
-	public Grade(String courseId, String studentId, String grade) {
+	public Grade(String courseId, int studentId, String grade) {
 		this.courseId = courseId;
 		this.studentId = studentId;
 		this.grade = grade;
@@ -19,11 +19,11 @@ public class Grade {
 		this.courseId = courseId;
 	}
 
-	public String getStudentId() {
+	public int getStudentId() {
 		return studentId;
 	}
 
-	public void setStudentId(String studentId) {
+	public void setStudentId(int studentId) {
 		this.studentId = studentId;
 	}
 

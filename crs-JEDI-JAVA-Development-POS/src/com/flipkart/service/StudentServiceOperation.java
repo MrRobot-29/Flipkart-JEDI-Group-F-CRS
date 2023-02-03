@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Grade;
 import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
 import com.flipkart.data.SharedTempData;
@@ -151,10 +152,27 @@ public class StudentServiceOperation implements StudentService{
 	}
 	
 	
-	public String viewGrade(RegisteredCourse rc) {
+	public ArrayList<ArrayList<String>> viewGrade(int studentId) {
 		//view the grade card with exception handling
-		
-		return rc.getGradesObtained();
+
+		ArrayList<Grade> grades = new ArrayList<Grade>();
+		ArrayList<Course> courses = new ArrayList<Course>();
+		ArrayList<ArrayList<String>> gradeCard = new ArrayList<ArrayList<String>>();
+		grades = td.getGrades();
+		courses = td.getCourseList();
+		for(Grade grade : grades) {
+			if(grade.getStudentId() == studentId) {
+				for(Course course : courses) {
+					if(grade.getCourseId().equals(course.getCourseId())) { 
+						ArrayList<String> courseGrade = new ArrayList<String>();
+						courseGrade.add(course.getCourseName());
+						courseGrade.add(grade.getGrade());
+						gradeCard.add(courseGrade);
+					}
+				}
+			}
+		}
+		return gradeCard;
 		
 	}
 	

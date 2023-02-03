@@ -10,6 +10,6 @@ public interface ProfessorService {
 	
 	public void viewEnrolledStudents();
 	
-	public boolean addGrade(String courseId, String studentId, String grade);
+	 public boolean addGrade(String courseId, int studentId, String grade);
 	
 }

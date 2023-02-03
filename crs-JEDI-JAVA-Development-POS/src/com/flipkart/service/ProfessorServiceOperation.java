@@ -51,8 +51,8 @@ public class ProfessorServiceOperation implements ProfessorService {
 
     }
 
-    public boolean addGrade(String courseId, String studentId, String grade) {
-        Grade newgrade = new Grade(studentId,courseId,grade);
+    public boolean addGrade(String courseId, int studentId, String grade) {
+        Grade newgrade = new Grade(courseId, studentId, grade);
         data.getGrades().add(newgrade);
         return true;
     }

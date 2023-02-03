@@ -44,8 +44,8 @@ public class ProfessorCRSMenu {
 			case 3:
 				System.out.println("Enter Course Id: ");
 				String courseId = sc.next();
-				System.out.println("Enter Student Id: ");
-				String studentId = sc.next();
+				System.out.println("Enter Student Id(Int): ");
+				int studentId = sc.nextInt();
 				System.out.println("Enter Grade: ");
 				String grade = sc.next();
 				boolean status = service.addGrade("crs-id-"+courseId, studentId, grade);
