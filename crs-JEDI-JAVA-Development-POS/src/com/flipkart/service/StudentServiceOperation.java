@@ -4,6 +4,7 @@
 package com.flipkart.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.RegisteredCourse;
@@ -94,6 +95,8 @@ public class StudentServiceOperation implements StudentService{
 			registeredCourses.add(c);
 		}
 		td.setStudentApprovedCourses(registeredCourses);
+		HashMap<Integer,ArrayList<Course>> studentTakenCourse = td.getStudentTakenCourses();
+		studentTakenCourse.put(10001, registeredCourses);
 		return true;
 	}
 	
@@ -124,12 +127,12 @@ public class StudentServiceOperation implements StudentService{
 			}
 		}
 
-		ArrayList<Course> approvedCourses = td.getStudentCourseCart();
+		ArrayList<Course> approvedCourses = td.getStudentApprovedCourses();
 		double totalFee = this.calculateTotalFee(approvedCourses);
 		System.out.println(totalFee);
 		PaymentServiceOperation pso = new PaymentServiceOperation();
 		
-		pso.initiatePayment(totalFee, st, td.getStudentCourseCart());
+		pso.initiatePayment(totalFee, st, td.getStudentApprovedCourses());
 		
 		
 		// pay for the fees and return receipt
