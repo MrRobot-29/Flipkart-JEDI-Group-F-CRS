@@ -20,5 +20,5 @@ public interface StudentService {
 	
 	public void payFee(String user);
 	
-	public String viewGrade(RegisteredCourse rc);
+	public ArrayList<ArrayList<String>> viewGrade(String studentId);
 }

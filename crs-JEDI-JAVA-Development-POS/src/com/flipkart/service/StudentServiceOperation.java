@@ -4,8 +4,8 @@
 package com.flipkart.service;
 
 import java.util.ArrayList;
-
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Grade;
 import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
 import com.flipkart.data.SharedTempData;
@@ -121,10 +121,28 @@ public class StudentServiceOperation implements StudentService{
 	}
 	
 	
-	public String viewGrade(RegisteredCourse rc) {
+	public ArrayList<ArrayList<String>> viewGrade(String studentId) {
 		//view the grade card with exception handling
 		
-		return rc.getGradesObtained();
+		TempData data = new TempData();
+		ArrayList<Grade> grades = new ArrayList<Grade>();
+		ArrayList<Course> courses = new ArrayList<Course>();
+		ArrayList<ArrayList<String>> gradeCard = new ArrayList<ArrayList<String>>();
+		grades = data.getGrades();
+		courses = data.getCourseList();
+		for(Grade grade : grades) {
+			if(grade.getStudentId().equals(studentId)) {
+				for(Course course : courses) {
+					if(grade.getCourseId().equals(course.getCourseId())) { 
+						ArrayList<String> courseGrade = new ArrayList<String>();
+						courseGrade.add(course.getCourseName());
+						courseGrade.add(grade.getGrade());
+						gradeCard.add(courseGrade);
+					}
+				}
+			}
+		}
+		return gradeCard;
 		
 	}
 	
