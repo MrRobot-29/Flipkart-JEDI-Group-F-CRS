@@ -188,12 +188,12 @@ public class AdminDAOImpl implements AdminDAOInterface {
 	}
 
 	public ArrayList<Student> viewPendingStudents() {
-		ArrayList<Student> arr;
+		ArrayList<Student> arr =  new ArrayList<Student>();
 		return arr;
 	}
 
 	public ArrayList<Student> viewAllStudents() {
-		ArrayList<Student> arr;
+		ArrayList<Student> arr =  new ArrayList<Student>();
 		return arr;
 	}
 

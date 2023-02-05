@@ -3,6 +3,7 @@ package com.flipkart.dao;
 import java.util.ArrayList;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 
 public interface AdminDAOInterface {
@@ -23,7 +24,7 @@ public interface AdminDAOInterface {
 
 // professor related services
 
-    public void addProfessor();
+    public void addProfessor(Professor prof);
 
     public void dropProfessor(int ProfId);
     

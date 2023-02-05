@@ -34,8 +34,8 @@ public class ProfessorCRSMenu {
 			{
 			case 1:
 				System.out.println("Enter Instructor Id: ");
-				String instructorId = sc.next();
-				List<String> takenCourses = service.viewCourseList("ins-"+instructorId);
+				int instructorId = sc.nextInt();
+				List<String> takenCourses = service.viewCourseList(instructorId);
 				for(String course: takenCourses)
 					System.out.println(course);
 				break;
@@ -58,8 +58,8 @@ public class ProfessorCRSMenu {
 				System.out.println("Enter Course Id: ");
 				courseId = sc.next();
 				System.out.println("Enter Instructor Id: ");
-				instructorId = sc.next();
-				status = service.selectCourseToTeach("crs-id-"+courseId,"ins-"+instructorId);
+				instructorId = sc.nextInt();
+				status = service.selectCourseToTeach("crs-id-"+courseId,instructorId);
 				if(status)
 					System.out.println("Successfully Assigned");
 				else

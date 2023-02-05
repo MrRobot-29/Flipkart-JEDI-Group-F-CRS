@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface ProfessorService {
 	
-	public  List<String> viewCourseList(String instructorId);
+	public List<String> viewCourseList(int instructorId);
 	
-	public boolean selectCourseToTeach(String courseId, String instructorId);
+	public boolean selectCourseToTeach(String courseId, int instructorId);
 	
 	public void viewEnrolledStudents();
 	
