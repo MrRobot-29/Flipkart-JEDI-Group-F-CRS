@@ -4,8 +4,11 @@
 package com.flipkart.service;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
+=======
 import java.util.HashMap;
 
+>>>>>>> main
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
 import com.flipkart.bean.RegisteredCourse;
@@ -152,6 +155,19 @@ public class StudentServiceOperation implements StudentService{
 	}
 	
 	
+<<<<<<< HEAD
+	public ArrayList<ArrayList<String>> viewGrade(String studentId) {
+		//view the grade card with exception handling
+		
+		TempData data = new TempData();
+		ArrayList<Grade> grades = new ArrayList<Grade>();
+		ArrayList<Course> courses = new ArrayList<Course>();
+		ArrayList<ArrayList<String>> gradeCard = new ArrayList<ArrayList<String>>();
+		grades = data.getGrades();
+		courses = data.getCourseList();
+		for(Grade grade : grades) {
+			if(grade.getStudentId().equals(studentId)) {
+=======
 	public ArrayList<ArrayList<String>> viewGrade(int studentId) {
 		//view the grade card with exception handling
 
@@ -162,6 +178,7 @@ public class StudentServiceOperation implements StudentService{
 		courses = td.getCourseList();
 		for(Grade grade : grades) {
 			if(grade.getStudentId() == studentId) {
+>>>>>>> main
 				for(Course course : courses) {
 					if(grade.getCourseId().equals(course.getCourseId())) { 
 						ArrayList<String> courseGrade = new ArrayList<String>();
