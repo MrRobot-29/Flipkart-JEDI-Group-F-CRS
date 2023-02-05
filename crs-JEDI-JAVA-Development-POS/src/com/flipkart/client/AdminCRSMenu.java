@@ -26,7 +26,8 @@ public class AdminCRSMenu {
 			System.out.println("4. View List of Students");
 			System.out.println("5: Aprove Student");
 			System.out.println("6. Add Professor");
-			System.out.println("7. Logout");
+			System.out.println("7. Drop Professor");
+			System.out.println("8. Logout");
 			System.out.println("*****************************");
 			
 			int choice = scanner.nextInt();
@@ -53,9 +54,7 @@ public class AdminCRSMenu {
 				break;
 				
 			case 3:
-				if(aso.dropCourse()) {
-				    System.out.println("Course Dropped Successfully from the catalog");	
-			    }
+				aso.dropCourse();
 				break;
 				
 			case 4:
@@ -108,8 +107,10 @@ public class AdminCRSMenu {
 			case 6:
 				aso.addProfessor();
 				break;
-			
 			case 7:
+				aso.dropProfessor();
+				break;
+			case 8:
 				isLoggedIn = false;
 				break;
 			

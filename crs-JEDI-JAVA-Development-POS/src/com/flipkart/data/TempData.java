@@ -70,7 +70,7 @@ public class TempData {
     public TempData() {
         super();
         for(int i = 0; i < 10; i++) {
-            Course c = new Course("Course" + (i+1),"crs-id-"+(i+1),"ins-"+(i+1), true, 100.1);
+            Course c = new Course("Course" + (i+1),"crs-id-"+(i+1),2, true, 100.1, 8);
             courseList.add(c);
         }
         
