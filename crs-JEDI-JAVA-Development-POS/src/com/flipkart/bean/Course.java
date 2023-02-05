@@ -3,18 +3,19 @@ package com.flipkart.bean;
 public class Course {
 	private String courseName;
 	private String courseId;
-	private String instructorId;
+	private int instructorId;
 	private Double courseFee;
 	private boolean isCourseAvailable;
-	
+	private int semester;
 	
 
-	public Course(String courseName, String courseId, String instructorId, boolean isCourseAvailable, Double fee) {
+	public Course(String courseName, String courseId, int instructorId, boolean isCourseAvailable, Double fee, int semester) {
 		this.courseName = courseName;
 		this.courseId = courseId;
 		this.instructorId = instructorId;
 		this.isCourseAvailable = isCourseAvailable;
 		this.courseFee = fee;
+		this.semester = semester;
 	}
 
 	public String getCourseName() {
@@ -33,11 +34,11 @@ public class Course {
 		this.courseId = courseId;
 	}
 
-	public String getInstructorId() {
+	public int getInstructorId() {
 		return instructorId;
 	}
 
-	public void setInstructorId(String instructorId) {
+	public void setInstructorId(int instructorId) {
 		this.instructorId = instructorId;
 	}
 
@@ -55,6 +56,20 @@ public class Course {
 
 	public void setCourseFee(Double courseFee) {
 		this.courseFee = courseFee;
+	}
+
+	/**
+	 * @return the semester
+	 */
+	public int getSemester() {
+		return semester;
+	}
+
+	/**
+	 * @param semester the semester to set
+	 */
+	public void setSemester(int semester) {
+		this.semester = semester;
 	}
 
 }

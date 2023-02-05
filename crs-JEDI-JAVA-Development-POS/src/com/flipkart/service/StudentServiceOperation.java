@@ -4,6 +4,11 @@
 package com.flipkart.service;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
+=======
+import java.util.HashMap;
+
+>>>>>>> main
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
 import com.flipkart.bean.RegisteredCourse;
@@ -33,6 +38,21 @@ public class StudentServiceOperation implements StudentService{
 		// add the course
 		ArrayList<Course> courseList = td.getCourseList();
 		int ind = -1;
+		boolean flag = false;
+		for(var c: td.getStudentCourseCart()) {
+			if(c.getCourseId().compareTo(courseId) == 0) {
+				flag = true;
+				break;
+			}
+		}
+		
+		
+		if(flag) {
+			System.out.println("Course already present");
+			return false;
+		}
+		
+		
 		
 		for(int i = 0; i < courseList.size(); i++) {
 			if(courseList.get(i).getCourseId().compareTo(courseId) == 0) {
@@ -58,7 +78,7 @@ public class StudentServiceOperation implements StudentService{
 		
 		ArrayList<Course> stdCart = td.getStudentCourseCart();
 		
-		stdCart.removeIf(c -> c.getCourseId() == courseId);
+		stdCart.removeIf(c -> c.getCourseId().compareTo(courseId) == 0);
 		
 		return true;
 		
@@ -69,13 +89,27 @@ public class StudentServiceOperation implements StudentService{
 		return td.getStudentCourseCart();
 	}
 	
+	public ArrayList<Course> viewSelectedCourses(){
+		return td.getStudentCourseCart();
+	}
+	
+	public boolean registerCourses() {
+		ArrayList<Course> registeredCourses = new ArrayList<Course>();
+		for(var c: td.getStudentCourseCart()) {
+			registeredCourses.add(c);
+		}
+		td.setStudentApprovedCourses(registeredCourses);
+		HashMap<Integer,ArrayList<Course>> studentTakenCourse = td.getStudentTakenCourses();
+		studentTakenCourse.put(10001, registeredCourses);
+		return true;
+	}
 	
 	
-	public int calculateTotalFee() {
+	public double calculateTotalFee(ArrayList<Course> approvedCourses) {
 		// calculate the total fees based on the registered courses.
-		ArrayList<Course> approvedCourses = td.getStudentApprovedCourses();
 		
-		int totalFee = 0;
+		
+		double totalFee = 0.0;
 		
 		for(var course: approvedCourses) {
 			totalFee += course.getCourseFee();
@@ -91,14 +125,14 @@ public class StudentServiceOperation implements StudentService{
 		Student st = null;
 		
 		for (Student student : td.getApprovedStudents()) {
-			if(student.getName() == user) {
+			if(student.getStudentID() == Integer.parseInt(user)) {
 				st = student;
 				break;
 			}
 		}
 
-
-		int totalFee = this.calculateTotalFee();
+		ArrayList<Course> approvedCourses = td.getStudentApprovedCourses();
+		double totalFee = this.calculateTotalFee(approvedCourses);
 		System.out.println(totalFee);
 		PaymentServiceOperation pso = new PaymentServiceOperation();
 		
@@ -121,6 +155,7 @@ public class StudentServiceOperation implements StudentService{
 	}
 	
 	
+<<<<<<< HEAD
 	public ArrayList<ArrayList<String>> viewGrade(String studentId) {
 		//view the grade card with exception handling
 		
@@ -132,6 +167,18 @@ public class StudentServiceOperation implements StudentService{
 		courses = data.getCourseList();
 		for(Grade grade : grades) {
 			if(grade.getStudentId().equals(studentId)) {
+=======
+	public ArrayList<ArrayList<String>> viewGrade(int studentId) {
+		//view the grade card with exception handling
+
+		ArrayList<Grade> grades = new ArrayList<Grade>();
+		ArrayList<Course> courses = new ArrayList<Course>();
+		ArrayList<ArrayList<String>> gradeCard = new ArrayList<ArrayList<String>>();
+		grades = td.getGrades();
+		courses = td.getCourseList();
+		for(Grade grade : grades) {
+			if(grade.getStudentId() == studentId) {
+>>>>>>> main
 				for(Course course : courses) {
 					if(grade.getCourseId().equals(course.getCourseId())) { 
 						ArrayList<String> courseGrade = new ArrayList<String>();

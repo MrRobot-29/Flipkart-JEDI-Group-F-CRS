@@ -4,16 +4,24 @@ import com.flipkart.constant.Gender;
 import com.flipkart.constant.Role;
 
 public class Professor extends User {
+	private int profId;
 	private String department;
 	private String designation;
 	
 	public Professor(String userId, String name, Role role, String password, Gender gender, String address,
-			String country, String department, String designation) {
+			String country, String department, String designation, int profId) {
 		super(userId, name, role, password, gender, address, country);
+		this.profId = profId;
 		this.department = department;
 		this.designation = designation;
 	}
 	
+	public int getProfId() {
+		return profId;
+	}
+	public void setProfId(int profId) {
+		this.profId = profId;
+	}
 	public String getDepartment() {
 		return department;
 	}
