@@ -1,6 +1,9 @@
 package com.flipkart.client;
 
+import java.sql.Connection;
 import java.util.Scanner;
+
+import com.flipkart.helper.DaoHelper;
 import com.flipkart.service.UserServiceOperation;
 
 public class CrsApplication {
@@ -15,6 +18,8 @@ public class CrsApplication {
 		boolean isExit = false;
 		while(!isExit)
 		{
+			Connection conn = null;
+			conn = DaoHelper.getConnection();
 			System.out.println("Welcome to the CRS Applicatoin Choose the Option given below ->");
 			System.out.println("1. Login ");
 			System.out.println("2. Registration of Student");
