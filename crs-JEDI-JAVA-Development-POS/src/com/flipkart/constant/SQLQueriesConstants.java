@@ -21,7 +21,7 @@ public class SQLQueriesConstants {
 	
 	public static final String LAST_ID="SELECT MAX(Student.student_id) FROM crs_db.Student";
 	
-	public static final String GET_COURSE_ID="SELECT RegisteredCourse.course_id FROM RegisteredCourse WHERE RegisteredCourse.student_id= ? AND RegisteredCourse.registration_status=2";
+	public static final String GET_COURSE_ID="SELECT RegisteredCourse.course_id as course_id FROM `RegisteredCourse` WHERE RegisteredCourse.student_id= ? AND RegisteredCourse.registration_status=2";
 	//public static final String GET_COURSE_NAME="SELECT Course.course_name in Course WHERE Course.course_id IN ?";
 	
 	public static final String GET_COURSES="SELECT * FROM Course WHERE Course.semester= ?";
@@ -41,9 +41,5 @@ public class SQLQueriesConstants {
 	// test first in SQL
 	public static final String FREEZE_COURSES="UPDATE crs_db.RegisteredCourse SET RegisteredCourse.registration_status=2 WHERE RegisteredCourse.student_id= ? AND RegisteredCourse.registration_status=0 OR RegisteredCourse.registration_status=1";
 	
-	public static final String CALCULATE_FEE="SELECT SUM(Course.course_fee) FROM crs_db.Course WHERE Course.course_id IN ?";
-	
-	// test first in SQL
-	public static final String FREEZE_COURSES="UPDATE crs_db.RegisteredCourse SET RegisteredCourse.registration_status=2 WHERE RegisteredCourse.student_id= ? AND RegisteredCourse.registration_status=0 OR RegisteredCourse.registration_status=1";
 	
 }
