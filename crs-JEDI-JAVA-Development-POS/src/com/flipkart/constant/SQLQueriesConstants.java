@@ -42,6 +42,8 @@ public class SQLQueriesConstants {
 	
 	public static final String GET_GRADE_STATUS="SELECT GradeStatus.grade_status FROM crs_db.GradeStatus WHERE GradeStatus.semester= ?";
 	
+	public static final String PAY_FEE="INSERT INTO `crs_db`.`Payment` (`student_id`, `payment_id`, `payment_method`, `payment_details`) VALUES ( ? , ? , ? , ? )";
+	
 	// test first in SQL
 	public static final String FREEZE_COURSES="UPDATE crs_db.RegisteredCourse SET RegisteredCourse.registration_status=2 WHERE RegisteredCourse.student_id= ? AND RegisteredCourse.registration_status=0 OR RegisteredCourse.registration_status=1";
 	
