@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.flipkart.bean.Course;
@@ -12,6 +13,7 @@ import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.constant.Gender;
 import com.flipkart.constant.Role;
+import com.flipkart.helper.DaoHelper;
 
 public class AdminDAOImpl implements AdminDAOInterface {
 
@@ -188,12 +190,80 @@ public class AdminDAOImpl implements AdminDAOInterface {
 	}
 
 	public ArrayList<Student> viewPendingStudents() {
-		ArrayList<Student> arr =  new ArrayList<Student>();
+		Connection conn = DaoHelper.getConnection();
+		PreparedStatement stmt = null;
+		
+		String sql = "SELECT * FROM Student AS st INNER JOIN User as us ON st.email = us.email WHERE st.approval_status = 0";
+		ArrayList<Student> arr = new ArrayList<Student>();
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				String email = rs.getString("email");
+				String name = rs.getString("name");
+				String branch = rs.getString("branch");
+				int sem = rs.getInt("semester");
+				int approvalStatus = rs.getInt("approval_status");
+				int stdID = rs.getInt("student_id");
+				String password = rs.getString("password");
+				
+				Student std = new Student(email, name, Role.STUDENT, password, Gender.MALE, "India", "India", branch, stdID, sem, approvalStatus == 1);
+				arr.add(std);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		return arr;
 	}
 
 	public ArrayList<Student> viewAllStudents() {
-		ArrayList<Student> arr =  new ArrayList<Student>();
+		Connection conn = DaoHelper.getConnection();
+		PreparedStatement stmt = null;
+		
+		String sql = "SELECT * FROM Student AS st INNER JOIN User as us ON st.email = us.email WHERE st.approval_status = 1";
+		ArrayList<Student> arr = new ArrayList<Student>();
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				String email = rs.getString("email");
+				String name = rs.getString("name");
+				String branch = rs.getString("branch");
+				int sem = rs.getInt("semester");
+				int approvalStatus = rs.getInt("approval_status");
+				int stdID = rs.getInt("student_id");
+				String password = rs.getString("password");
+				
+				Student std = new Student(email, name, Role.STUDENT, password, Gender.MALE, "India", "India", branch, stdID, sem, approvalStatus == 1);
+				arr.add(std);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		return arr;
 	}
 
@@ -342,12 +412,16 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			while (rs.next()) {
 				String email = rs.getString("email");
 				System.out.println(email + " is going to be deleted!");
-				PreparedStatement stmt1 = null;
-				sql = "delete from user where email = '" + email + "'";
-				stmt1 = conn.prepareStatement(sql);
-				int rows = stmt1.executeUpdate();
+				Statement stmt1 = conn.createStatement();
+				String s3 = "UPDATE Course set prof_id = 0 WHERE prof_id = " + ProfId;
+				String s1 = "Delete from Professor where email = '" + email +"'";
+				String s2 = "Delete from user where email = '" + email + "'";
+				stmt1.addBatch(s3);
+				stmt1.addBatch(s1);
+				stmt1.addBatch(s2);
+				int[] rows = stmt1.executeBatch();
 
-				if (rows > 0) {
+				if (rows[0] > 0) {
 					System.out.println("Professor deleted successfully!");
 				}
 				stmt1.close();
