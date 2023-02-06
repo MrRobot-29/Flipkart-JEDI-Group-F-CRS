@@ -30,7 +30,10 @@ public class SQLQueriesConstants {
 	
 	public static final String ADD_COURSE_IN_BUCKET="INSERT INTO `crs_db`.`RegisteredCourse` (`student_id`, `course_id`, `grade`, `registration_status`) VALUES (?, ?, \"GA\", ?)";
 	
+	public static final String DROP_COURSE="DELETE FROM crs_db.RegisteredCourse WHERE RegisteredCourse.course_id= ? AND RegisteredCourse.student_id= ?";
 	
+	public static final String PRIMARY_COURSE_FREQ="SELECT COUNT(course_id) FROM crs_db.RegisteredCourse WHERE RegisteredCourse.student_id= ? AND RegisteredCourse.registration_status = 0";
 	
+	public static final String SECONDARY_COURSE_FREQ="SELECT COUNT(course_id) FROM crs_db.RegisteredCourse WHERE RegisteredCourse.student_id= ? AND RegisteredCourse.registration_status = 1";
 	
 }
