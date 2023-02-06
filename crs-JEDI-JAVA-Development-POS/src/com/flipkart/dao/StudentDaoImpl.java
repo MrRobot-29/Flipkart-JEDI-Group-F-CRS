@@ -35,6 +35,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
     
     
     
+    
     public boolean freezeCourses(int student_id) {
     	
     	Connection conn = DBUtils.getConnection();
@@ -391,7 +392,36 @@ public class StudentDaoImpl implements StudentDaoInterface{
     }
     
     
-    public ArrayList<String> getRegisteredCourseList(Student student) {
+    public double calculate_total_fee(String student_id) {
+    	
+    	double fees = 0.0;
+    	
+    	ArrayList<String> registered_course_list = getRegisteredCourseList(student_id);
+    	
+		Connection connection = DBUtils.getConnection();
+		
+		try {
+				PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.CALCULATE_FEE);
+				
+				// @test  karna hai isse
+				statement.setObject(1, registered_course_list);
+				
+				//statement.setArray(1, registered_course_list);
+				
+				ResultSet rs = statement.executeQuery();
+				
+				if(rs.next()){
+					fees = fees + rs.getDouble("SUM(Course.course_fee)");
+				}
+			}
+		catch(SQLException e){
+			System.out.checkError();
+		}
+    	return fees;
+    }
+    
+    
+    public ArrayList<String> getRegisteredCourseList(String student_id) {
 		// get the list of all the courses and return it.
     	
     	ArrayList<String> course = null;
@@ -402,7 +432,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
 		try {
 				PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_COURSE_ID);
 				
-				int id = getStudentId(student.getUserId());
+				int id = getStudentId(student_id);
 				
 				statement.setInt(1, id);
 				
@@ -416,8 +446,6 @@ public class StudentDaoImpl implements StudentDaoInterface{
 		catch(SQLException e){
 			System.out.checkError();
 		}
- 
-    	
     	return course;
 	}
     
