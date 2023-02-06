@@ -13,19 +13,17 @@ public class DaoHelper {
 	static final String USER = "root";
 	static final String PASS = "root186828";
 	
-	static Connection connection = null;
+	private static Connection connection = null;
 	
 	
 	public static Connection getConnection() {
-		if(connection == null) {
-			connection = connectToDB();
-		}
+		connection = connectToDB();
 		return connection;
 	}
 	
 	static Connection connectToDB() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		   
 			System.out.println("Connecting to database...");
 			connection = DriverManager.getConnection(DB_URL,USER,PASS);
