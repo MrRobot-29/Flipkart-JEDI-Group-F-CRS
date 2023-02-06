@@ -9,6 +9,9 @@ import java.util.List;
 
 import com.flipkart.helper.DaoHelper;
 
+/**
+ * Class to implement Professor Dao
+ */
 public class ProfessorDaoImpl implements ProfessorDaoInterface{
 	Connection conn = null;
 	PreparedStatement stmt = null;

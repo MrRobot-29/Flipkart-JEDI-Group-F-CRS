@@ -9,7 +9,7 @@ import com.flipkart.data.TempData;
 
 /**
  * @author manish.kumar24
- *
+ * class to implement professor service operation
  */
         
 public class ProfessorServiceOperation implements ProfessorService {

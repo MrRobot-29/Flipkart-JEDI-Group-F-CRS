@@ -12,6 +12,9 @@ import com.flipkart.dao.AdminDAOImpl;
 import com.flipkart.data.SharedTempData;
 import com.flipkart.data.TempData;
 
+/**
+ * Implementations of Admin Service Operations
+ */
 public class AdminServiceOperation implements AdminService {
 
 	TempData td = SharedTempData.td;

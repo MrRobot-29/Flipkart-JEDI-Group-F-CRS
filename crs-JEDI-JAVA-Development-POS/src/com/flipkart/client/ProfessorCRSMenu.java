@@ -7,17 +7,20 @@ import com.flipkart.bean.Professor;
 import com.flipkart.service.ProfessorService;
 import com.flipkart.service.ProfessorServiceOperation;
 
+/**
+ * Class that display Professor Client Menu
+ */
 public class ProfessorCRSMenu {
 	
 	ProfessorService service = new ProfessorServiceOperation();
 	boolean isLogin = true;
 	Scanner sc = new Scanner(System.in);
-	
-	
-	/*
-	 * Creates Menu for Professor Login
-	 *  @param Professor Object
-	 * 
+
+
+	/**
+	 * Method to create Professor menu
+	 * @param p: professor object obtained after logging into the system
+	 * returns displays all the options for the professor, and provides navigation
 	 */
 	public void createMenu(Professor p) {
 		
@@ -41,11 +44,17 @@ public class ProfessorCRSMenu {
 			switch(selectedOption)
 			{
 			case 1:
+				/**
+				 * view all the courses taught by the professor
+				 */
 				List<String> takenCourses = service.viewCourseList(p.getProfId());
 				for(String course: takenCourses)
 					System.out.println(course);
 				break;
 			case 2:
+				/**
+				 * view all the enrolled students for the course
+				 */
 				System.out.println("Enter Course Id: ");
 				sc.nextLine();
 				String courseId = sc.nextLine();
@@ -54,6 +63,9 @@ public class ProfessorCRSMenu {
 					System.out.println(student);
 				break;
 			case 3:
+				/**
+				 * add grade for a student
+				 */
 				System.out.println("Enter Course Id: ");
 				sc.nextLine();
 				courseId = sc.nextLine();
@@ -68,12 +80,18 @@ public class ProfessorCRSMenu {
 					System.out.println("Operation Unsuccessful");
 				break;
 			case 4:
+				/**
+				 * select course for professor to teach
+				 */
 				System.out.println("Enter Course Id: ");
 				sc.nextLine();
 				courseId = sc.nextLine();
 				service.selectCourseToTeach(courseId,p.getProfId());
 				break;
 			case 5:
+				/**
+				 * logout from the system
+				 */
 				isLogin = false;
 				break;
 			default:

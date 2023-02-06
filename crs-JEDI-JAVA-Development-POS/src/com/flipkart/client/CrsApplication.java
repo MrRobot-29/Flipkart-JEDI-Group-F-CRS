@@ -6,6 +6,9 @@ import java.util.Scanner;
 import com.flipkart.helper.DaoHelper;
 import com.flipkart.service.UserServiceOperation;
 
+/**
+ * This class is used as the main entry point of the application
+ */
 public class CrsApplication {
 
 	public static void main(String[] args) {
@@ -29,9 +32,11 @@ public class CrsApplication {
 			switch(selectedOption)
 			{
 			case 1:
+				// login
 				uso.loginAccount();
 				break;
 			case 2:
+				// student registration
 				uso.registerAccount();
 				break;
 			case 3:

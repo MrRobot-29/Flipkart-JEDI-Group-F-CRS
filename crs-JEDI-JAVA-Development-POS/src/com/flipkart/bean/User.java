@@ -6,7 +6,7 @@ import com.flipkart.constant.Role;
 
 /**
  * 
- * @author JEDI-03
+ * @author
  * User Class
  *
  */
@@ -23,7 +23,7 @@ public abstract class User {
 	/**
 	 * Parameterized Constructor
 	 * @param userId: email address of the user
-	 * @param name: user name
+	 * @param name: user's name
 	 * @param role: user's role
 	 * @param password: user's password
 	 * @param gender: user's gender
