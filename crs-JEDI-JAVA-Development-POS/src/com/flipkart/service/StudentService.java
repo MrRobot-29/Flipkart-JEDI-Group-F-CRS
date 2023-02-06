@@ -1,6 +1,7 @@
 package com.flipkart.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.flipkart.bean.Course;
 
@@ -16,7 +17,7 @@ public interface StudentService {
 	
 	public void payFee(String user);
 	
-	public ArrayList<ArrayList<String>> viewGrade(int studentId);
+	public HashMap<String,String> viewGrade(int studentId,int sem);
 	
 	public ArrayList<String> viewSelectedCourses(int student_id);
 	public boolean freezeCourseCart(int studentId) ;

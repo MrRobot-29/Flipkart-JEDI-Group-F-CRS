@@ -470,7 +470,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
     	
     	Connection connection = DBUtils.getConnection();
     	
-    	if(isGradeReleased(semester) == "awaited") {
+    	if(isGradeReleased(semester).equalsIgnoreCase("awaited")) {
     		return null;
     	}
     	
