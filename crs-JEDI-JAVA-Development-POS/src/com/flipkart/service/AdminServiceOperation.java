@@ -24,8 +24,6 @@ public class AdminServiceOperation implements AdminService {
     	String cid = sc.next();
     	AdminDAOImpl aDao = new AdminDAOImpl();
     	aDao.dropCourse(cid);
-    	ArrayList<Course> cl = td.getCourseList();
-    	cl.removeIf(c -> c.getCourseId().compareTo(cid) == 0);
     	return true;
     }
 
@@ -42,11 +40,8 @@ public class AdminServiceOperation implements AdminService {
     	System.out.println("Enter semester to which the course is offered");
     	int sem = sc.nextInt();
     	Course newCourse = new Course(cname, cid, insid, true, courseFee, sem);
-    	ArrayList<Course> cl = td.getCourseList();
     	AdminDAOImpl aDao = new AdminDAOImpl();
     	aDao.addCourse(newCourse);
-    	cl.add(newCourse);
-    	td.setCourseList(cl);
     	return true;
     	
     }
