@@ -8,11 +8,11 @@ public interface StudentService {
 
 	public ArrayList<Course> courseList();
 	
-	public  boolean addCourse(String courseId);
+	public boolean addCourse(int student_id, String courseId, int course_type);
 	
 	public boolean dropCourse(String courseId);
 	
-	public  ArrayList<Course> approvedList();
+	public  ArrayList<Course> approvedList(String student_id);
 	
 	public double calculateTotalFee(ArrayList<Course> approvedCourses);
 	
@@ -22,5 +22,7 @@ public interface StudentService {
 	
 	public ArrayList<Course> viewSelectedCourses();
 	
-	public boolean registerCourses();
+	//public boolean registerCourses();
+	
+	public boolean getCourseAvailabilityStatus(String courseId);
 }

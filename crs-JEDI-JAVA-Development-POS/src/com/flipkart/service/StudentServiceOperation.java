@@ -23,6 +23,7 @@ import com.flipkart.data.TempData;
 public class StudentServiceOperation implements StudentService{
 	
 	StudentDaoInterface studentDao = new StudentDaoImpl();
+	static TempData td = SharedTempData.td;
 	
 	public ArrayList<Course> courseList(int sem) {
 		// get the list of all the courses and return it.

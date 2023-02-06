@@ -17,5 +17,5 @@ public interface StudentDaoInterface {
 	public boolean drop_course(Student student, Course course);
 	public ArrayList<Course> courseList(int sem);
 	public boolean getCourseAvailabilityStatus(String course_id);
-	public ArrayList<String> getRegisteredCourseList(Student student);
+	public ArrayList<String> getRegisteredCourseList(String student_id);
 }
