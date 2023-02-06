@@ -1,25 +1,32 @@
 package com.flipkart.client;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.service.ProfessorService;
 import com.flipkart.service.ProfessorServiceOperation;
 
 public class ProfessorCRSMenu {
 	
-	
 	ProfessorService service = new ProfessorServiceOperation();
 	boolean isLogin = true;
+	Scanner sc = new Scanner(System.in);
+	
+	
+	/*
+	 * Creates Menu for Professor Login
+	 *  @param Professor Object
+	 * 
+	 */
 	public void createMenu(Professor p) {
 		
 		System.out.println("Login as : " + p.getName() + "\n");
+		
+		// To show menu till Professor logs out
 		while(isLogin) {
 			
-			
+			// Menu
 			System.out.println("Enter your choise : ");
 			System.out.println("1. view Course");
 			System.out.println("2. View Enrolled Student");
@@ -27,26 +34,22 @@ public class ProfessorCRSMenu {
 			System.out.println("4. Select course to teach");
 			System.out.println("5. log out");
 			
-			Scanner sc = new Scanner(System.in);
 			
+			//Input to take menu choice
 			int selectedOption = sc.nextInt();
 
 			switch(selectedOption)
 			{
 			case 1:
-				System.out.println("Enter Instructor Id: ");
-				int instructorId = sc.nextInt();
-				List<String> takenCourses = service.viewCourseList(instructorId);
+				List<String> takenCourses = service.viewCourseList(p.getProfId());
 				for(String course: takenCourses)
 					System.out.println(course);
 				break;
 			case 2:
-				System.out.println("Enter Instructor Id: ");
-				instructorId = sc.nextInt();
 				System.out.println("Enter Course Id: ");
 				sc.nextLine();
 				String courseId = sc.nextLine();
-				List<String> enrolledStudents = service.viewEnrolledStudents(instructorId, courseId);
+				List<String> enrolledStudents = service.viewEnrolledStudents(p.getProfId(), courseId);
 				for(String student: enrolledStudents)
 					System.out.println(student);
 				break;
@@ -68,9 +71,8 @@ public class ProfessorCRSMenu {
 				System.out.println("Enter Course Id: ");
 				sc.nextLine();
 				courseId = sc.nextLine();
-				System.out.println("Enter Instructor Id: ");
-				instructorId = sc.nextInt();
-				service.selectCourseToTeach(courseId,instructorId);
+				service.selectCourseToTeach(courseId,p.getProfId());
+				break;
 			case 5:
 				isLogin = false;
 				break;

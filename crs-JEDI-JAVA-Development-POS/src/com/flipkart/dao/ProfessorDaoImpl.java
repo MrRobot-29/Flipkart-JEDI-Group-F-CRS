@@ -85,12 +85,7 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 					stmt.close();
 			} catch (SQLException se2) {
 			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} // end finally try
+			
 		} 
 		return false;
 	}
@@ -130,12 +125,6 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 					stmt.close();
 			} catch (SQLException se2) {
 			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} // end finally try
 		} // end try
 		return enrolledStudents;
 	}
@@ -171,12 +160,6 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 					stmt.close();
 			} catch (SQLException se2) {
 			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} // end finally try
 		} 
 		return false;
 	}
