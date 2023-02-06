@@ -17,6 +17,9 @@ import com.flipkart.constant.Gender;
 import com.flipkart.constant.Role;
 import com.flipkart.helper.DaoHelper;
 
+/**
+ * Class to implement user Dao
+ */
 public class UserDAOImpl implements UserDAOInterface{
 
 	public boolean registerAccount(Student std) {
