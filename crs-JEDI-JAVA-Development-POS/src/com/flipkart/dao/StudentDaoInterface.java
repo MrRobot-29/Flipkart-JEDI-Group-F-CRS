@@ -14,8 +14,10 @@ public interface StudentDaoInterface {
 	public int primaryCourseFreq(int student_id);
 	public int secondaryCourseFreq(int student_id);
 	public boolean addCourseBucket(int student_id, String course_id, int course_type);
-	public boolean drop_course(Student student, Course course);
+	public boolean drop_course(int studentId, String courseId);
 	public ArrayList<Course> courseList(int sem);
 	public boolean getCourseAvailabilityStatus(String course_id);
-	public ArrayList<String> getRegisteredCourseList(String student_id);
+	public ArrayList<String> getRegisteredCourseList(int student_id);
+	public boolean freezeCourses(int student_id) ;
+	public double calculate_total_fee(int student_id);
 }

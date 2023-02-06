@@ -10,9 +10,7 @@ public interface StudentService {
 	
 	public boolean addCourse(int student_id, String courseId, int course_type);
 	
-	public boolean dropCourse(String courseId);
-	
-	public  ArrayList<String> approvedList(String student_id);
+	public boolean dropCourse(int student, String courseId) ;
 	
 	public double calculateTotalFee(ArrayList<Course> approvedCourses);
 	
@@ -20,11 +18,13 @@ public interface StudentService {
 	
 	public ArrayList<ArrayList<String>> viewGrade(int studentId);
 	
-	public ArrayList<String> viewSelectedCourses(String student_id);
+	public ArrayList<String> viewSelectedCourses(int student_id);
+	public boolean freezeCourseCart(int studentId) ;
 	
 	//public boolean registerCourses();
 	
 	public boolean getCourseAvailabilityStatus(String courseId);
 	public int primaryCourseFreq(int student_id) ;
 	public int secondaryCourseFreq(int student_id) ;
+	
 }

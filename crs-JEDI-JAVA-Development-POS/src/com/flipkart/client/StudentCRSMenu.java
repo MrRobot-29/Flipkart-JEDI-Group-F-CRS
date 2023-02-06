@@ -87,37 +87,25 @@ public class StudentCRSMenu {
 				break;
 			case 3:
 				System.out.println("Enter Course ID to drop");
-				String cid1 = sc.next();
-				sso.dropCourse(cid1);
+				String courseId = sc.next();
+				boolean status = sso.dropCourse(std.getStudentID(),courseId);
+				if(status)
+					System.out.println("Course Dropped Successfully");
 				break;
 			case 4:
-//				ArrayList<Course> cl2 = sso.viewSelectedCourses();
-//				int num2 = 1;
-//				for(var c: cl2) {
-//					System.out.println(num2);
-//					System.out.println("Course Name: " + c.getCourseName());
-//					System.out.println("Course ID: " + c.getCourseId());
-//					num2++;
-//				}
-//				System.out.println("Proceed for registration");
-//				System.out.println("1. Yes");
-//				System.out.println("2. Go back");
-//				int sel = sc.nextInt();
-//				if(sel == 1) {
-//					sso.registerCourses();
-//					System.out.println("Courses Registered Successfully. Proceed to pay fee");
-//				}
+				status = sso.freezeCourseCart(std.getStudentID());
+				if(status)
+					System.out.println("Course Cart Freezed Successfully");
+				else
+					System.out.println("Operation Failed! Please make sure you have selected 4 primary and 2 secondary courses");
 				break;
 			case 5:
-//				ArrayList<Course> cl1 = sso.approvedList();
-//				int num1 = 1;
-//				for(var c: cl1) {
-//					System.out.println(num1);
-//					System.out.println("Course Name: " + c.getCourseName());
-//					System.out.println("Course ID: " + c.getCourseId());
-//					num1++;
-//				}
-//				break;
+				ArrayList<String> selectedCourse = sso.viewSelectedCourses(std.getStudentID());
+				for(String finalcourse: selectedCourse)
+				{
+					System.out.println(finalcourse);
+				}
+				break;
 			case 6:
 				
 				sso.payFee(std.getName());
