@@ -40,15 +40,24 @@ public class ProfessorCRSMenu {
 					System.out.println(course);
 				break;
 			case 2:
+				System.out.println("Enter Instructor Id: ");
+				instructorId = sc.nextInt();
+				System.out.println("Enter Course Id: ");
+				sc.nextLine();
+				String courseId = sc.nextLine();
+				List<String> enrolledStudents = service.viewEnrolledStudents(instructorId, courseId);
+				for(String student: enrolledStudents)
+					System.out.println(student);
 				break;
 			case 3:
 				System.out.println("Enter Course Id: ");
-				String courseId = sc.next();
+				sc.nextLine();
+				courseId = sc.nextLine();
 				System.out.println("Enter Student Id(Int): ");
 				int studentId = sc.nextInt();
 				System.out.println("Enter Grade: ");
 				String grade = sc.next();
-				boolean status = service.addGrade("crs-id-"+courseId, studentId, grade);
+				boolean status = service.addGrade(courseId, studentId, grade);
 				if(status)
 					System.out.println("Grade Assigned");
 				else
@@ -56,15 +65,11 @@ public class ProfessorCRSMenu {
 				break;
 			case 4:
 				System.out.println("Enter Course Id: ");
-				courseId = sc.next();
+				sc.nextLine();
+				courseId = sc.nextLine();
 				System.out.println("Enter Instructor Id: ");
 				instructorId = sc.nextInt();
-				status = service.selectCourseToTeach("crs-id-"+courseId,instructorId);
-				if(status)
-					System.out.println("Successfully Assigned");
-				else
-					System.out.println("Operation Unsuccessful");
-				break;
+				service.selectCourseToTeach(courseId,instructorId);
 			case 5:
 				isLogin = false;
 				break;
