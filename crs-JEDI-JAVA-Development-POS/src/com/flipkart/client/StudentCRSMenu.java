@@ -45,24 +45,44 @@ public class StudentCRSMenu {
 				
 				break;
 			case 2:
-//				int numberOfCoursesToAdd = 6-sso.viewSelectedCourses().size();
-//				
-//				if(numberOfCoursesToAdd == 0) {
-//					System.out.println("You have already seleceted 6 courses");
-//				}else {
-//					System.out.println("Enter "+ numberOfCoursesToAdd +" Course IDs to add");
-//					while( numberOfCoursesToAdd != 0) {
-//						String cid = sc.next();
-//						if(sso.addCourse(cid)) {
-//						   System.out.println("Course added successfully");	
-//						}else {
-//						   System.out.println("Course not added");	
-//						}
-//						numberOfCoursesToAdd = 6-sso.viewSelectedCourses().size();
-//					}
-//				}
-				
-				
+				int primaryCnt = sso.primaryCourseFreq(std.getStudentID()), secCnt = sso.secondaryCourseFreq(std.getStudentID());
+				System.out.println(primaryCnt);
+				if(primaryCnt == 4 && secCnt == 2)
+				{
+					System.out.println("You have already selected all the required primary and secondary course !!");
+					System.out.println("Please Drop Course");
+					break;
+				}
+				while(true)
+				{
+					System.out.println("Enter Course-Id: (0 to go back)");
+					String courseId = sc.next();
+					if(courseId.equalsIgnoreCase("0"))
+						break;
+					if(!sso.getCourseAvailabilityStatus(courseId))
+					{
+						System.out.println("Course Unavailable!!");
+						break;
+					}
+					System.out.println("Enter Course Type: ");
+					System.out.println("0 for Primary and 1 for Secondary");
+					int type = sc.nextInt();
+					if(type == 0 && primaryCnt == 4)
+					{
+						System.out.println("You have already filled all the slot for primary courses");
+						break;
+					}
+					if(type == 1 && primaryCnt == 2)
+					{
+						System.out.println("You have already filled all the slot for secondary courses");
+						break;
+					}
+					boolean status = sso.addCourse(std.getStudentID(), courseId, type);
+					if(status)
+						System.out.println("Course Added Successfully");
+					else
+						System.out.println("Operation Failed !!");
+				}
 				
 				break;
 			case 3:

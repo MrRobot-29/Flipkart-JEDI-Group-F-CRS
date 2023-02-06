@@ -44,6 +44,18 @@ public class StudentServiceOperation implements StudentService{
 	
 	}
 	
+	public int primaryCourseFreq(int student_id) {
+		// add the course
+		return studentDao.primaryCourseFreq(student_id);
+	
+	}
+	
+	public int secondaryCourseFreq(int student_id) {
+		// add the course
+		return studentDao.secondaryCourseFreq(student_id);
+	
+	}
+	
 	public boolean dropCourse(String courseId) {
 		// drop the course
 		

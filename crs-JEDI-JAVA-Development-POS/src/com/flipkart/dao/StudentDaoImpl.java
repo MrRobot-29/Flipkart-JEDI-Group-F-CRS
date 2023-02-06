@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 import com.flipkart.bean.*;
 
 import com.flipkart.utils.DBUtils;
-
+import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
 import com.flipkart.constant.*;
 
 /**
@@ -75,8 +75,8 @@ public class StudentDaoImpl implements StudentDaoInterface{
 			statement.setInt(1, student_id);
 			
 			ResultSet rs = statement.executeQuery();
-			
-			cnt = rs.getInt("COUNT(course_id)");
+			while(rs.next())
+				cnt = rs.getInt("count");
 			
     	}catch(SQLException err) {
     		System.out.println(err.getMessage());
@@ -96,17 +96,40 @@ public class StudentDaoImpl implements StudentDaoInterface{
 			statement.setInt(1, student_id);
 			
 			ResultSet rs = statement.executeQuery();
-			
-			cnt = rs.getInt("COUNT(course_id)");
-			
-			
+			while(rs.next())
+				cnt = rs.getInt("count");
 			
     	}catch(SQLException err) {
     		System.out.println(err.getMessage());
     	}
     	return cnt;
     }
-
+    
+    public boolean checkCourse(int studentId, String courseId) {
+    	
+    	Connection conn = DBUtils.getConnection();
+    	
+    	PreparedStatement stmt = null;
+    	
+    	String sql = "SELECT COUNT(*) as count FROM RegisteredCourse WHERE student_id = " + studentId + " AND course_id = '"+ courseId +"'";
+    	try {
+			stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			int count = 0;
+			
+			while(rs.next()) {
+				count = rs.getInt("count");
+			}
+			
+			if(count > 0) return false;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	return true;
+    }
 
     
     public boolean addCourseBucket(int student_id, String course_id, int course_type) {
@@ -116,6 +139,10 @@ public class StudentDaoImpl implements StudentDaoInterface{
 
     	
     	try {
+    		    if(!checkCourse(student_id, course_id)) {
+    		    	System.out.println("Course already added!");
+    		    	return false;
+    		    }
     			int cnt = 0;
     			if(course_type == 0) {
     				cnt = primaryCourseFreq(student_id);
@@ -146,7 +173,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
 	    		else if(course_type == 1) {
 	    			statement.setInt(3, 1);
 	    		}
-	    		statement.executeQuery();
+	    		statement.executeUpdate();
 	    		return true;
 			
 	    	}catch(SQLException err) {
