@@ -6,13 +6,13 @@ import com.flipkart.bean.Course;
 
 public interface StudentService {
 
-	public ArrayList<Course> courseList();
+	public ArrayList<Course> courseList(int sem);
 	
 	public boolean addCourse(int student_id, String courseId, int course_type);
 	
 	public boolean dropCourse(String courseId);
 	
-	public  ArrayList<Course> approvedList(String student_id);
+	public  ArrayList<String> approvedList(String student_id);
 	
 	public double calculateTotalFee(ArrayList<Course> approvedCourses);
 	
@@ -20,7 +20,7 @@ public interface StudentService {
 	
 	public ArrayList<ArrayList<String>> viewGrade(int studentId);
 	
-	public ArrayList<Course> viewSelectedCourses();
+	public ArrayList<String> viewSelectedCourses(String student_id);
 	
 	//public boolean registerCourses();
 	
