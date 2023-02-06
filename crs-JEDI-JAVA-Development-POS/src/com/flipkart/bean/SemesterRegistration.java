@@ -7,16 +7,21 @@ import java.time.LocalDate;
 
 /**
  * @author gaurav.dash
- *
+ * class for semester registration
  */
 public class SemesterRegistration {
   
 	private int studentId;
 	private String semester;
 	private LocalDate dateOfRegistration;
-	
-	
-	
+
+
+	/**
+	 * constructor
+	 * @param studentId: student id
+	 * @param semester: semester of student
+	 * @param dateOfRegistration: date of registration
+	 */
 	public SemesterRegistration(int studentId, String semester, LocalDate dateOfRegistration) {
 		this.studentId = studentId;
 		this.semester = semester;

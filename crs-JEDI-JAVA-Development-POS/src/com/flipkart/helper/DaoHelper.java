@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * helper class for Dao
+ */
 public class DaoHelper {
 	
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -14,8 +17,12 @@ public class DaoHelper {
 	static final String PASS = "root186828";
 	
 	private static Connection connection = null;
-	
+
 	//Singleton Class
+
+	/**
+	 * Singleton Class
+	 */
 	private DaoHelper() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

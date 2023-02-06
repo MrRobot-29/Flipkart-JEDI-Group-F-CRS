@@ -6,6 +6,9 @@ import com.flipkart.bean.*;
 import com.flipkart.service.AdminServiceOperation;
 import com.flipkart.data.*;
 
+/**
+ * Class that display Admin Client Menu
+ */
 public class AdminCRSMenu {
 	Scanner scanner = new Scanner(System.in); 
 	AdminServiceOperation aso = new AdminServiceOperation();
@@ -13,6 +16,11 @@ public class AdminCRSMenu {
 	
 		
 	boolean isLoggedIn = true;
+
+	/**
+	 * Method to create admin menu
+	 * @param ad: admin object
+	 */
 	public void createMenu(Admin ad) {
 		
 		while(isLoggedIn) {
@@ -35,7 +43,9 @@ public class AdminCRSMenu {
 			
 			switch(choice) {
 			case 1:
-	
+				/**
+				 * view course in catalog
+				 */
 				ArrayList<Course> cl = aso.viewCourses();
 				int num = 1;
 				for(var c: cl) {
@@ -49,16 +59,25 @@ public class AdminCRSMenu {
 				break;
 				
 			case 2:
+				/**
+				 * add course to catalog
+				 */
 				if(aso.addCourse()) {
 					System.out.println("Course Added to the catalog");	
 				}
 				break;
 				
 			case 3:
+				/**
+				 * delete course from catalog
+				 */
 				aso.dropCourse();
 				break;
 				
 			case 4:
+				/**
+				 * view list of student
+				 */
 				System.out.println("1. List of Approved Students");
 				System.out.println("2. List of Non-approved Students");
 				System.out.println("3. Go back!!");
@@ -97,20 +116,35 @@ public class AdminCRSMenu {
 				break;
 			
 			case 5:
+				/**
+				 * approve student
+				 */
 				System.out.println("Enter Student ID to approve");
 				int stId = scanner.nextInt();
 				aso.validateStudent(stId);
 				break;
 			case 6:
+				/**
+				 * add professor
+				 */
 				aso.addProfessor();
 				break;
 			case 7:
+				/**
+				 * remove professor
+				 */
 				aso.dropProfessor();
 				break;
 			case 8:
+				/**
+				 * generate grade cards
+				 */
 				aso.generateGradeCard();
 				break;
 			case 9:
+				/**
+				 * logout
+				 */
 				isLoggedIn = false;
 				break;
 			

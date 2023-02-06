@@ -6,7 +6,16 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 
+/**
+ * Interface for Admin Dao Operation
+ */
 public interface AdminDAOInterface {
+
+    /**
+     * Delete Course using SQL commands
+     * @throws
+     * @param courseId: course id
+     */
 	public void dropCourse(String courseId);
 
     public boolean addCourse(Course c);
