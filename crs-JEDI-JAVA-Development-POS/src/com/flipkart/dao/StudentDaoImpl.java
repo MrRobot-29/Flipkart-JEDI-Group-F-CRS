@@ -32,74 +32,134 @@ public class StudentDaoImpl {
 		// TODO Auto-generated constructor stub
 		DBUtils = new DBUtils();
 	}
+    
+    
+    
+    public int primaryCourseFreq(int student_id) {
+    	
+    	Connection conn = DBUtils.getConnection();
+
+    	int cnt = 0;
+    	
+    	try {
+	    	PreparedStatement statement = conn.prepareStatement(SQLQueriesConstants.PRIMARY_COURSE_FREQ);
+			
+			statement.setInt(1, student_id);
+			
+			ResultSet rs = statement.executeQuery();
+			
+			cnt = rs.getInt("COUNT(course_id)");
+			
+    	}catch(SQLException err) {
+    		System.out.println(err.getMessage());
+    	}
+    	return cnt;
+    }
+    
+    public int secondaryCourseFreq(int student_id) {
+    	
+    	Connection conn = DBUtils.getConnection();
+
+    	int cnt = 0;
+    	
+    	try {
+	    	PreparedStatement statement = conn.prepareStatement(SQLQueriesConstants.SECONDARY_COURSE_FREQ);
+			
+			statement.setInt(1, student_id);
+			
+			ResultSet rs = statement.executeQuery();
+			
+			cnt = rs.getInt("COUNT(course_id)");
+			
+			
+			
+    	}catch(SQLException err) {
+    		System.out.println(err.getMessage());
+    	}
+    	return cnt;
+    }
 
 
     
-    public void addCourseBucket(Student student, ArrayList<Course> courses) {
+    public boolean addCourseBucket(int student_id, String course_id, int course_type) {
     	
     	Connection conn = DBUtils.getConnection();
     	
-    	
-//    	String sql = "insert into RegisteredCourse values(?,?,?,?)";
-//        stmt = conn.prepareStatement(sql);
-//        stmt.setInt(1,studentId);
-//        stmt.setString(2, courseId);
-//        stmt.setString(3, null);
-//        stmt.setInt(4, 0);
-//        int rows = stmt.executeUpdate();
-//        if(rows==1)
-//            return true;
-//        else
-//            return false;
+
     	
     	try {
-    		
-    		int cnt = 1;
-    		
-    		for(Course ct : courses) {
-    			if(getCourseAvailabilityStatus(ct.getCourseId())) {
-    				PreparedStatement statement = conn.prepareStatement(SQLQueriesConstants.ADD_COURSE_IN_BUCKET);
-    	    		
-    	    		statement.setString(1, student.getUserId());
-    	    		statement.setString(2, ct.getCourseId());
+    			int cnt = 0;
+    			if(course_type == 0) {
+    				cnt = primaryCourseFreq(student_id);
     				
-    	    		if(cnt<=4) {
-    	    			statement.setInt(3, 0);
-    	    		}
-    	    		else {
-    	    			statement.setInt(3, 1);
-    	    		}
-    				statement.executeQuery();
+    				if(cnt>=4) {
+    					return false;
+    				}
+    			}
+    			else if(course_type == 1) {
+    				cnt = secondaryCourseFreq(student_id);
     				
-    				//ResultSet rs = statement.executeQuery();
-    				
+    				if(cnt>=2) {
+    					return false;
+    				}
+    			}
+    			else {
+    				return false;
     			}
     			
-    			cnt++;
-    		}
-			
-//			PreparedStatement get_last_id = conn.prepareStatement(SQLQueriesConstants.LAST_ID);
-//			
-//			ResultSet rs = get_last_id.executeQuery();
-			
-			
-//			int last_id = 0;
-////			
-//			if(rs.next()) {
-//				last_id = rs.getInt(1);   // last student id + 1
-//			}
-//			
-//			PreparedStatement statement2 = conn.prepareStatement(SQLQueriesConstants.ADD_STUDENT_ID);
-//			statement2.setInt(1, last_id+1);
-//			statement2.setString(2, student.getUserId());
-//			statement2.setString(3, student.getBranch());
-//			statement2.setInt(4, semester);	
+    			PreparedStatement statement = conn.prepareStatement(SQLQueriesConstants.ADD_COURSE_IN_BUCKET);
+	    		
+	    		statement.setInt(1, student_id);
+	    		statement.setString(2, course_id);
+				
+	    		if(course_type == 0) {
+	    			statement.setInt(3, 0);
+	    		}
+	    		else if(course_type == 1) {
+	    			statement.setInt(3, 1);
+	    		}
+	    		statement.executeQuery();
+	    		return true;
 			
 	    	}catch(SQLException err) {
 	    		System.out.println(err.getMessage());
 	    	}
+    	return false;
     }
     
+    
+    public boolean drop_course(Student student, Course course) {
+    	
+    	Connection connection=DBUtils.getConnection();
+    	
+		try {
+			
+			PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.DROP_COURSE);
+			
+			statement.setString(1, course.getCourseId());
+			
+			int uid = getStudentId(student.getUserId());
+			
+			statement.setInt(2, uid);
+			
+			int row = statement.executeUpdate();
+			
+			if(row==1)
+			{
+				return true;
+			}
+			return false;
+				
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
+		return false;    // Student does not exists
+    	
+    	
+    }
     
     
     
@@ -132,7 +192,7 @@ public class StudentDaoImpl {
 				
 				temp.setCourseId(course_id);
 				temp.setCourseName(course_name);
-				temp.setInstructorId(professor_id);
+				temp.setInstructorId(prof_id);
 				temp.setCourseAvailable(getCourseAvailabilityStatus(course_id));
 				temp.setCourseFee(course_fee);
 				//temp.setSemester(semester)
