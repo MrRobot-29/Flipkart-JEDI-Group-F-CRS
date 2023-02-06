@@ -27,9 +27,7 @@ public class StudentServiceOperation implements StudentService{
 	
 	public ArrayList<Course> courseList(int sem) {
 		// get the list of all the courses and return it.
-		
-		return studentDao.courseList(sem);
-		
+		return studentDao.courseList(sem);		
 	}
 	
 	public boolean getCourseAvailabilityStatus(String courseId) {
