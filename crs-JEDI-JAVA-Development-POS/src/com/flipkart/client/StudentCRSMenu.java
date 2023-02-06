@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
+import com.flipkart.service.StudentService;
 import com.flipkart.service.StudentServiceOperation;
 
 public class StudentCRSMenu {
@@ -12,7 +13,7 @@ public class StudentCRSMenu {
 	public void createMenu(Student std)
 	{
 		Scanner sc = new Scanner(System.in);
-		StudentServiceOperation sso = new StudentServiceOperation();
+		StudentService sso = new StudentServiceOperation();
 		while(isLoggedIn == true)
 		{
 			System.out.println("Logged in as : " + std.getName() + "\n");
@@ -32,7 +33,8 @@ public class StudentCRSMenu {
 			switch(selectedOption)
 			{
 			case 1:
-				ArrayList<Course> cl = sso.courseList();
+				System.out.println(std.getSemester());
+				ArrayList<Course> cl = sso.courseList(std.getSemester());
 				int num = 1;
 				for(var c: cl) {
 					System.out.println(num);
@@ -43,22 +45,22 @@ public class StudentCRSMenu {
 				
 				break;
 			case 2:
-				int numberOfCoursesToAdd = 6-sso.viewSelectedCourses().size();
-				
-				if(numberOfCoursesToAdd == 0) {
-					System.out.println("You have already seleceted 6 courses");
-				}else {
-					System.out.println("Enter "+ numberOfCoursesToAdd +" Course IDs to add");
-					while( numberOfCoursesToAdd != 0) {
-						String cid = sc.next();
-						if(sso.addCourse(cid)) {
-						   System.out.println("Course added successfully");	
-						}else {
-						   System.out.println("Course not added");	
-						}
-						numberOfCoursesToAdd = 6-sso.viewSelectedCourses().size();
-					}
-				}
+//				int numberOfCoursesToAdd = 6-sso.viewSelectedCourses().size();
+//				
+//				if(numberOfCoursesToAdd == 0) {
+//					System.out.println("You have already seleceted 6 courses");
+//				}else {
+//					System.out.println("Enter "+ numberOfCoursesToAdd +" Course IDs to add");
+//					while( numberOfCoursesToAdd != 0) {
+//						String cid = sc.next();
+//						if(sso.addCourse(cid)) {
+//						   System.out.println("Course added successfully");	
+//						}else {
+//						   System.out.println("Course not added");	
+//						}
+//						numberOfCoursesToAdd = 6-sso.viewSelectedCourses().size();
+//					}
+//				}
 				
 				
 				
@@ -69,33 +71,33 @@ public class StudentCRSMenu {
 				sso.dropCourse(cid1);
 				break;
 			case 4:
-				ArrayList<Course> cl2 = sso.viewSelectedCourses();
-				int num2 = 1;
-				for(var c: cl2) {
-					System.out.println(num2);
-					System.out.println("Course Name: " + c.getCourseName());
-					System.out.println("Course ID: " + c.getCourseId());
-					num2++;
-				}
-				System.out.println("Proceed for registration");
-				System.out.println("1. Yes");
-				System.out.println("2. Go back");
-				int sel = sc.nextInt();
-				if(sel == 1) {
-					sso.registerCourses();
-					System.out.println("Courses Registered Successfully. Proceed to pay fee");
-				}
+//				ArrayList<Course> cl2 = sso.viewSelectedCourses();
+//				int num2 = 1;
+//				for(var c: cl2) {
+//					System.out.println(num2);
+//					System.out.println("Course Name: " + c.getCourseName());
+//					System.out.println("Course ID: " + c.getCourseId());
+//					num2++;
+//				}
+//				System.out.println("Proceed for registration");
+//				System.out.println("1. Yes");
+//				System.out.println("2. Go back");
+//				int sel = sc.nextInt();
+//				if(sel == 1) {
+//					sso.registerCourses();
+//					System.out.println("Courses Registered Successfully. Proceed to pay fee");
+//				}
 				break;
 			case 5:
-				ArrayList<Course> cl1 = sso.approvedList();
-				int num1 = 1;
-				for(var c: cl1) {
-					System.out.println(num1);
-					System.out.println("Course Name: " + c.getCourseName());
-					System.out.println("Course ID: " + c.getCourseId());
-					num1++;
-				}
-				break;
+//				ArrayList<Course> cl1 = sso.approvedList();
+//				int num1 = 1;
+//				for(var c: cl1) {
+//					System.out.println(num1);
+//					System.out.println("Course Name: " + c.getCourseName());
+//					System.out.println("Course ID: " + c.getCourseId());
+//					num1++;
+//				}
+//				break;
 			case 6:
 				
 				sso.payFee(std.getName());
