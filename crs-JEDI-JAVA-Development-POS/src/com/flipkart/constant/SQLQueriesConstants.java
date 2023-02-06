@@ -11,8 +11,11 @@ public class SQLQueriesConstants {
 	// Student Queries
 	
 	public static final String IS_APPROVED="SELECT Student.approval_status FROM crs_db.Student WHERE Student.student_id= ?";
+	
 	public static final String GET_TOTAL_STUDENTS="SELECT ";
+	
 	public static final String GET_STUDENT_ID="SELECT Student.student_id FROM crs_db.Student WHERE Student.email= ?";
+	
 	public static final String GET_CURR_SEM="SELECT Student.semester FROM crs_db.Student WHERE Student.student_id= ?";
 	
 	public static final String ADD_STUDENT="INSERT INTO `crs_db`.`User`(`email`,`name`,`role`,`password`) VALUES ( ? , ? , \"student\" , ? )";
@@ -37,6 +40,11 @@ public class SQLQueriesConstants {
 	public static final String SECONDARY_COURSE_FREQ="SELECT COUNT(course_id) FROM crs_db.RegisteredCourse WHERE RegisteredCourse.student_id= ? AND RegisteredCourse.registration_status = 1";
 	
 	public static final String CALCULATE_FEE="SELECT SUM(Course.course_fee) FROM crs_db.Course WHERE Course.course_id IN ?";
+	
+	public static final String GET_COURSE_GRADE="SELECT RegisteredCourse.course_id, RegisteredCourse.grade FROM crs_db.RegisteredCourse WHERE RegisteredCourse.student_id= ?";
+	
+	public static final String GET_GRADE_STATUS="SELECT GradeStatus.grade_status FROM crs_db.GradeStatus WHERE GradeStatus.semester= ?";
+	
 	
 	// test first in SQL
 	public static final String FREEZE_COURSES="UPDATE crs_db.RegisteredCourse SET RegisteredCourse.registration_status=2 WHERE RegisteredCourse.student_id= ? AND RegisteredCourse.registration_status=0 OR RegisteredCourse.registration_status=1";

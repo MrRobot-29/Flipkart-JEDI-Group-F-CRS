@@ -5,6 +5,8 @@ package com.flipkart.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+
+import java.util.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -392,7 +394,7 @@ public class StudentDaoImpl {
     }
     
     
-    public double calculate_total_fee(String student_id) {
+    public double calculate_total_fee(int student_id) {
     	
     	double fees = 0.0;
     	
@@ -420,8 +422,60 @@ public class StudentDaoImpl {
     	return fees;
     }
     
+    public String isGradeReleased(int semester) {
+    	
+    	Connection connection = DBUtils.getConnection();
+		try {
+				PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_GRADE_STATUS);
+				
+				statement.setInt(1, semester);
+				
+				ResultSet rs = statement.executeQuery();
+				
+				if(rs.next()){
+					return rs.getString("grade_status");
+				}
+			}
+		
+		catch(SQLException e){
+			System.out.checkError();
+		}
+    	
+    	return "awaited";
+    }
     
-    public ArrayList<String> getRegisteredCourseList(String student_id) {
+    
+    public HashMap<String,String> viewGrade(int student_id, int semester) {
+
+    	HashMap<String,String> subject_grade=new HashMap<String,String>();//Creating HashMap
+    	
+    	Connection connection = DBUtils.getConnection();
+    	
+    	if(isGradeReleased(semester) == "awaited") {
+    		return null;
+    	}
+    	
+		try {
+				PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_COURSE_GRADE);
+				
+				statement.setInt(1, student_id);
+				
+				ResultSet rs = statement.executeQuery();
+				
+				while(rs.next()){
+					subject_grade.put(rs.getString("course_id"), rs.getString("grade"));
+				}
+			}
+		
+		catch(SQLException e){
+			System.out.checkError();
+		}
+		
+    	return subject_grade;
+    }
+    
+    
+    public ArrayList<String> getRegisteredCourseList(int student_id) {
 		// get the list of all the courses and return it.
     	
     	ArrayList<String> course = null;
@@ -432,9 +486,7 @@ public class StudentDaoImpl {
 		try {
 				PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_COURSE_ID);
 				
-				int id = getStudentId(student_id);
-				
-				statement.setInt(1, id);
+				statement.setInt(1, student_id);
 				
 				ResultSet rs = statement.executeQuery();
 				
