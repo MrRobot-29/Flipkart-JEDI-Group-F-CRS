@@ -16,6 +16,7 @@ import com.flipkart.bean.*;
 
 import com.flipkart.utils.DBUtils;
 import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
+import java.util.*;
 import com.flipkart.constant.*;
 
 /**
@@ -437,6 +438,59 @@ public class StudentDaoImpl implements StudentDaoInterface{
 			System.out.checkError();
 		}
     	return fees;
+    }
+    
+    
+    public String isGradeReleased(int semester) {
+    	
+    	Connection connection = DBUtils.getConnection();
+		try {
+				PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_GRADE_STATUS);
+				
+				statement.setInt(1, semester);
+				
+				ResultSet rs = statement.executeQuery();
+				
+				if(rs.next()){
+					return rs.getString("grade_status");
+				}
+			}
+		
+		catch(SQLException e){
+			System.out.checkError();
+		}
+    	
+    	return "awaited";
+    }
+    
+    
+    public HashMap<String,String> viewGrade(int student_id, int semester) {
+
+    	HashMap<String,String> subject_grade=new HashMap<String,String>();//Creating HashMap
+    	
+    	Connection connection = DBUtils.getConnection();
+    	
+    	if(isGradeReleased(semester) == "awaited") {
+    		return null;
+    	}
+    	
+		try {
+				PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_COURSE_GRADE);
+				
+				statement.setInt(1, student_id);
+				
+				ResultSet rs = statement.executeQuery();
+				
+				while(rs.next()){
+					subject_grade.put(rs.getString("course_id"), rs.getString("grade"));
+				}
+			}
+		
+		catch(SQLException e){
+			System.out.checkError();
+		}
+		
+    	return subject_grade;
     }
     
     

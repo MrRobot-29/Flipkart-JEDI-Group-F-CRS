@@ -38,6 +38,10 @@ public class SQLQueriesConstants {
 	
 	public static final String CALCULATE_FEE="SELECT SUM(Course.course_fee) FROM crs_db.Course WHERE Course.course_id IN ?";
 	
+	public static final String GET_COURSE_GRADE="SELECT RegisteredCourse.course_id, RegisteredCourse.grade FROM crs_db.RegisteredCourse WHERE RegisteredCourse.student_id= ?";
+	
+	public static final String GET_GRADE_STATUS="SELECT GradeStatus.grade_status FROM crs_db.GradeStatus WHERE GradeStatus.semester= ?";
+	
 	// test first in SQL
 	public static final String FREEZE_COURSES="UPDATE crs_db.RegisteredCourse SET RegisteredCourse.registration_status=2 WHERE RegisteredCourse.student_id= ? AND RegisteredCourse.registration_status=0 OR RegisteredCourse.registration_status=1";
 	

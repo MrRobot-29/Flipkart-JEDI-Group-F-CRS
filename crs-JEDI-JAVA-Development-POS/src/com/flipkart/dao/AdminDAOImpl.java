@@ -15,6 +15,9 @@ import com.flipkart.constant.Gender;
 import com.flipkart.constant.Role;
 import com.flipkart.helper.DaoHelper;
 
+/**
+ * class for Admin Dao Implementation
+ */
 public class AdminDAOImpl implements AdminDAOInterface {
 
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
