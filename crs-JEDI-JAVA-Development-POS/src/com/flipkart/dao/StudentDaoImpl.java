@@ -15,7 +15,10 @@ import java.sql.ResultSet;
 import com.flipkart.bean.*;
 
 import com.flipkart.utils.DBUtils;
+
 import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
+
+
 import java.util.*;
 import com.flipkart.constant.*;
 
@@ -491,6 +494,31 @@ public class StudentDaoImpl implements StudentDaoInterface{
 		}
 		
     	return subject_grade;
+    }
+    
+    
+    public boolean payFee(int student_id, String payment_id, String payment_method, String payment_details) {
+    	
+    	Connection connection = DBUtils.getConnection();
+    	
+		try {
+				PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.PAY_FEE);
+								
+				statement.setInt(1, student_id);
+				statement.setString(2, payment_id);
+				statement.setString(3, payment_method);
+				statement.setString(4, payment_details);
+				
+				statement.executeUpdate();
+				
+				return true;
+			}
+		
+		catch(SQLException e){
+			System.out.checkError();
+		}
+
+    	return false;	
     }
     
     
