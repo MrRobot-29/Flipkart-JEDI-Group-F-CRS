@@ -10,6 +10,8 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
 //import com.flipkart.bean.RegisteredCourse;
 import com.flipkart.bean.Student;
+import com.flipkart.dao.StudentDaoImpl;
+import com.flipkart.dao.StudentDaoInterface;
 import com.flipkart.data.SharedTempData;
 import com.flipkart.data.TempData;
 
@@ -20,53 +22,26 @@ import com.flipkart.data.TempData;
 
 public class StudentServiceOperation implements StudentService{
 	
-	TempData td = SharedTempData.td;
+	StudentDaoInterface studentDao = new StudentDaoImpl();
 	
-	public ArrayList<Course> courseList() {
+	public ArrayList<Course> courseList(int sem) {
 		// get the list of all the courses and return it.
 		
-		return td.getCourseList();
+		return studentDao.courseList(sem);
+		
+	}
+	
+	public boolean getCourseAvailabilityStatus(String courseId) {
+		
+		return studentDao.getCourseAvailabilityStatus(courseId);
 		
 	}
 	
 	
 	
-	public boolean addCourse(String courseId) {
+	public boolean addCourse(int student_id, String courseId, int course_type) {
 		// add the course
-		ArrayList<Course> courseList = td.getCourseList();
-		int ind = -1;
-		boolean flag = false;
-		for(var c: td.getStudentCourseCart()) {
-			if(c.getCourseId().compareTo(courseId) == 0) {
-				flag = true;
-				break;
-			}
-		}
-		
-		
-		if(flag) {
-			System.out.println("Course already present");
-			return false;
-		}
-		
-		
-		
-		for(int i = 0; i < courseList.size(); i++) {
-			if(courseList.get(i).getCourseId().compareTo(courseId) == 0) {
-				ind = i;
-				break;
-			}
-		}
-		
-		if(ind == -1) {
-			
-			return false;
-		}
-		ArrayList<Course> stdCart = td.getStudentCourseCart();
-		if(stdCart.size() > 6) return false;	
-		stdCart.add(courseList.get(ind));
-		td.setStudentCourseCart(stdCart);
-		return true;
+		return studentDao.addCourseBucket(student_id, courseId, course_type);
 	
 	}
 	
@@ -81,26 +56,28 @@ public class StudentServiceOperation implements StudentService{
 		
 	}
 	
-	public ArrayList<Course> approvedList() {
+	public ArrayList<String> approvedList(String student_id) {
 		// get the list of approved registered courses
-		return td.getStudentCourseCart();
+		return studentDao.getRegisteredCourseList(student_id);
 	}
 	
-	public ArrayList<Course> viewSelectedCourses(){
-		return td.getStudentCourseCart();
+	public ArrayList<String> viewSelectedCourses(String student_id) {
+		// get the list of approved registered courses
+		return studentDao.getRegisteredCourseList(student_id);
 	}
+
 	
-	public boolean registerCourses() {
-		ArrayList<Course> registeredCourses = new ArrayList<Course>();
-		for(var c: td.getStudentCourseCart()) {
-			registeredCourses.add(c);
-		}
-		td.setStudentApprovedCourses(registeredCourses);
-		HashMap<Integer,ArrayList<Course>> studentTakenCourse = td.getStudentTakenCourses();
-		studentTakenCourse.put(10001, registeredCourses);
-		return true;
-	}
-	
+//	public boolean registerCourses() {
+//		ArrayList<Course> registeredCourses = new ArrayList<Course>();
+//		for(var c: td.getStudentCourseCart()) {
+//			registeredCourses.add(c);
+//		}
+//		td.setStudentApprovedCourses(registeredCourses);
+//		HashMap<Integer,ArrayList<Course>> studentTakenCourse = td.getStudentTakenCourses();
+//		studentTakenCourse.put(10001, registeredCourses);
+//		return true;
+//	}
+//	
 	
 	public double calculateTotalFee(ArrayList<Course> approvedCourses) {
 		// calculate the total fees based on the registered courses.

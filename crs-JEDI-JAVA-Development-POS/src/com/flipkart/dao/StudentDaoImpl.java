@@ -191,13 +191,13 @@ public class StudentDaoImpl implements StudentDaoInterface{
     
     
     
-    public ArrayList<Course> courseList(Student student, int sem) {
+    public ArrayList<Course> courseList(int sem) {
     	
-    	ArrayList<Course> courses = null;
+    	ArrayList<Course> courses = new ArrayList<Course>();
     	
     	Connection connection=DBUtils.getConnection();
     	
-    	int uid = getStudentId(student.getUserId());
+//    	int uid = getStudentId(student.getUserId());
     	
 		try {
 			
@@ -216,24 +216,18 @@ public class StudentDaoImpl implements StudentDaoInterface{
 				int semester = rs.getInt("semester");
 				String professor_id = Integer.toString(prof_id);
 				
-				Course temp = null;
-				
-				temp.setCourseId(course_id);
-				temp.setCourseName(course_name);
-				temp.setInstructorId(prof_id);
-				temp.setCourseAvailable(getCourseAvailabilityStatus(course_id));
-				temp.setCourseFee(course_fee);
-				//temp.setSemester(semester)
+				Course temp = new Course(course_name,course_id,prof_id,getCourseAvailabilityStatus(course_id),course_fee,semester);
 				courses.add(temp);
  			}
+			return courses;
 				
 		}
 		catch(SQLException e)
 		{
 			System.out.println(e.getMessage());
 		}
-		
-    	return courses;
+		return null;
+    	
     }
     
     
