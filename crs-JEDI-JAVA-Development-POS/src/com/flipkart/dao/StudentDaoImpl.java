@@ -22,7 +22,7 @@ import com.flipkart.constant.*;
  * @author ashwin.kumar2
  *
  */
-public class StudentDaoImpl {
+public class StudentDaoImpl implements StudentDaoInterface{
 	
 	
 	DBUtils DBUtils;
