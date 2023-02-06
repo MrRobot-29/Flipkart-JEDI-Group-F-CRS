@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Student;
 import com.flipkart.service.StudentServiceOperation;
 
 public class StudentCRSMenu {
 	static boolean isLoggedIn = true;
-	public void createMenu(String user)
+	public void createMenu(Student std)
 	{
 		Scanner sc = new Scanner(System.in);
 		StudentServiceOperation sso = new StudentServiceOperation();
 		while(isLoggedIn == true)
 		{
-			System.out.println("Login as : " + user + "\n");
+			System.out.println("Logged in as : " + std.getName() + "\n");
 			System.out.println("Welcome to Student Menu !!");
 			System.out.println("1. View available Course List");
 			System.out.println("2. Add Course to course Cart");
@@ -97,7 +98,7 @@ public class StudentCRSMenu {
 				break;
 			case 6:
 				
-				sso.payFee(user);
+				sso.payFee(std.getName());
 				break;
 			case 7:
 				ArrayList<ArrayList<String>>  grades = sso.viewGrade(10001);

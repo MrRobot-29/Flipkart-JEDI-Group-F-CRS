@@ -32,6 +32,6 @@ public interface AdminService {
 
 
     // gradecard related services
-    public void generateGradeCard(String studentId, String semester);
+    public void generateGradeCard();
 
 }

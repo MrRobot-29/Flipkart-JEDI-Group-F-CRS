@@ -32,5 +32,5 @@ public interface AdminDAOInterface {
 
 
     // gradecard related services
-    public void generateGradeCard(String studentId, String semester);
+    public void generateGradeCard(int semester);
 }

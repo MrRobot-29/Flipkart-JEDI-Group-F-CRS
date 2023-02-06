@@ -13,14 +13,20 @@ public class Student extends User {
 	private int studentID;
 	private String branch;
 	private boolean isApproved;
+	private int semester;
+
+	/**
+	 * @return the semester
+	 */
 	
 
 	public Student(String userId, String name, Role role, String password, Gender gender, String address,
-			String country,String branchName,int studentId,int batch, boolean isApproved) {
+			String country,String branchName,int studentId,int semester, boolean isApproved) {
 		super(userId, name, role, password, gender, address, country);
 		this.branch = branchName;
 		this.studentID = studentId;
 		this.isApproved = isApproved;
+		this.semester = semester;
 	}
 	
 	public int getStudentID() {
@@ -42,7 +48,12 @@ public class Student extends User {
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
 	}
-	
+	public int getSemester() {
+		return semester;
+	}
+	public void setSemester(int semester) {
+		this.semester = semester;
+	}
 	// methods start
 	public void viewGrade() {
 		System.out.println("Student Grade");

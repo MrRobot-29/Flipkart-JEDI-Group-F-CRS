@@ -13,13 +13,13 @@ public class AdminCRSMenu {
 	
 		
 	boolean isLoggedIn = true;
-	public void createMenu(String user) {
+	public void createMenu(Admin ad) {
 		
 		while(isLoggedIn) {
 			System.out.println("***********************************");
 			System.out.println("********* Admin *******************");
 			System.out.println("***********************************");
-			System.out.println("Login as : " + user + "\n");
+			System.out.println("Logged in as : " + ad.getName() + "\n");
 			System.out.println("1. View course in catalog");
 			System.out.println("2. Add Course to catalog");
 			System.out.println("3. Delete Course from catalog");
@@ -27,7 +27,8 @@ public class AdminCRSMenu {
 			System.out.println("5: Aprove Student");
 			System.out.println("6. Add Professor");
 			System.out.println("7. Drop Professor");
-			System.out.println("8. Logout");
+			System.out.println("8. Generate grade cards");
+			System.out.println("9. Logout");
 			System.out.println("*****************************");
 			
 			int choice = scanner.nextInt();
@@ -93,16 +94,12 @@ public class AdminCRSMenu {
 						System.out.println("Invalid Input");
 						break;
 				}
-				
-	//			System.out.println("approveStudent()");
 				break;
 			
 			case 5:
 				System.out.println("Enter Student ID to approve");
 				int stId = scanner.nextInt();
-				
 				aso.validateStudent(stId);
-				System.out.println("Student Approved!");
 				break;
 			case 6:
 				aso.addProfessor();
@@ -111,6 +108,9 @@ public class AdminCRSMenu {
 				aso.dropProfessor();
 				break;
 			case 8:
+				aso.generateGradeCard();
+				break;
+			case 9:
 				isLoggedIn = false;
 				break;
 			

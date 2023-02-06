@@ -1,9 +1,15 @@
 package com.flipkart.bean;
 
-import java.util.Date;
+
+import com.flipkart.constant.Gender;
+import com.flipkart.constant.Role;
 
 public class Admin extends User{
 	
+	public Admin(String userId, String name, Role role, String password, Gender gender, String address,
+			String country) {
+		super(userId, name, role, password, gender, address, country);
+	}
 	
 	public void approveStudent() {
 		

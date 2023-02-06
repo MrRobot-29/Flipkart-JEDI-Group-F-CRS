@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Professor;
 import com.flipkart.service.ProfessorService;
 import com.flipkart.service.ProfessorServiceOperation;
 
@@ -13,9 +14,9 @@ public class ProfessorCRSMenu {
 	
 	ProfessorService service = new ProfessorServiceOperation();
 	boolean isLogin = true;
-	public void createMenu(String user) {
+	public void createMenu(Professor p) {
 		
-		System.out.println("Login as : " + user + "\n");
+		System.out.println("Login as : " + p.getName() + "\n");
 		while(isLogin) {
 			
 			
