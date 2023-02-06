@@ -84,7 +84,6 @@ public class StudentCRSMenu {
 						System.out.println("Operation Failed !!");
 				}
 				
-				
 				break;
 			case 3:
 				System.out.println("Enter Course ID to drop");
