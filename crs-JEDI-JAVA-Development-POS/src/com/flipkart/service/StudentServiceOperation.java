@@ -56,23 +56,20 @@ public class StudentServiceOperation implements StudentService{
 	
 	}
 	
-	public boolean dropCourse(String courseId) {
+	public boolean dropCourse(int student, String courseId) {
 		// drop the course
 		
-		ArrayList<Course> stdCart = td.getStudentCourseCart();
-		
-		stdCart.removeIf(c -> c.getCourseId().compareTo(courseId) == 0);
+		studentDao.drop_course(student, courseId);
 		
 		return true;
 		
 	}
 	
-	public ArrayList<String> approvedList(String student_id) {
-		// get the list of approved registered courses
-		return studentDao.getRegisteredCourseList(student_id);
+	public boolean freezeCourseCart(int studentId) {
+		return studentDao.freezeCourses(studentId);
 	}
 	
-	public ArrayList<String> viewSelectedCourses(String student_id) {
+	public ArrayList<String> viewSelectedCourses(int student_id) {
 		// get the list of approved registered courses
 		return studentDao.getRegisteredCourseList(student_id);
 	}

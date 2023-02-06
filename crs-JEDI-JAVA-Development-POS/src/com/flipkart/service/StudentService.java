@@ -26,18 +26,12 @@ public interface StudentService {
 	public boolean addCourse(int student_id, String courseId, int course_type);
 
 	/**
-	 * Method to drop course and return tatus of is course removed
-	 * @param courseId: course id
+	 * Method to drop course and return status of is course removed
+	 * @param student
+	 * @param courseId
 	 * @return status of is course removed
 	 */
-	public boolean dropCourse(String courseId);
-
-	/**
-	 * Method to get the list of approved registered courses
-	 * @param student_id: student id
-	 * @return list of approved registered courses
-	 */
-	public  ArrayList<String> approvedList(String student_id);
+	public boolean dropCourse(int student, String courseId) ;
 
 	/**
 	 * Method to get total fee of approved courses
@@ -64,7 +58,14 @@ public interface StudentService {
 	 * @param student_id: student id
 	 * @return list of selected course by student
 	 */
-	public ArrayList<String> viewSelectedCourses(String student_id);
+	public ArrayList<String> viewSelectedCourses(int student_id);
+
+	/**
+	 * Method to freeze the course
+	 * @param studentId: student id
+	 * @return status of is course cart frozen
+	 */
+	public boolean freezeCourseCart(int studentId) ;
 	
 	//public boolean registerCourses();
 
@@ -88,4 +89,5 @@ public interface StudentService {
 	 * @return count of secondary courses
 	 */
 	public int secondaryCourseFreq(int student_id) ;
+	
 }

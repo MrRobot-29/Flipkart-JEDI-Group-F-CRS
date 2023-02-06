@@ -183,7 +183,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
     }
     
     
-    public boolean drop_course(Student student, Course course) {
+    public boolean drop_course(int studentId, String courseId) {
     	
     	Connection connection=DBUtils.getConnection();
     	
@@ -191,11 +191,9 @@ public class StudentDaoImpl implements StudentDaoInterface{
 			
 			PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.DROP_COURSE);
 			
-			statement.setString(1, course.getCourseId());
+			statement.setString(1, courseId);
 			
-			int uid = getStudentId(student.getUserId());
-			
-			statement.setInt(2, uid);
+			statement.setInt(2, studentId);
 			
 			int row = statement.executeUpdate();
 			
@@ -413,7 +411,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
     }
     
     
-    public double calculate_total_fee(String student_id) {
+    public double calculate_total_fee(int student_id) {
     	
     	double fees = 0.0;
     	
@@ -442,24 +440,21 @@ public class StudentDaoImpl implements StudentDaoInterface{
     }
     
     
-    public ArrayList<String> getRegisteredCourseList(String student_id) {
+    public ArrayList<String> getRegisteredCourseList(int student_id) {
 		// get the list of all the courses and return it.
     	
-    	ArrayList<String> course = null;
+    	ArrayList<String> course = new ArrayList<String>();
     	
     	Connection connection = DBUtils.getConnection();
     	
     	
 		try {
 				PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_COURSE_ID);
-				
-				int id = getStudentId(student_id);
-				
-				statement.setInt(1, id);
-				
+								
+				statement.setInt(1, student_id);
 				ResultSet rs = statement.executeQuery();
 				
-				if(rs.next()){
+				while(rs.next()){
 					course.add(rs.getString("course_id"));
 				}
 			}
@@ -467,6 +462,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
 		catch(SQLException e){
 			System.out.checkError();
 		}
+
     	return course;
 	}
     
