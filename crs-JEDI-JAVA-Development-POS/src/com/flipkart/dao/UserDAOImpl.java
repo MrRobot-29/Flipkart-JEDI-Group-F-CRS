@@ -128,7 +128,6 @@ public class UserDAOImpl implements UserDAOInterface{
 		} finally{
 			try {
 				stmt.close();
-				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -151,7 +150,7 @@ public class UserDAOImpl implements UserDAOInterface{
 			Connection conn = DaoHelper.getConnection();
 			PreparedStatement stmt = null;
 			
-			String sql = "SELECT name from User WHERE email = " + userName;
+			String sql = "SELECT name from User WHERE email = '" + userName + "'";
 			
 			try {
 				stmt = conn.prepareStatement(sql);
@@ -159,7 +158,7 @@ public class UserDAOImpl implements UserDAOInterface{
 				Professor p = null;
 				while(rs.next()) {
 					String name = rs.getString("name");
-					PreparedStatement stmt1 = conn.prepareStatement("SELECT * FROM Professor WHERE email = " + userName);
+					PreparedStatement stmt1 = conn.prepareStatement("SELECT * FROM Professor WHERE email = '" + userName + "'");
 					ResultSet rs1 = stmt1.executeQuery();
 					while(rs1.next()) {
 						int profId = rs1.getInt("prof_id");

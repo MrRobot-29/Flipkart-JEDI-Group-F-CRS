@@ -67,7 +67,7 @@ public class UserServiceOperation implements UserService{
 
 		UserDAOImpl uDao = new UserDAOImpl();
 		uDao.loginAccount(userName, password, role);
-	
+		
 	}
 
 }
