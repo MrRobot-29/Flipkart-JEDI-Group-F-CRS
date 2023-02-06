@@ -35,6 +35,33 @@ public class StudentDaoImpl {
     
     
     
+    public boolean freezeCourses(int student_id) {
+    	
+    	Connection conn = DBUtils.getConnection();
+    	
+    	int cnt_primary = primaryCourseFreq(student_id);
+    	
+    	if(cnt_primary!=4) {
+    		return false;
+    	}
+    	
+    	try {
+    		PreparedStatement statement = conn.prepareStatement(SQLQueriesConstants.FREEZE_COURSES);
+    		
+    		statement.setInt(1, student_id);
+    		
+    		statement.executeUpdate();
+    		
+    		return true;
+    		
+    	}catch(SQLException err) {
+    		System.out.println(err.getMessage());
+    	}
+    	
+    	return false;
+    }
+    
+    
     public int primaryCourseFreq(int student_id) {
     	
     	Connection conn = DBUtils.getConnection();

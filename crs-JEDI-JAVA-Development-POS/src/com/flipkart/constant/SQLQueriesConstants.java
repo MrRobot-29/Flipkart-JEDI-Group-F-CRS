@@ -36,4 +36,8 @@ public class SQLQueriesConstants {
 	
 	public static final String SECONDARY_COURSE_FREQ="SELECT COUNT(course_id) FROM crs_db.RegisteredCourse WHERE RegisteredCourse.student_id= ? AND RegisteredCourse.registration_status = 1";
 	
+	
+	// test first in SQL
+	public static final String FREEZE_COURSES="UPDATE crs_db.RegisteredCourse SET RegisteredCourse.registration_status=2 WHERE RegisteredCourse.student_id= ? AND RegisteredCourse.registration_status=0 OR RegisteredCourse.registration_status=1";
+	
 }
