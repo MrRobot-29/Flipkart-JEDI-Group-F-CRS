@@ -25,4 +25,6 @@ public interface StudentService {
 	//public boolean registerCourses();
 	
 	public boolean getCourseAvailabilityStatus(String courseId);
+	public int primaryCourseFreq(int student_id) ;
+	public int secondaryCourseFreq(int student_id) ;
 }
