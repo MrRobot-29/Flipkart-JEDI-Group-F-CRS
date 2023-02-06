@@ -14,16 +14,19 @@ public class TestSQL {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		
+//
+
 		StudentDaoImpl std = new StudentDaoImpl();
 		
-		var result = std.getStudentId("divya@gmail.com");
+		std.addStudent(null, 4);
 		
-		System.out.println(result);
-		
-		var res2 = std.isApproved(2);
-		
-		System.out.println(res2);
+//		var result = std.getStudentId("divya@gmail.com");
+//		
+//		System.out.println(result);
+//		
+//		var res2 = std.isApproved(2);
+//		
+//		System.out.println(res2);
 		
 //		DBUtils dbs = new DBUtils();
 //		
