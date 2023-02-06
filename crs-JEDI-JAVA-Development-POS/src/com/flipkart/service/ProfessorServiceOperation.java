@@ -15,13 +15,13 @@ import com.flipkart.data.TempData;
 public class ProfessorServiceOperation implements ProfessorService {
 
     static TempData data = SharedTempData.td;
-    public  List<String> viewCourseList(String instructorId) {
+    public  List<String> viewCourseList(int instructorId) {
         // view List of courses taken by professor
         List<String> takenCourses = new ArrayList<String>();
 
         for(Course course: data.getCourseList())
         {
-            if(course.getInstructorId().equalsIgnoreCase(instructorId)) {
+            if(course.getInstructorId() == instructorId) {
                 takenCourses.add(course.getCourseName());
             }
         }
@@ -29,7 +29,7 @@ public class ProfessorServiceOperation implements ProfessorService {
 
     }
 
-    public boolean selectCourseToTeach(String courseId, String instructorId)
+    public boolean selectCourseToTeach(String courseId, int instructorId)
     {
 
 

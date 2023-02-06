@@ -1,15 +1,14 @@
-package com.flipkart.service;
+package com.flipkart.dao;
 
 import java.util.List;
 
-public interface ProfessorService {
+public interface ProfessorDaoInterface {
 	
 	public List<String> viewCourseList(int instructorId);
 	
 	public boolean selectCourseToTeach(String courseId, int instructorId);
 	
-	public void viewEnrolledStudents();
+	public List<String> viewEnrolledStudents(int instructorId,String courseId);
 	
 	 public boolean addGrade(String courseId, int studentId, String grade);
-	
 }
