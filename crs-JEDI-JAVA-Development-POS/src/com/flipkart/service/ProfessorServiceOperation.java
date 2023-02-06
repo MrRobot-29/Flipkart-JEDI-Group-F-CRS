@@ -1,9 +1,6 @@
 package com.flipkart.service;
-        import java.util.ArrayList;
-        import java.util.List;
-
-        import com.flipkart.bean.Course;
-        import com.flipkart.bean.Grade;
+import java.util.List;
+import com.flipkart.dao.ProfessorDaoImpl;
 import com.flipkart.data.SharedTempData;
 import com.flipkart.data.TempData;
 
@@ -15,45 +12,29 @@ import com.flipkart.data.TempData;
 public class ProfessorServiceOperation implements ProfessorService {
 
     static TempData data = SharedTempData.td;
+    ProfessorDaoImpl pdi = new ProfessorDaoImpl();
+    
     public  List<String> viewCourseList(int instructorId) {
         // view List of courses taken by professor
-        List<String> takenCourses = new ArrayList<String>();
-
-        for(Course course: data.getCourseList())
-        {
-            if(course.getInstructorId() == instructorId) {
-                takenCourses.add(course.getCourseName());
-            }
-        }
+        List<String> takenCourses = pdi.viewCourseList(instructorId);
         return takenCourses;
-
     }
 
     public boolean selectCourseToTeach(String courseId, int instructorId)
     {
 
-
-        List<Course> courseList = data.getCourseList();
-
-        for(Course course: courseList)
-        {
-            if(course.getCourseId().equalsIgnoreCase(courseId)) {
-                course.setInstructorId(instructorId);
-                return true;
-            }
-        }
+        pdi.selectCourseToTeach(courseId, instructorId);
         return false;
     }
 
-    public void viewEnrolledStudents() {
+	public List<String> viewEnrolledStudents(int instructorId,String courseId) {
         // view List of professor enrolled in professor's courses
-
+    	return pdi.viewEnrolledStudents(instructorId, courseId);
 
     }
 
     public boolean addGrade(String courseId, int studentId, String grade) {
-        Grade newgrade = new Grade(courseId, studentId, grade);
-        data.getGrades().add(newgrade);
+        pdi.addGrade(courseId, studentId, grade);
         return true;
     }
 

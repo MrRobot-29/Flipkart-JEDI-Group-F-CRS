@@ -66,7 +66,7 @@ public class UserServiceOperation implements UserService{
 		String password = sc.next();
 		System.out.println("Enter Role : ");
 		String role = sc.next();
-		if(role.equals("professor")) {
+		if(role.equalsIgnoreCase("professor")) {
 			ProfessorCRSMenu professorMenu = new ProfessorCRSMenu();
 			professorMenu.createMenu(userName);
 		}

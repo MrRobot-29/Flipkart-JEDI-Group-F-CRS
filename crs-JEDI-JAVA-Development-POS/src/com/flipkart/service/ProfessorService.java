@@ -8,7 +8,7 @@ public interface ProfessorService {
 	
 	public boolean selectCourseToTeach(String courseId, int instructorId);
 	
-	public void viewEnrolledStudents();
+	public List<String> viewEnrolledStudents(int instructorId,String courseId);
 	
 	 public boolean addGrade(String courseId, int studentId, String grade);
 	

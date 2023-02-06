@@ -24,10 +24,7 @@ public class DaoHelper {
 	static Connection connectToDB() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-		   
-			System.out.println("Connecting to database...");
 			connection = DriverManager.getConnection(DB_URL,USER,PASS);
-			System.out.println("Creating statement...");
 		}catch(SQLException se){
 	      //Handle errors for JDBC
 	      se.printStackTrace();
