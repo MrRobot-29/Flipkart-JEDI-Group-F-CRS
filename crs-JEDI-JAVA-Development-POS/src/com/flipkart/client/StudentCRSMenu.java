@@ -108,8 +108,7 @@ public class StudentCRSMenu {
 				}
 				break;
 			case 6:
-				
-				sso.payFee(std.getName());
+				sso.payFee(std);
 				break;
 			case 7:
 				HashMap<String,String> grades = sso.viewGrade(std.getStudentID(), std.getSemester());
