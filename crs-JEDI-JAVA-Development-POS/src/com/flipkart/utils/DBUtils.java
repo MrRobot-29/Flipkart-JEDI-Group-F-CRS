@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 /**
  * @author ashwin.kumar2
- *
+ *	Database utility class
  */
 public class DBUtils {
 	

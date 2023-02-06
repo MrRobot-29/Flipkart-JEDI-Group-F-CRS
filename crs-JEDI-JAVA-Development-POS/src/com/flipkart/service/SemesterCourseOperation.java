@@ -9,7 +9,7 @@ import com.flipkart.data.*;
 
 /**
  * @author ashwin.kumar2
- *
+ * implementation of Semester course Operation
  */
 public class SemesterCourseOperation implements SemesterCourseService {
 	
