@@ -4,19 +4,15 @@
 package com.flipkart.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.sql.*;
 
 import java.sql.ResultSet;
 
 import com.flipkart.bean.*;
 
 import com.flipkart.utils.DBUtils;
-
-import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
 
 
 import java.util.*;
@@ -243,7 +239,6 @@ public class StudentDaoImpl implements StudentDaoInterface{
 				int prof_id = rs.getInt("prof_id");
 				double course_fee = rs.getDouble("course_fee");
 				int semester = rs.getInt("semester");
-				String professor_id = Integer.toString(prof_id);
 				
 				Course temp = new Course(course_name,course_id,prof_id,getCourseAvailabilityStatus(course_id),course_fee,semester);
 				courses.add(temp);
@@ -473,6 +468,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
     	
     	Connection connection = DBUtils.getConnection();
     	
+
     	if(isGradeReleased(semester) == "awaited") {
     		return null;
     	}
@@ -495,7 +491,6 @@ public class StudentDaoImpl implements StudentDaoInterface{
 		
     	return subject_grade;
     }
-    
     
     public boolean payFee(int student_id, String payment_id, String payment_method, String payment_details) {
     	

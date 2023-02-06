@@ -1,6 +1,7 @@
 package com.flipkart.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
@@ -103,4 +104,6 @@ public interface StudentDaoInterface {
 	 * @return return total fee of registered course
 	 */
 	public double calculate_total_fee(int student_id);
+	public HashMap<String,String> viewGrade(int student_id, int semester);
+	public String isGradeReleased(int semester);
 }

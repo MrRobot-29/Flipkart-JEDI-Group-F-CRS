@@ -1,6 +1,7 @@
 package com.flipkart.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.flipkart.bean.Course;
 
@@ -45,14 +46,16 @@ public interface StudentService {
 	 * @param user: user who is paying the fee
 	 */
 	public void payFee(String user);
-
+	
 	/**
 	 * Method to view Grade of student
 	 * @param studentId: student id
 	 * @return list of course and corresponding grade
 	 */
-	public ArrayList<ArrayList<String>> viewGrade(int studentId);
+	public HashMap<String,String> viewGrade(int studentId,int sem);
+	
 
+	
 	/**
 	 * Method to get list of selected course by student
 	 * @param student_id: student id

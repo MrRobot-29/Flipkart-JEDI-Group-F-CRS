@@ -1,6 +1,7 @@
 package com.flipkart.client;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
@@ -111,10 +112,15 @@ public class StudentCRSMenu {
 				sso.payFee(std.getName());
 				break;
 			case 7:
-				ArrayList<ArrayList<String>>  grades = sso.viewGrade(10001);
-				for(var c: grades) {
-					System.out.print("Course Name - " + c.get(0));
-					System.out.println(": Course Grade - " + c.get(1));
+				HashMap<String,String> grades = sso.viewGrade(std.getStudentID(), std.getSemester());
+				if(grades == null)
+				{
+					System.out.println("Grade Card Awaited!! Contact Admin");
+					break;
+				}
+				for(String course: grades.keySet()) {
+					System.out.print("Course Name - " + course);
+					System.out.println(" : Course Grade - " + grades.get(course));
 				}
 				break;
 			case 8:

@@ -130,34 +130,9 @@ public class StudentServiceOperation implements StudentService{
 		
 	}
 	
-	public void assignCourse(int studentId)
-	{
-		
-		td.getStudentTakenCourses().put(studentId, td.getStudentCourseCart());
-	}
-	
-	
-	public ArrayList<ArrayList<String>> viewGrade(int studentId) {
+	public HashMap<String,String> viewGrade(int studentId,int sem) {
 		//view the grade card with exception handling
-
-		ArrayList<Grade> grades = new ArrayList<Grade>();
-		ArrayList<Course> courses = new ArrayList<Course>();
-		ArrayList<ArrayList<String>> gradeCard = new ArrayList<ArrayList<String>>();
-		grades = td.getGrades();
-		courses = td.getCourseList();
-		for(Grade grade : grades) {
-			if(grade.getStudentId() == studentId) {
-				for(Course course : courses) {
-					if(grade.getCourseId().equals(course.getCourseId())) { 
-						ArrayList<String> courseGrade = new ArrayList<String>();
-						courseGrade.add(course.getCourseName());
-						courseGrade.add(grade.getGrade());
-						gradeCard.add(courseGrade);
-					}
-				}
-			}
-		}
-		return gradeCard;
+		return studentDao.viewGrade(studentId, sem);
 		
 	}
 	
