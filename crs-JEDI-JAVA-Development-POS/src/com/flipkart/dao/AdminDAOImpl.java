@@ -198,8 +198,49 @@ public class AdminDAOImpl implements AdminDAOInterface {
 	}
 
 	public boolean validateStudent(int studentId) {
-		return false;
-	}
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			System.out.println("Creating statement...");
+			String sql = "UPDATE Student SET approval_status = 1 WHERE student_id ="+ studentId;
+			stmt = conn.prepareStatement(sql);
+
+			int rows = stmt.executeUpdate();
+			if (rows > 0) {
+				System.out.println("Student approved to login !");
+			}else {
+				System.out.println("Student approval request does not exist");
+			}
+			stmt.close();
+			conn.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} // end finally try
+		} // end try
+		return true;
+	}	
 
 	public void addProfessor(Professor prof) {
 		Connection conn = null;
@@ -250,24 +291,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			stmt1.setString(3, dept);
 			rows = stmt1.executeUpdate();
 			System.out.println("Rows impacted : " + rows);
-			// Let us select all the records and display them.
-//			      sql = "SELECT id, name ,address FROM customer";
-//			      ResultSet rs = stmt.executeQuery(sql);
-//
-//			      //STEP 5: Extract data from result set
-//			      while(rs.next()){
-//			         //Retrieve by column name
-//			         int eid  = rs.getInt("id");
-//			         String name1 = rs.getString("name");
-//			         String address1 = rs.getString("address");
-//
-//			         //Display values
-//			         System.out.print("ID: " + eid);
-//			         System.out.print(", Age: " + name1);
-//			         System.out.println(", First: " + address1);
-//			      }
-			// STEP 6: Clean-up environment
-			// rs.close();
 			stmt1.close();
 			conn.close();
 		} catch (SQLException se) {
@@ -357,7 +380,44 @@ public class AdminDAOImpl implements AdminDAOInterface {
 
 	}
 
-	public void generateGradeCard(String studentId, String semester) {
+	public void generateGradeCard(int semester) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
 
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("Connecting to database...");
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			System.out.println("Creating statement...");
+			String sql = "UPDATE GradeStatus SET grade_status = 1 WHERE semester ="+ semester;
+			stmt = conn.prepareStatement(sql);
+
+			int rows = stmt.executeUpdate();
+			if (rows > 0) {
+					System.out.println("Grade cards for semester " + semester + " released !");
+				}
+			stmt.close();
+			conn.close();
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} // end finally try
+		} // end try
 	}
 }

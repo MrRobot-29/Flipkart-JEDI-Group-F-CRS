@@ -58,48 +58,25 @@ public class AdminServiceOperation implements AdminService {
     // student related services
     public ArrayList<Student> viewPendingStudents() {
     	
-    	System.out.println(td.getPendingStudents().size());
-    	ArrayList<Student> st1 = td.getPendingStudents();
+    	AdminDAOImpl aDao  = new AdminDAOImpl();
     	
-    	return st1;
+    	return aDao.viewPendingStudents();
     }
 
     public ArrayList<Student> viewAllStudents() {
     	
-    	ArrayList<Student> st1 = td.getApprovedStudents();
+    	AdminDAOImpl aDao  = new AdminDAOImpl();
     	
-    	return st1;
+    	return aDao.viewAllStudents();
     	
     }
 
     public boolean validateStudent(int studentId){
     	
-    	ArrayList<Student> st1 = td.getPendingStudents();
+    	AdminDAOImpl aDao  = new AdminDAOImpl();
     	
-    	int flag = -1;
+    	 return aDao.validateStudent(studentId);
     	
-    	for(Student at : st1) {
-    		if(at.getStudentID() == studentId) {
-    			flag = at.getStudentID();
-    			
-    			// validate
-    			at.setApproved(true);
-    			
-    			td.removePendingStudents(at);
-    			
-    			td.setApprovedStudents(at);
-    			
-    			break;
-    		}
-    	}
-    	
-    	if(flag == -1) {
-    		return false;
-    	}
-    	
-    	
-    	
-    	return true;
     }
 
 
@@ -154,8 +131,11 @@ public class AdminServiceOperation implements AdminService {
 
 
     // gradecard related services
-    public void generateGradeCard(String studentId, String semester){
-
+    public void generateGradeCard(){
+    	System.out.println("Enter semester for which grade card needs to be generated: ");
+		int sem = sc.nextInt();
+    	AdminDAOImpl  aDao = new AdminDAOImpl();
+    	aDao.generateGradeCard(sem);
     }
 }
 
