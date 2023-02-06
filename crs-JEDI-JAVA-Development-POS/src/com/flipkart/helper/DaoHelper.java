@@ -15,13 +15,8 @@ public class DaoHelper {
 	
 	private static Connection connection = null;
 	
-	
-	public static Connection getConnection() {
-		connection = connectToDB();
-		return connection;
-	}
-	
-	static Connection connectToDB() {
+	//Singleton Class
+	private DaoHelper() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -32,10 +27,14 @@ public class DaoHelper {
 	      //Handle errors for Class.forName
 	      e.printStackTrace();
 	   }
-		return connection;
-		
-		
-		   
 	}
+	
+	public static Connection getConnection() {
+		if(connection==null) {
+			new DaoHelper();
+		}
+		return connection;
+	}
+	
 
 }
