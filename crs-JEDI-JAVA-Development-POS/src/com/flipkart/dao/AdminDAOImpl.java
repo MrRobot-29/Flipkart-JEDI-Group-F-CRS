@@ -147,9 +147,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();
-		} finally {
-			// finally block used to close resources
-		
+		}
 		return arr;
 	}
 

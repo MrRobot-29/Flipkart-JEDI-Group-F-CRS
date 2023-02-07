@@ -1,2 +1,6 @@
 .DS_Store
-crs-JEDI-JAVA-Development-POS/.classpath
+# Eclipse Core      
+.project
+
+# JDT-specific (Eclipse Java Development Tools)     
+.classpath
