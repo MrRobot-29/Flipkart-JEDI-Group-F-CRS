@@ -308,10 +308,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			conn = DaoHelper.getConnection();
 			String sql = "SELECT * FROM Professor WHERE prof_id ='" + ProfId + "'";
 			stmt = conn.prepareStatement(sql);
-
-			// Bind values into the parameters.
-//			      stmt.setInt(1, ProfId);  // This would set age
-//			      stmt.executeUpdate();
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {

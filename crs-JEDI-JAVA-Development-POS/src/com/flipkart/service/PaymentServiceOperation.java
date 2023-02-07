@@ -3,12 +3,10 @@
  */
 package com.flipkart.service;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
 import com.flipkart.dao.StudentDaoImpl;
 import com.flipkart.dao.StudentDaoInterface;
