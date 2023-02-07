@@ -3,13 +3,9 @@
  */
 package com.flipkart.service;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.flipkart.bean.Student;
-import com.flipkart.client.AdminCRSMenu;
-import com.flipkart.client.ProfessorCRSMenu;
-import com.flipkart.client.StudentCRSMenu;
 import com.flipkart.constant.Gender;
 import com.flipkart.constant.Role;
 import com.flipkart.dao.UserDAOImpl;

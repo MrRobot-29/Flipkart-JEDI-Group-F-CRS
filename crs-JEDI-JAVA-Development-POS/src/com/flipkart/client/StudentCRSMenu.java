@@ -6,6 +6,13 @@ import java.util.Scanner;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
+import com.flipkart.exception.CourseAlreadyOptedException;
+import com.flipkart.exception.CourseCountExceededException;
+import com.flipkart.exception.CourseNotAvailableException;
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.GradeNotAllotedException;
+import com.flipkart.exception.NoCourseFoundException;
+import com.flipkart.exception.PaymentNotCompletedException;
 import com.flipkart.service.StudentService;
 import com.flipkart.service.StudentServiceOperation;
 
@@ -35,15 +42,24 @@ public class StudentCRSMenu {
 			{
 			case 1:
 				System.out.println(std.getSemester());
-				ArrayList<Course> cl = sso.courseList(std.getSemester());
-				int num = 1;
-				for(var c: cl) {
-					System.out.println(num);
-					System.out.println("Course Name: " + c.getCourseName());
-					System.out.println("Course ID: " + c.getCourseId());
-					num++;
+				ArrayList<Course> cl;
+				try {
+					cl = sso.courseList(std.getSemester());
+					if(cl.size() == 0) {
+						System.out.println("No courses to show for " + std.getSemester() + " semester");
+					}else {
+						int num = 1;
+						for(var c: cl) {
+							System.out.println(num);
+							System.out.println("Course Name: " + c.getCourseName());
+							System.out.println("Course ID: " + c.getCourseId());
+							num++;
+						}
+					}
+				} catch (NoCourseFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				
 				break;
 			case 2:
 				int primaryCnt = sso.primaryCourseFreq(std.getStudentID()), secCnt = sso.secondaryCourseFreq(std.getStudentID());
@@ -78,48 +94,88 @@ public class StudentCRSMenu {
 						System.out.println("You have already filled all the slot for secondary courses");
 						break;
 					}
-					boolean status = sso.addCourse(std.getStudentID(), courseId, type);
-					if(status)
-						System.out.println("Course Added Successfully");
-					else
-						System.out.println("Operation Failed !!");
+					boolean status;
+					try {
+						status = sso.addCourse(std.getStudentID(), courseId, type);
+						if(status)
+							System.out.println("Course Added Successfully");
+						else
+							System.out.println("Operation Failed !!");
+						
+					} catch (CourseAlreadyOptedException | CourseCountExceededException | CourseNotFoundException
+							| CourseNotAvailableException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 				}
-				
 				break;
 			case 3:
 				System.out.println("Enter Course ID to drop");
 				String courseId = sc.next();
-				boolean status = sso.dropCourse(std.getStudentID(),courseId);
-				if(status)
-					System.out.println("Course Dropped Successfully");
+				boolean status;
+				try {
+					status = sso.dropCourse(std.getStudentID(),courseId);
+					if(status)
+						System.out.println("Course Dropped Successfully");
+				} catch (CourseNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				break;
 			case 4:
-				status = sso.freezeCourseCart(std.getStudentID());
-				if(status)
-					System.out.println("Course Cart Freezed Successfully");
-				else
-					System.out.println("Operation Failed! Please make sure you have selected 4 primary and 2 secondary courses");
+				try {
+					status = sso.freezeCourseCart(std.getStudentID());
+					if(status)
+						System.out.println("Course Cart Freezed Successfully");
+					else
+						System.out.println("Operation Failed! Please make sure you have selected 4 primary and 2 secondary courses");
+				} catch (CourseNotAvailableException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				break;
 			case 5:
-				ArrayList<String> selectedCourse = sso.viewSelectedCourses(std.getStudentID());
-				for(String finalcourse: selectedCourse)
-				{
-					System.out.println(finalcourse);
+				ArrayList<String> selectedCourse;
+				try {
+					selectedCourse = sso.viewSelectedCourses(std.getStudentID());
+					for(String finalcourse: selectedCourse)
+					{
+						System.out.println(finalcourse);
+					}
+					
+				} catch (NoCourseFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
+				
 				break;
 			case 6:
-				sso.payFee(std);
+				try {
+					sso.payFee(std);
+				} catch (PaymentNotCompletedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			case 7:
-				HashMap<String,String> grades = sso.viewGrade(std.getStudentID(), std.getSemester());
-				if(grades == null)
-				{
-					System.out.println("Grade Card Awaited!! Contact Admin");
-					break;
-				}
-				for(String course: grades.keySet()) {
-					System.out.print("Course Name - " + course);
-					System.out.println(" : Course Grade - " + grades.get(course));
+				HashMap<String, String> grades;
+				try {
+					grades = sso.viewGrade(std.getStudentID(), std.getSemester());
+					if(grades == null)
+					{
+						System.out.println("Grade Card Awaited!! Contact Admin");
+						break;
+					}
+					for(String course: grades.keySet()) {
+						System.out.print("Course Name - " + course);
+						System.out.println(" : Course Grade - " + grades.get(course));
+					}
+				} catch (GradeNotAllotedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				break;
 			case 8:

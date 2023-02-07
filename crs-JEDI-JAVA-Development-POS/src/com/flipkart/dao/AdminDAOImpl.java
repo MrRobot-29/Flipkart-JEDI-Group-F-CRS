@@ -23,6 +23,7 @@ import com.flipkart.utils.DBUtils;
 /**
  * class for Admin Dao Implementation
  */
+
 public class AdminDAOImpl implements AdminDAOInterface {
 
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -95,9 +96,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			// Bind values into the parameters.
 			stmt.setString(1, courseID); // This would set age
 			stmt.setString(2, courseName);
-			if(insID==0)
-				stmt.setString(3, null);
-			else
 			stmt.setInt(3, insID);
 			stmt.setDouble(4, fee);
 			stmt.setInt(5, sem);
@@ -142,7 +140,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		         Course c = new Course(cname, cid, profId, true, cfee, sem);
 		         arr.add(c);
 		      }
-//		 STEP 6: Clean-up environment
 		 rs.close();
 		} catch (SQLException se) {
 			// Handle errors for JDBC
@@ -152,7 +149,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			e.printStackTrace();
 		} finally {
 			// finally block used to close resources
-		} // end try
 		
 		return arr;
 	}
@@ -216,9 +212,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			
-		}
+		} 
 
 		return arr;
 	}
@@ -365,38 +359,37 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			} // nothing we can do
 		} // end try
 	}
-
 	
 	
 	// added new funcationality <tue 7 feb>
-	public ArrayList<Professor> viewProfessors() {
-		ArrayList<Professor> professors = new ArrayList<Professor>();
-	
-    	
-    	Connection connection = DBUtils.getConnection();
-    	
-		try {
-				PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_PROFF_LIST);
-								
-				ResultSet rs = statement.executeQuery();
-				
-				while(rs.next()){
-					Professor temp = new Professor();
-					temp.setName(rs.getString("name"));
-					temp.setDepartment(rs.getString("department"));
-					temp.setProfId(rs.getInt("prof_id"));
-					professors.add(temp);
+		public ArrayList<Professor> viewProfessors() {
+			ArrayList<Professor> professors = new ArrayList<Professor>();
+		
+	    	
+	    	Connection connection =  DaoHelper.getConnection();
+	    	
+			try {
+					PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_PROFF_LIST);
+									
+					ResultSet rs = statement.executeQuery();
 					
+					while(rs.next()){
+						Professor temp = new Professor();
+						temp.setName(rs.getString("name"));
+						temp.setDepartment(rs.getString("department"));
+						temp.setProfId(rs.getInt("prof_id"));
+						professors.add(temp);
+						
+					}
 				}
+			catch(SQLException e){
+				System.out.checkError();
 			}
-		catch(SQLException e){
-			System.out.checkError();
+	    	return professors;
 		}
-    	return professors;
-	}
-	
-	
-	
+		
+
+
 
 	public void generateGradeCard(int semester) {
 		Connection conn = null;
@@ -428,4 +421,10 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			
 		} // end try
 	}
+
+	
+	
+	
+	
+	
 }

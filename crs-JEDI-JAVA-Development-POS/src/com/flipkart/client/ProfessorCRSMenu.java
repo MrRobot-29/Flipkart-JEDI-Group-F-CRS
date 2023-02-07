@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.flipkart.bean.Professor;
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.GradeAlreadyAddedException;
+import com.flipkart.exception.NoCourseFoundException;
+import com.flipkart.exception.NoStudentFoundException;
 import com.flipkart.service.ProfessorService;
 import com.flipkart.service.ProfessorServiceOperation;
 
@@ -47,9 +51,16 @@ public class ProfessorCRSMenu {
 				/**
 				 * view all the courses taught by the professor
 				 */
-				List<String> takenCourses = service.viewCourseList(p.getProfId());
-				for(String course: takenCourses)
-					System.out.println(course);
+				List<String> takenCourses;
+				try {
+					takenCourses = service.viewCourseList(p.getProfId());
+					for(String course: takenCourses)
+						System.out.println(course);
+					
+				} catch (NoCourseFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			case 2:
 				/**
@@ -58,9 +69,16 @@ public class ProfessorCRSMenu {
 				System.out.println("Enter Course Id: ");
 				sc.nextLine();
 				String courseId = sc.nextLine();
-				List<String> enrolledStudents = service.viewEnrolledStudents(p.getProfId(), courseId);
-				for(String student: enrolledStudents)
-					System.out.println(student);
+				List<String> enrolledStudents;
+				try {
+					enrolledStudents = service.viewEnrolledStudents(p.getProfId(), courseId);
+					for(String student: enrolledStudents)
+						System.out.println(student);
+					
+				} catch (NoStudentFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			case 3:
 				/**
@@ -73,11 +91,18 @@ public class ProfessorCRSMenu {
 				int studentId = sc.nextInt();
 				System.out.println("Enter Grade: ");
 				String grade = sc.next();
-				boolean status = service.addGrade(courseId, studentId, grade);
-				if(status)
-					System.out.println("Grade Assigned");
-				else
-					System.out.println("Operation Unsuccessful");
+				boolean status;
+				try {
+					status = service.addGrade(courseId, studentId, grade);
+					if(status)
+						System.out.println("Grade Assigned");
+					else
+						System.out.println("Operation Unsuccessful");
+				} catch (GradeAlreadyAddedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				break;
 			case 4:
 				/**
@@ -86,7 +111,12 @@ public class ProfessorCRSMenu {
 				System.out.println("Enter Course Id: ");
 				sc.nextLine();
 				courseId = sc.nextLine();
-				service.selectCourseToTeach(courseId,p.getProfId());
+				try {
+					service.selectCourseToTeach(courseId,p.getProfId());
+				} catch (CourseNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			case 5:
 				/**
