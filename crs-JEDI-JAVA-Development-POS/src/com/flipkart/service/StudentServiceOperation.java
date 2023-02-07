@@ -36,8 +36,6 @@ public class StudentServiceOperation implements StudentService{
 		
 	}
 	
-	
-	
 	public boolean addCourse(int student_id, String courseId, int course_type) {
 		// add the course
 		return studentDao.addCourseBucket(student_id, courseId, course_type);
@@ -73,60 +71,12 @@ public class StudentServiceOperation implements StudentService{
 		// get the list of approved registered courses
 		return studentDao.getRegisteredCourseList(student_id);
 	}
-
 	
-//	public boolean registerCourses() {
-//		ArrayList<Course> registeredCourses = new ArrayList<Course>();
-//		for(var c: td.getStudentCourseCart()) {
-//			registeredCourses.add(c);
-//		}
-//		td.setStudentApprovedCourses(registeredCourses);
-//		HashMap<Integer,ArrayList<Course>> studentTakenCourse = td.getStudentTakenCourses();
-//		studentTakenCourse.put(10001, registeredCourses);
-//		return true;
-//	}
-//	
-	
-	public double calculateTotalFee(ArrayList<Course> approvedCourses) {
-		// calculate the total fees based on the registered courses.
+	public void payFee(Student std) {
 		
-		
-		double totalFee = 0.0;
-		
-		for(var course: approvedCourses) {
-			totalFee += course.getCourseFee();
-		}
-		
-		return totalFee;
-	}
-	
-	
-	
-	public void payFee(String user) {
-		
-		Student st = null;
-		
-		for (Student student : td.getApprovedStudents()) {
-			if(student.getStudentID() == Integer.parseInt(user)) {
-				st = student;
-				break;
-			}
-		}
-
-		ArrayList<Course> approvedCourses = td.getStudentApprovedCourses();
-		double totalFee = this.calculateTotalFee(approvedCourses);
-		System.out.println(totalFee);
-		PaymentServiceOperation pso = new PaymentServiceOperation();
-		
-		pso.initiatePayment(totalFee, st, td.getStudentApprovedCourses());
-		
-		
-		// pay for the fees and return receipt
-		/*
-		 * 
-		 * if else for the payment status.
-		 * 
-		 */
+		double amt = studentDao.calculate_total_fee(std.getStudentID());
+		PaymentService pso = new PaymentServiceOperation();	
+		pso.initiatePayment(amt, std, studentDao.getRegisteredCourseList(std.getStudentID()));
 		
 	}
 	

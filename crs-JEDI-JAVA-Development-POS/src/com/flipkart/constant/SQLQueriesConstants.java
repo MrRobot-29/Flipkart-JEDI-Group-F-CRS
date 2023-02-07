@@ -36,7 +36,7 @@ public class SQLQueriesConstants {
 	
 	public static final String SECONDARY_COURSE_FREQ="SELECT COUNT(course_id) as count FROM crs_db.RegisteredCourse WHERE RegisteredCourse.student_id= ? AND RegisteredCourse.registration_status = 1";
 	
-	public static final String CALCULATE_FEE="SELECT SUM(Course.course_fee) FROM crs_db.Course WHERE Course.course_id IN ?";
+	public static final String CALCULATE_FEE="SELECT SUM(Course.course_fee) as fee FROM `crs_db`.`RegisteredCourse` INNER JOIN crs_db.Course ON `crs_db`.`RegisteredCourse`.course_id = `crs_db`.`Course`.course_id WHERE `crs_db`.`RegisteredCourse`.student_id = ?";
 	
 	public static final String GET_COURSE_GRADE="SELECT RegisteredCourse.course_id, RegisteredCourse.grade FROM crs_db.RegisteredCourse WHERE RegisteredCourse.student_id= ?";
 	

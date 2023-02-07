@@ -106,4 +106,5 @@ public interface StudentDaoInterface {
 	public double calculate_total_fee(int student_id);
 	public HashMap<String,String> viewGrade(int student_id, int semester);
 	public String isGradeReleased(int semester);
+	public boolean payFee(int student_id, String payment_id, String payment_method, String payment_details);
 }

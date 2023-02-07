@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Student;
 
 /**
  * Interface for Student Service Operation
@@ -35,17 +36,10 @@ public interface StudentService {
 	public boolean dropCourse(int student, String courseId) ;
 
 	/**
-	 * Method to get total fee of approved courses
-	 * @param approvedCourses: list of approved courses
-	 * @return total fee of approved courses
-	 */
-	public double calculateTotalFee(ArrayList<Course> approvedCourses);
-
-	/**
 	 * Method to pay fee
-	 * @param user: user who is paying the fee
+	 * @param std: object of student who is paying fee
 	 */
-	public void payFee(String user);
+	public void payFee(Student std);
 	
 	/**
 	 * Method to view Grade of student

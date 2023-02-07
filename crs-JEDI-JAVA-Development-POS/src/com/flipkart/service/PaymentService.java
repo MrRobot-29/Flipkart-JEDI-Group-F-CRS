@@ -16,16 +16,16 @@ public interface PaymentService {
 	 * @param st: student object
 	 * @param studentApprovedCourses: list of approved course of student
 	 */
-	public void initiatePayment(double fee, Student st, ArrayList<Course> studentApprovedCourses);
+	public void initiatePayment(double fee, Student st, ArrayList<String> studentApprovedCourses);
 
 	/**
 	 * Method to pay online
 	 */
-	public void payOnline();
+	public void payOnline(Student std, double fee);
 
 	/**
 	 * Method to pay offline
 	 */
-	public void payOffline();
+	public void payOffline(Student std, double fee);
 
 }

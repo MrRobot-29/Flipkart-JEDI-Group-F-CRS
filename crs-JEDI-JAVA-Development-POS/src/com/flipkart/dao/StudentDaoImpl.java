@@ -414,7 +414,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
     	
     	double fees = 0.0;
     	
-    	ArrayList<String> registered_course_list = getRegisteredCourseList(student_id);
+    	//ArrayList<String> registered_course_list = getRegisteredCourseList(student_id);
     	
 		Connection connection = DBUtils.getConnection();
 		
@@ -422,14 +422,14 @@ public class StudentDaoImpl implements StudentDaoInterface{
 				PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.CALCULATE_FEE);
 				
 				// @test  karna hai isse
-				statement.setObject(1, registered_course_list);
-				
+				statement.setInt(1, student_id);
+				System.out.println(statement);
 				//statement.setArray(1, registered_course_list);
 				
 				ResultSet rs = statement.executeQuery();
 				
 				if(rs.next()){
-					fees = fees + rs.getDouble("SUM(Course.course_fee)");
+					fees = rs.getDouble("fee");
 				}
 			}
 		catch(SQLException e){
@@ -504,9 +504,10 @@ public class StudentDaoImpl implements StudentDaoInterface{
 				statement.setString(3, payment_method);
 				statement.setString(4, payment_details);
 				
-				statement.executeUpdate();
+				int row = statement.executeUpdate();
 				
-				return true;
+				if(row == 1)
+					return true;
 			}
 		
 		catch(SQLException e){
