@@ -40,18 +40,13 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		DBUtils = new DBUtils();
 	}
     
-	
+
 	public void dropCourse(String courseId) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-			System.out.println("Creating statement...");
+			conn = DaoHelper.getConnection();
 			String sql = "DELETE FROM Course where course_id = '" + courseId + "'";
 			stmt = conn.prepareStatement(sql);
 
@@ -62,7 +57,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 				System.out.println("Course not found");
 			}
 			stmt.close();
-			conn.close();
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
@@ -76,12 +70,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 					stmt.close();
 			} catch (SQLException se2) {
 			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} // end finally try
 		} // end try
 	}
 
@@ -90,15 +78,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		PreparedStatement stmt = null;
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			// Step 4 make/open a connection
-
-			System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-			// STEP 4: Execute a query
-			System.out.println("Creating statement...");
+			conn = DaoHelper.getConnection();
 			String sql = "insert into Course values(?,?,?,?, ?)";
 			// String sql = "UPDATE Employees set age=? WHERE id=?";
 			// String sql1="delete from employee where id=?";
@@ -123,7 +103,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			if (rows > 0)
 				System.out.println("Course Inserted Successfully!");
 			stmt.close();
-			conn.close();
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
@@ -132,18 +111,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			e.printStackTrace();
 		} finally {
 			// finally block used to close resources
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (SQLException se2) {
-			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} // end finally try
-		} // end try
+		}
 		return false;
 	}
 
@@ -153,15 +121,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		PreparedStatement stmt = null;
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			// Step 4 make/open a connection
-
-			System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-			// STEP 4: Execute a query
-			System.out.println("Creating statement...");
+			conn = DaoHelper.getConnection();
 			
 			String sql = "SELECT * FROM Course";
 			stmt = conn.prepareStatement(sql);
@@ -181,8 +141,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		      }
 //		 STEP 6: Clean-up environment
 		 rs.close();
-			stmt.close();
-			conn.close();
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
@@ -191,11 +149,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			e.printStackTrace();
 		} finally {
 			// finally block used to close resources
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (SQLException se2) {
-			} // nothing we can do
 			try {
 				if (conn != null)
 					conn.close();
@@ -234,13 +187,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				stmt.close();
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 		}
 
 		return arr;
@@ -273,13 +220,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				stmt.close();
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 		}
 
 		return arr;
@@ -291,11 +232,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		PreparedStatement stmt = null;
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-			System.out.println("Creating statement...");
+			conn = DaoHelper.getConnection();
 			String sql = "UPDATE Student SET approval_status = 1 WHERE student_id ="+ studentId;
 			stmt = conn.prepareStatement(sql);
 
@@ -306,7 +243,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 				System.out.println("Student approval request does not exist");
 			}
 			stmt.close();
-			conn.close();
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
@@ -320,12 +256,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 					stmt.close();
 			} catch (SQLException se2) {
 			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} // end finally try
+			
 		} // end try
 		return true;
 	}	
@@ -336,15 +267,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		PreparedStatement stmt1 = null;
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			// Step 4 make/open a connection
-
-			System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-			// STEP 4: Execute a query
-			System.out.println("Creating statement...");
+			conn = DaoHelper.getConnection();
 			String sql = "insert into user values(?,?,?,?)";
 			// String sql = "UPDATE Employees set age=? WHERE id=?";
 			// String sql1="delete from employee where id=?";
@@ -370,7 +293,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			int rows = stmt.executeUpdate();
 			System.out.println("Rows impacted : " + rows);
 
-			stmt.close();
+			
 
 			sql = "INSERT INTO Professor values(?,?,?)";
 			stmt1 = conn.prepareStatement(sql);
@@ -379,8 +302,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			stmt1.setString(3, dept);
 			rows = stmt1.executeUpdate();
 			System.out.println("Rows impacted : " + rows);
+			stmt.close();
 			stmt1.close();
-			conn.close();
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
@@ -394,12 +317,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 					stmt.close();
 			} catch (SQLException se2) {
 			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} // end finally try
 		} // end try
 
 	}
@@ -409,16 +326,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		PreparedStatement stmt = null;
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			// Step 4 make/open a connection
-
-			System.out.println("Connecting to database...");
-			System.out.println(ProfId);
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-			// STEP 4: Execute a query
-			System.out.println("Creating statement...");
+			conn = DaoHelper.getConnection();
 			String sql = "SELECT * FROM Professor WHERE prof_id ='" + ProfId + "'";
 			stmt = conn.prepareStatement(sql);
 
@@ -445,7 +353,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 				stmt1.close();
 			}
 			rs.close();
-			conn.close();
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
@@ -459,12 +366,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 					stmt.close();
 			} catch (SQLException se2) {
 			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} // end finally try
 		} // end try
 	}
 
@@ -505,11 +406,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		PreparedStatement stmt = null;
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-			System.out.println("Creating statement...");
+			conn = DaoHelper.getConnection();
 			String sql = "UPDATE GradeStatus SET grade_status = 1 WHERE semester ="+ semester;
 			stmt = conn.prepareStatement(sql);
 
@@ -518,7 +415,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 					System.out.println("Grade cards for semester " + semester + " released !");
 				}
 			stmt.close();
-			conn.close();
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			se.printStackTrace();
@@ -532,12 +428,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 					stmt.close();
 			} catch (SQLException se2) {
 			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} // end finally try
+			
 		} // end try
 	}
 }
