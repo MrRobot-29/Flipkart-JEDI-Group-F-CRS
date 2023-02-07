@@ -69,8 +69,9 @@ public interface AdminDAOInterface {
 
     /**
      * Method to view professors
+     * @return list of professors
      */
-    public void viewProfessors();
+    public ArrayList<Professor> viewProfessors();
 
 
     // gradecard related services
