@@ -100,6 +100,9 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			// Bind values into the parameters.
 			stmt.setString(1, courseID); // This would set age
 			stmt.setString(2, courseName);
+			if(insID==0)
+				stmt.setString(3, null);
+			else
 			stmt.setInt(3, insID);
 			stmt.setDouble(4, fee);
 			stmt.setInt(5, sem);
