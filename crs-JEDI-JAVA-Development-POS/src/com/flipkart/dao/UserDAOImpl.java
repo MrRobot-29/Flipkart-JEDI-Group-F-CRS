@@ -52,7 +52,7 @@ public class UserDAOImpl implements UserDAOInterface{
 				int rows = stmt.executeUpdate();
 				System.out.println("Rows impacted : " + rows);
 
-				stmt.close();
+				
 
 				sql = "INSERT INTO Student values(?,?,?,?,?)";
 				stmt1 = conn.prepareStatement(sql);
@@ -63,7 +63,6 @@ public class UserDAOImpl implements UserDAOInterface{
 				stmt1.setInt(5, sem);
 				
 				rows = stmt1.executeUpdate();
-				stmt1.close();
 			} catch (SQLException se) {
 				se.printStackTrace();
 				return false;
@@ -74,13 +73,8 @@ public class UserDAOImpl implements UserDAOInterface{
 				try {
 					if (stmt != null)
 						stmt.close();
+					stmt1.close();
 				} catch (SQLException se2) {
-				}
-				try {
-					if (conn != null)
-						conn.close();
-				} catch (SQLException se) {
-					se.printStackTrace();
 				} 
 			} 
 		return true;
@@ -130,6 +124,7 @@ public class UserDAOImpl implements UserDAOInterface{
 			return false;
 		} finally{
 			try {
+				if(stmt!=null)
 				stmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -176,8 +171,8 @@ public class UserDAOImpl implements UserDAOInterface{
 				e.printStackTrace();
 			} finally {
 				try {
+					if(stmt!=null)
 					stmt.close();
-					conn.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -225,8 +220,8 @@ public class UserDAOImpl implements UserDAOInterface{
 				e.printStackTrace();
 			} finally {
 				try {
+					if(stmt!=null)
 					stmt.close();
-					conn.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -261,8 +256,8 @@ public class UserDAOImpl implements UserDAOInterface{
 				e.printStackTrace();
 			} finally {
 				try {
+					if(stmt!=null)
 					stmt.close();
-					conn.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
