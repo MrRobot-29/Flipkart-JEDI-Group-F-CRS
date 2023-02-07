@@ -29,7 +29,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 	static final String DB_URL = "jdbc:mysql://localhost/crs_db";
 
 	static final String USER = "root";
-	static final String PASS = "Gd@21051971";
+	static final String PASS = "Gd@21051971";;
 
 
 	DBUtils DBUtils;
@@ -152,12 +152,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			e.printStackTrace();
 		} finally {
 			// finally block used to close resources
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} // end finally try
 		} // end try
 		
 		return arr;

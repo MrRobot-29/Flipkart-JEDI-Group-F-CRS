@@ -30,8 +30,6 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 			while(rs.next()) {
 				takenCourses.add(rs.getString("course_name"));
 			}
-			rs.close();
-			stmt.close();
 			
 		} catch (SQLException se) {
 			// Handle errors for JDBC
@@ -46,12 +44,6 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 					stmt.close();
 			} catch (SQLException se2) {
 			} // nothing we can do
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} // end finally try
 		} // end try
 		return takenCourses;
 	}
@@ -72,8 +64,6 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 				System.out.println("Professor Successfully Opted the course to teach!");
 			}
 				
-			stmt.close();
-			conn.close();
 			
 		} catch (SQLException se) {
 			// Handle errors for JDBC
@@ -111,9 +101,7 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 			while(rs.next()) {
 				enrolledStudents.add(rs.getString("name"));
 			}
-			rs.close();
-			stmt.close();
-			conn.close();
+			//rs.close();
 			
 		} catch (SQLException se) {
 			// Handle errors for JDBC
@@ -147,8 +135,7 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 			int rows = stmt.executeUpdate();
 			if (rows > 0)
 				System.out.println("Grade added Successfully");
-			stmt.close();
-			conn.close();
+			
 			
 		} catch (SQLException se) {
 			// Handle errors for JDBC

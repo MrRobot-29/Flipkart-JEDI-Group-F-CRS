@@ -267,7 +267,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
 			
 			ResultSet rs = statement.executeQuery();
 			
-			System.out.println(statement);
+			//System.out.println(statement);
 			
 			if(rs.next())
 			{
