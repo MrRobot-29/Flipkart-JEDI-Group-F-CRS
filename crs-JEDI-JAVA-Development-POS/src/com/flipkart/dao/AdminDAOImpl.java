@@ -26,6 +26,22 @@ import com.flipkart.utils.DBUtils;
 
 public class AdminDAOImpl implements AdminDAOInterface {
 
+	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	static final String DB_URL = "jdbc:mysql://localhost/crs_db";
+
+	static final String USER = "root";
+	static final String PASS = "Gd@21051971";;
+
+
+	DBUtils DBUtils;
+  
+    public AdminDAOImpl() {
+		super();
+		// TODO Auto-generated constructor stub
+		DBUtils = new DBUtils();
+	}
+    
+
 	public void dropCourse(String courseId) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -131,7 +147,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();
-		} 
+		} finally {
+			// finally block used to close resources
 		
 		return arr;
 	}
