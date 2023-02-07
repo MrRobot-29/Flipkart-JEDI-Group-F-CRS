@@ -3,6 +3,7 @@ package com.flipkart.client;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
@@ -23,7 +24,8 @@ public class StudentCRSMenu {
 	{
 		Scanner sc = new Scanner(System.in);
 		StudentService sso = new StudentServiceOperation();
-		Formatter fmt = new Formatter();  
+		StringBuffer buffer = new StringBuffer();
+		Formatter fmt = new Formatter(buffer);  
 		while(isLoggedIn == true)
 		{
 			System.out.println("Logged in as : " + std.getName() + "\n");
@@ -50,8 +52,8 @@ public class StudentCRSMenu {
 					if(cl.size() == 0) {
 						System.out.println("No courses to show for " + std.getSemester() + " semester");
 					}else {
-						fmt.format("\n%15s %15s\n\n", "Course ID", "Course Name");  
-						cl.forEach(course -> fmt.format("%14s %14s\n", course.getCourseId(),course.getCourseName()));
+						fmt.format("\n%15s %15s %15s\n\n", "Course ID", "Course Name", "Professor");  
+						cl.forEach(course -> fmt.format("%14s %14s %14s\n", course.getCourseId(),course.getCourseName(),course.getInstructorId()));
 						System.out.println(fmt);
 					}
 				} catch (NoCourseFoundException e) {
@@ -157,12 +159,8 @@ public class StudentCRSMenu {
 			case 5:
 				ArrayList<String> selectedCourse;
 				try {
-					selectedCourse = sso.viewSelectedCourses(std.getStudentID());
-					for(String finalcourse: selectedCourse)
-					{
-						System.out.println(finalcourse);
-					}
-					
+					System.out.println("\nSelected Courses:\n");
+					sso.viewSelectedCourses(std.getStudentID()).forEach(courseName -> System.out.println(courseName+" "));
 				} catch (NoCourseFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -186,10 +184,10 @@ public class StudentCRSMenu {
 						System.out.println("Grade Card Awaited!! Contact Admin");
 						break;
 					}
-					for(String course: grades.keySet()) {
-						System.out.print("Course Name - " + course);
-						System.out.println(" : Course Grade - " + grades.get(course));
-					}
+					buffer.setLength(0);
+					fmt.format("\n%15s %15s\n\n", "Course Name", "Grade");  
+					grades.forEach((courseName,grade) -> fmt.format("%14s %14s\n", courseName,grade));
+					System.out.println(fmt);
 				} catch (GradeNotAllotedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
