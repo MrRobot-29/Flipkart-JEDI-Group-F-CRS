@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import com.flipkart.bean.*;
 import com.flipkart.service.AdminServiceOperation;
-import com.flipkart.data.*;
 
 /**
  * Class that display Admin Client Menu
@@ -24,8 +23,9 @@ public class AdminCRSMenu {
 	public void createMenu(Admin ad) {
 		
 		while(isLoggedIn) {
+			System.out.println("");
 			System.out.println("***********************************");
-			System.out.println("********* Admin *******************");
+			System.out.println("************* Admin ***************");
 			System.out.println("***********************************");
 			System.out.println("Logged in as : " + ad.getName() + "\n");
 			System.out.println("1. View course in catalog");
@@ -38,6 +38,8 @@ public class AdminCRSMenu {
 			System.out.println("8. Generate grade cards");
 			System.out.println("9. Logout");
 			System.out.println("*****************************");
+			System.out.println("");
+			System.out.println("Enter your choice");
 			
 			int choice = scanner.nextInt();
 			

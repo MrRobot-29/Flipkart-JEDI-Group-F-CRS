@@ -124,7 +124,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		         Course c = new Course(cname, cid, profId, true, cfee, sem);
 		         arr.add(c);
 		      }
-//		 STEP 6: Clean-up environment
 		 rs.close();
 		} catch (SQLException se) {
 			// Handle errors for JDBC
@@ -132,15 +131,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();
-		} finally {
-			// finally block used to close resources
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (SQLException se) {
-				se.printStackTrace();
-			} // end finally try
-		} // end try
+		} 
 		
 		return arr;
 	}
@@ -204,9 +195,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			
-		}
+		} 
 
 		return arr;
 	}
@@ -360,7 +349,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			ArrayList<Professor> professors = new ArrayList<Professor>();
 		
 	    	
-	    	Connection connection = DBUtils.getConnection();
+	    	Connection connection =  DaoHelper.getConnection();
 	    	
 			try {
 					PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_PROFF_LIST);
