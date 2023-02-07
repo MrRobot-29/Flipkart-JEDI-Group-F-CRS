@@ -14,4 +14,5 @@ public class UserAlreadyExistsException extends Exception{
 	public String getMessage() {
 		return "User with email: " + userId + " already present";
 	}
+
 }
