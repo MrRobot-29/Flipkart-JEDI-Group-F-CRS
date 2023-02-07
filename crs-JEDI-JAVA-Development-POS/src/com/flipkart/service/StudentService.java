@@ -5,6 +5,13 @@ import java.util.HashMap;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
+import com.flipkart.exception.CourseAlreadyOptedException;
+import com.flipkart.exception.CourseCountExceededException;
+import com.flipkart.exception.CourseNotAvailableException;
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.GradeNotAllotedException;
+import com.flipkart.exception.NoCourseFoundException;
+import com.flipkart.exception.PaymentNotCompletedException;
 
 /**
  * Interface for Student Service Operation
@@ -16,7 +23,7 @@ public interface StudentService {
 	 * @param sem: semester of student
 	 * @return list of courses taken by student
 	 */
-	public ArrayList<Course> courseList(int sem);
+	public ArrayList<Course> courseList(int sem) throws NoCourseFoundException;
 
 	/**
 	 * Method to add course to student and return status of is course added to student
@@ -25,7 +32,7 @@ public interface StudentService {
 	 * @param course_type: course type
 	 * @return status of is course added to student
 	 */
-	public boolean addCourse(int student_id, String courseId, int course_type);
+	public boolean addCourse(int student_id, String courseId, int course_type) throws CourseAlreadyOptedException, CourseCountExceededException, CourseNotFoundException, CourseNotAvailableException;
 
 	/**
 	 * Method to drop course and return status of is course removed
@@ -33,20 +40,20 @@ public interface StudentService {
 	 * @param courseId
 	 * @return status of is course removed
 	 */
-	public boolean dropCourse(int student, String courseId) ;
+	public boolean dropCourse(int student, String courseId) throws CourseNotFoundException ;
 
 	/**
 	 * Method to pay fee
 	 * @param std: object of student who is paying fee
 	 */
-	public void payFee(Student std);
+	public void payFee(Student std) throws PaymentNotCompletedException;
 	
 	/**
 	 * Method to view Grade of student
 	 * @param studentId: student id
 	 * @return list of course and corresponding grade
 	 */
-	public HashMap<String,String> viewGrade(int studentId,int sem);
+	public HashMap<String,String> viewGrade(int studentId,int sem) throws GradeNotAllotedException;
 	
 
 	
@@ -55,14 +62,14 @@ public interface StudentService {
 	 * @param student_id: student id
 	 * @return list of selected course by student
 	 */
-	public ArrayList<String> viewSelectedCourses(int student_id);
+	public ArrayList<String> viewSelectedCourses(int student_id) throws NoCourseFoundException;
 
 	/**
 	 * Method to freeze the course
 	 * @param studentId: student id
 	 * @return status of is course cart frozen
 	 */
-	public boolean freezeCourseCart(int studentId) ;
+	public boolean freezeCourseCart(int studentId) throws CourseNotAvailableException;
 	
 	//public boolean registerCourses();
 

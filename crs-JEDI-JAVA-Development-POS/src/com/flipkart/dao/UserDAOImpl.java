@@ -76,12 +76,6 @@ public class UserDAOImpl implements UserDAOInterface{
 						stmt.close();
 				} catch (SQLException se2) {
 				}
-				try {
-					if (conn != null)
-						conn.close();
-				} catch (SQLException se) {
-					se.printStackTrace();
-				} 
 			} 
 		return true;
 	}
@@ -226,7 +220,6 @@ public class UserDAOImpl implements UserDAOInterface{
 			} finally {
 				try {
 					stmt.close();
-					conn.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -262,7 +255,6 @@ public class UserDAOImpl implements UserDAOInterface{
 			} finally {
 				try {
 					stmt.close();
-					conn.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

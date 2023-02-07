@@ -4,17 +4,18 @@
 package com.flipkart.exception;
 
 /**
- * @author adity
+ * @author jasan
  *
  */
-public class CourseNotFoundException extends Exception{
+public class CourseNotOptedException extends Exception{
+
 	private String courseId;
 
 	/**
 	 * Constructor
 	 * @param courseId
 	 */
-	public CourseNotFoundException(String courseId)
+	public CourseNotOptedException(String courseId)
 	{	
 		this.courseId = courseId;
 	}
@@ -25,6 +26,6 @@ public class CourseNotFoundException extends Exception{
 	 */
 	@Override
 	public String getMessage() {
-		return "Course with course id: " + courseId + " not found.";
+		return  "Course " + courseId + " has not been opted by you.";
 	}
 }
