@@ -81,7 +81,7 @@ public interface AdminDAOInterface {
      * Method to view professors
      * @return list of professors
      */
-    public void viewProfessors() throws NoProfessorFoundException;
+    public ArrayList<Professor> viewProfessors() throws NoProfessorFoundException;
 
 
     // gradecard related services
