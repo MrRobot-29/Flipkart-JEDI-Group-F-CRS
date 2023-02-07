@@ -107,6 +107,10 @@ public interface StudentDaoInterface {
 	public HashMap<String,String> viewGrade(int student_id, int semester);
 	public String isGradeReleased(int semester);
 	public boolean payFee(int student_id, String payment_id, String payment_method, String payment_details);
+
 	
 	public int countFreezeCourses(int student_id);
+
+	public boolean checkCourse(int studentId, String courseId);
+
 }

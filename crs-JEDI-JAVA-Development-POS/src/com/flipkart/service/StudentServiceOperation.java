@@ -103,4 +103,9 @@ public class StudentServiceOperation implements StudentService{
 		
 	}
 	
+	public boolean checkCourse(int studentId, String courseId) 
+	{
+		return studentDao.checkCourse(studentId, courseId);
+	}
+	
 }

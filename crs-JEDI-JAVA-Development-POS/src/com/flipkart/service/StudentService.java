@@ -94,5 +94,9 @@ public interface StudentService {
 	 */
 	public int secondaryCourseFreq(int student_id) ;
 	
+
 	public boolean add_drop_status(int studentId);
+
+	public boolean checkCourse(int studentId, String courseId);
+
 }
