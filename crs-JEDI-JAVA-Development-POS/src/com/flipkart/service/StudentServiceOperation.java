@@ -14,6 +14,7 @@ import com.flipkart.dao.StudentDaoImpl;
 import com.flipkart.dao.StudentDaoInterface;
 import com.flipkart.data.SharedTempData;
 import com.flipkart.data.TempData;
+import com.flipkart.exception.PaymentNotCompletedException;
 
 /**
  * @author ashwin.kumar2
@@ -76,7 +77,12 @@ public class StudentServiceOperation implements StudentService{
 		
 		double amt = studentDao.calculate_total_fee(std.getStudentID());
 		PaymentService pso = new PaymentServiceOperation();	
-		pso.initiatePayment(amt, std, studentDao.getRegisteredCourseList(std.getStudentID()));
+		try {
+			pso.initiatePayment(amt, std, studentDao.getRegisteredCourseList(std.getStudentID()));
+		} catch (PaymentNotCompletedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

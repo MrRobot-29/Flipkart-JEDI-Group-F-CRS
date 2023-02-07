@@ -36,14 +36,18 @@ public class StudentCRSMenu {
 			case 1:
 				System.out.println(std.getSemester());
 				ArrayList<Course> cl = sso.courseList(std.getSemester());
-				int num = 1;
-				for(var c: cl) {
-					System.out.println(num);
-					System.out.println("Course Name: " + c.getCourseName());
-					System.out.println("Course ID: " + c.getCourseId());
-					num++;
-				}
 				
+				if(cl.size() == 0) {
+					System.out.println("No courses to show for " + std.getSemester() + " semester");
+				}else {
+					int num = 1;
+					for(var c: cl) {
+						System.out.println(num);
+						System.out.println("Course Name: " + c.getCourseName());
+						System.out.println("Course ID: " + c.getCourseId());
+						num++;
+					}
+				}
 				break;
 			case 2:
 				int primaryCnt = sso.primaryCourseFreq(std.getStudentID()), secCnt = sso.secondaryCourseFreq(std.getStudentID());

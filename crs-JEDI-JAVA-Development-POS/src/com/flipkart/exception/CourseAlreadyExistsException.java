@@ -1,12 +1,9 @@
 /**
  * 
  */
-package com.flipkart.exceptions;
+package com.flipkart.exception;
 
-/**
- * @author adity
- *
- */
+
 public class CourseAlreadyExistsException extends Exception{
 	private String courseId;
 		
