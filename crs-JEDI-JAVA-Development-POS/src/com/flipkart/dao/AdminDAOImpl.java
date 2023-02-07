@@ -1,6 +1,7 @@
 package com.flipkart.dao;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,17 +9,37 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+
+
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.constant.Gender;
 import com.flipkart.constant.Role;
+import com.flipkart.constant.SQLQueriesConstants;
 import com.flipkart.helper.DaoHelper;
+import com.flipkart.utils.DBUtils;
 
 /**
  * class for Admin Dao Implementation
  */
 public class AdminDAOImpl implements AdminDAOInterface {
+
+	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	static final String DB_URL = "jdbc:mysql://localhost/crs_db";
+
+	static final String USER = "root";
+	static final String PASS = "Gd@21051971";
+
+
+	DBUtils DBUtils;
+  
+    public AdminDAOImpl() {
+		super();
+		// TODO Auto-generated constructor stub
+		DBUtils = new DBUtils();
+	}
+    
 
 	public void dropCourse(String courseId) {
 		Connection conn = null;
@@ -348,9 +369,37 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		} // end try
 	}
 
-	public void viewProfessors() {
-
+	
+	
+	// added new funcationality <tue 7 feb>
+	public ArrayList<Professor> viewProfessors() {
+		ArrayList<Professor> professors = new ArrayList<Professor>();
+	
+    	
+    	Connection connection = DBUtils.getConnection();
+    	
+		try {
+				PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_PROFF_LIST);
+								
+				ResultSet rs = statement.executeQuery();
+				
+				while(rs.next()){
+					Professor temp = new Professor();
+					temp.setName(rs.getString("name"));
+					temp.setDepartment(rs.getString("department"));
+					temp.setProfId(rs.getInt("prof_id"));
+					professors.add(temp);
+					
+				}
+			}
+		catch(SQLException e){
+			System.out.checkError();
+		}
+    	return professors;
 	}
+	
+	
+	
 
 	public void generateGradeCard(int semester) {
 		Connection conn = null;

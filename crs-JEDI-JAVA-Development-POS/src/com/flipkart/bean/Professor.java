@@ -22,6 +22,12 @@ public class Professor extends User {
 	 * @param designation: designation of the professor
 	 * @param profId: id of the professor
 	 */
+	
+	public Professor() {
+		super();
+	}
+
+	
 	public Professor(String userId, String name, Role role, String password, Gender gender, String address,
 			String country, String department, String designation, int profId) {
 		super(userId, name, role, password, gender, address, country);
