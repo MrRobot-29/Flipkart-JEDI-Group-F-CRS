@@ -2,6 +2,11 @@ package com.flipkart.service;
 
 import java.util.List;
 
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.GradeAlreadyAddedException;
+import com.flipkart.exception.NoCourseFoundException;
+import com.flipkart.exception.NoStudentFoundException;
+
 /**
  * interface for professor service operation
  */
@@ -12,7 +17,7 @@ public interface ProfessorService {
 	 * @param instructorId: instructor id
 	 * @return returns list of courses the professor is teaching
 	 */
-	public List<String> viewCourseList(int instructorId);
+	public List<String> viewCourseList(int instructorId) throws NoCourseFoundException;
 
 	/**
 	 * Method to assign course to professor and return status of assigning the course to professor for teaching
@@ -20,7 +25,7 @@ public interface ProfessorService {
 	 * @param instructorId: instructor id
 	 * @return status of assigning the course to professor for teaching
 	 */
-	public boolean selectCourseToTeach(String courseId, int instructorId);
+	public boolean selectCourseToTeach(String courseId, int instructorId) throws CourseNotFoundException;
 
 	/**
 	 * Method to get list of enrolled students corresponding to current professor id and course id
@@ -28,7 +33,7 @@ public interface ProfessorService {
 	 * @param courseId: course id
 	 * @return list of enrolled students corresponding to current professor id and course id
 	 */
-	public List<String> viewEnrolledStudents(int instructorId,String courseId);
+	public List<String> viewEnrolledStudents(int instructorId,String courseId) throws NoStudentFoundException;
 
 	/**
 	 * Method to add grade to student and get status if grade is added or not
@@ -37,6 +42,6 @@ public interface ProfessorService {
 	 * @param grade: student grade
 	 * @return returns status if grade is added or not
 	 */
-	 public boolean addGrade(String courseId, int studentId, String grade);
+	 public boolean addGrade(String courseId, int studentId, String grade)  throws GradeAlreadyAddedException;
 	
 }

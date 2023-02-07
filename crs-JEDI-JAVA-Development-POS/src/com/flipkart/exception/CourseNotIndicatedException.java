@@ -1,21 +1,20 @@
 /**
  * 
  */
-package com.flipkart.exceptions;
+package com.flipkart.exception;
 
 /**
- * @author jasan
+ * @author adity
  *
  */
-public class CourseNotOptedException extends Exception{
-
+public class CourseNotIndicatedException extends Exception{
 	private String courseId;
 
 	/**
 	 * Constructor
 	 * @param courseId
 	 */
-	public CourseNotOptedException(String courseId)
+	public CourseNotIndicatedException(String courseId)
 	{	
 		this.courseId = courseId;
 	}
@@ -26,6 +25,6 @@ public class CourseNotOptedException extends Exception{
 	 */
 	@Override
 	public String getMessage() {
-		return  "Course " + courseId + " has not been opted by you.";
+		return  "You do not teach the course : " + courseId;
 	}
 }

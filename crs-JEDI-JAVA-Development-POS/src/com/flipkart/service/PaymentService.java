@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
+import com.flipkart.exception.PaymentNotCompletedException;
 
 /**
  * Interface for Payment Service Operation
@@ -16,16 +17,16 @@ public interface PaymentService {
 	 * @param st: student object
 	 * @param studentApprovedCourses: list of approved course of student
 	 */
-	public void initiatePayment(double fee, Student st, ArrayList<String> studentApprovedCourses);
+	public void initiatePayment(double fee, Student st, ArrayList<String> studentApprovedCourses) throws PaymentNotCompletedException;
 
 	/**
 	 * Method to pay online
 	 */
-	public void payOnline(Student std, double fee);
+	public void payOnline(Student std, double fee) throws PaymentNotCompletedException;
 
 	/**
 	 * Method to pay offline
 	 */
-	public void payOffline(Student std, double fee);
+	public void payOffline(Student std, double fee) throws PaymentNotCompletedException;
 
 }

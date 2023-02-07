@@ -1,7 +1,8 @@
 /**
  * 
  */
-package com.flipkart.exceptions;
+
+package com.flipkart.exception;
 
 /**
  * @author jasan
