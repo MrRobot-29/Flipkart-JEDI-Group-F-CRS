@@ -78,7 +78,7 @@ public class AdminRestAPI {
     @Path("/dropProfessor")
     @Consumes("application/json")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addProfessor(@Valid int professor_id) throws ValidationException{
+    public Response dropProfessor(@QueryParam("profID") int professor_id) throws ValidationException{
         try{
             aso.dropProfessor(professor_id);
             return  Response.ok().entity("Professor Dropped Successfully").build();

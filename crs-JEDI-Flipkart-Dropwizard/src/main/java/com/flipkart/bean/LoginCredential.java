@@ -17,6 +17,9 @@ public class LoginCredential {
     @NotBlank
     private String Role;
 
+    public LoginCredential(){
+
+    }
     public LoginCredential(String userId, String password, String role) {
         this.userId = userId;
         Password = password;
