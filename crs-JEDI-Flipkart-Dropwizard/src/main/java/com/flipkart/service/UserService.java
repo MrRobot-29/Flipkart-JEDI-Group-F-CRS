@@ -1,5 +1,6 @@
 package com.flipkart.service;
 
+import com.flipkart.bean.Student;
 import com.flipkart.exception.UserAlreadyExistsException;
 import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.exception.WrongPasswordException;
@@ -12,7 +13,7 @@ public interface UserService {
 	/**
 	 * method to register account
 	 */
-	public void registerAccount() throws UserAlreadyExistsException;
+	public void registerAccount(Student student) throws UserAlreadyExistsException;
 
 	/**
 	 * method to edit account
@@ -22,6 +23,6 @@ public interface UserService {
 	/**
 	 * method for login
 	 */
-	public void loginAccount() throws UserNotFoundException, WrongPasswordException; 
+	public boolean loginAccount(String Username, String password, String role) throws UserNotFoundException, WrongPasswordException;
 
 }
