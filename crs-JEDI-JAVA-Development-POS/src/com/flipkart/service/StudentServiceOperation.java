@@ -86,6 +86,17 @@ public class StudentServiceOperation implements StudentService{
 		
 	}
 	
+	public boolean add_drop_status(int studentId) {
+		
+		int cnt = studentDao.countFreezeCourses(studentId);
+		
+		if(cnt >= 4) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public HashMap<String,String> viewGrade(int studentId,int sem) {
 		//view the grade card with exception handling
 		return studentDao.viewGrade(studentId, sem);
