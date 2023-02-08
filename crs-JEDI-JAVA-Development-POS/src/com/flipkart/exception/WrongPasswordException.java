@@ -1,5 +1,7 @@
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 public class WrongPasswordException extends Exception{
 	
 	private static final long serialVersionUID = 1L;
@@ -18,7 +20,7 @@ public class WrongPasswordException extends Exception{
 	 */
 	@Override
 	public String getMessage() {
-		return "Wrong password for user with userId: " + userId;
+		return Color.ANSI_YELLOW+"Wrong password for user with userId: " + userId +Color.ANSI_RESET;
 	}
 
 }

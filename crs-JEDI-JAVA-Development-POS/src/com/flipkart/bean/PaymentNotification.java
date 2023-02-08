@@ -4,88 +4,69 @@ package com.flipkart.bean;
  * Class for payment notification
  */
 public class PaymentNotification {
-	private String studentId;
-	private String referenceId;
-	private String notificationId;
-	private String notificationMessage;
-
-	/**
-	 * Constructor
-	 * @param studentId: student id
-	 * @param referenceId: id of payment reference
-	 * @param notificationId: notification id of payment
-	 * @param notificationMessage: notification message of payment
-	 */
-	public PaymentNotification(String studentId, String referenceId, String notificationId,
-			String notificationMessage) {
+	private int studentId;
+	private String studentName;
+	private double billAmount;
+	private String modeOfPayment;
+	private String paymentDetails;
+	private String paymentId;
+	
+	public PaymentNotification(int studentId, String studentName, double billAmount, String modeOfPayment,
+			String paymentDetails, String paymentId) {
+		super();
 		this.studentId = studentId;
-		this.referenceId = referenceId;
-		this.notificationId = notificationId;
-		this.notificationMessage = notificationMessage;
+		this.studentName = studentName;
+		this.billAmount = billAmount;
+		this.modeOfPayment = modeOfPayment;
+		this.paymentDetails = paymentDetails;
+		this.paymentId = paymentId;
 	}
 
-	/**
-	 *
-	 * @return student id
-	 */
-	public String getStudentId() {
+	public int getStudentId() {
 		return studentId;
 	}
-
-	/**
-	 *
-	 * @param studentId: student id
-	 */
-	public void setStudentId(String studentId) {
+	
+	public void setStudentId(int studentId) {
 		this.studentId = studentId;
 	}
-
-	/**
-	 *
-	 * @return reference id of payment
-	 */
-	public String getReferenceId() {
-		return referenceId;
+	
+	public String getStudentName() {
+		return studentName;
 	}
-
-	/**
-	 * Method to set reference id
-	 * @param referenceId: reference id of payment
-	 */
-	public void setReferenceId(String referenceId) {
-		this.referenceId = referenceId;
+	
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
-
-	/**
-	 *
-	 * @return get notification id of payment
-	 */
-	public String getNotificationId() {
-		return notificationId;
+	
+	public double getBillAmount() {
+		return billAmount;
 	}
-
-	/**
-	 *
-	 * @param notificationId: notification id
-	 */
-	public void setNotificationId(String notificationId) {
-		this.notificationId = notificationId;
+	
+	public void setBillAmount(double billAmount) {
+		this.billAmount = billAmount;
 	}
-
-	/**
-	 *
-	 * @return get notification message of payment
-	 */
-	public String getNotificationMessage() {
-		return notificationMessage;
+	
+	public String getModeOfPayment() {
+		return modeOfPayment;
 	}
-
-	/**
-	 * method to set notification message of payment
-	 * @param notificationMessage: notification message of payment
-	 */
-	public void setNotificationMessage(String notificationMessage) {
-		this.notificationMessage = notificationMessage;
+	
+	public void setModeOfPayment(String modeOfPayment) {
+		this.modeOfPayment = modeOfPayment;
+	}
+	
+	public String getPaymentDetails() {
+		return paymentDetails;
+	}
+	public void setPaymentDetails(String paymentDetails) {
+		this.paymentDetails = paymentDetails;
+	}
+	
+	public String getPaymentId() {
+		return paymentId;
+	}
+	
+	public void setPaymentId(String paymentId) {
+		this.paymentId = paymentId;
 	}
 	
 }

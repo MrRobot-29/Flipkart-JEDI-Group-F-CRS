@@ -11,26 +11,28 @@ import com.flipkart.constant.Role;
 import com.flipkart.dao.AdminDAOImpl;
 import com.flipkart.data.SharedTempData;
 import com.flipkart.data.TempData;
+import com.flipkart.exception.*;
 
 /**
  * Implementations of Admin Service Operations
  */
 public class AdminServiceOperation implements AdminService {
-
-	TempData td = SharedTempData.td;
-	
 	Scanner sc = new Scanner(System.in);
 	static int profId = 1;
-    // course services
-    public boolean dropCourse() {
+    public boolean dropCourse() throws CourseNotFoundException {
     	System.out.println("Enter Course Id to be deleted");
     	String cid = sc.next();
     	AdminDAOImpl aDao = new AdminDAOImpl();
-    	aDao.dropCourse(cid);
+
+		try {
+			aDao.dropCourse(cid);
+		}catch(CourseNotFoundException e){
+			throw e;
+		}
     	return true;
     }
 
-    public boolean addCourse() {
+    public boolean addCourse() throws CourseAlreadyExistsException {
     	System.out.println("Enter Course Name");
     	String cname = "";
     	cname += sc.nextLine();
@@ -43,25 +45,34 @@ public class AdminServiceOperation implements AdminService {
     	System.out.println("Enter semester to which the course is offered");
     	int sem = sc.nextInt();
     	Course newCourse = new Course(cname, cid, insid, true, courseFee, sem);
-    	AdminDAOImpl aDao = new AdminDAOImpl();
-    	aDao.addCourse(newCourse);
+
+		AdminDAOImpl aDao = new AdminDAOImpl();
+		try {			
+			aDao.addCourse(newCourse);
+		} catch(CourseAlreadyExistsException e) {
+			throw e;
+		}
     	return true;
     	
     }
-    public ArrayList<Course> viewCourses(){
+    public ArrayList<Course> viewCourses() throws  NoCourseFoundException{
     	AdminDAOImpl aDao = new AdminDAOImpl();
-    	return aDao.viewCourses();
-    	
+		try{
+	    	return aDao.viewCourses();
+		}catch (NoCourseFoundException e){
+			throw e;
+		}
+
     }
     // student related services
-    public ArrayList<Student> viewPendingStudents() {
+    public ArrayList<Student> viewPendingStudents() throws NoStudentFoundException {
     	
     	AdminDAOImpl aDao  = new AdminDAOImpl();
     	
     	return aDao.viewPendingStudents();
     }
 
-    public ArrayList<Student> viewAllStudents() {
+    public ArrayList<Student> viewAllStudents() throws NoStudentFoundException {
     	
     	AdminDAOImpl aDao  = new AdminDAOImpl();
     	
@@ -69,17 +80,21 @@ public class AdminServiceOperation implements AdminService {
     	
     }
 
-    public boolean validateStudent(int studentId){
+    public boolean validateStudent(int studentId) throws  StudentNotFoundException{
     	
     	AdminDAOImpl aDao  = new AdminDAOImpl();
-    	
-    	 return aDao.validateStudent(studentId);
-    	
-    }
+
+		try {
+			return aDao.validateStudent(studentId);
+		} catch (StudentNotFoundException e) {
+			throw e;
+		}
+
+	}
 
 
     // professor related services
-    public void addProfessor() {
+    public void addProfessor() throws  ProfessorIdAlreadyExistsException{
     	
     	System.out.println("Professor Details");
     	System.out.println("Enter Professor email:");
@@ -105,36 +120,40 @@ public class AdminServiceOperation implements AdminService {
     	Professor prof = new Professor(email,name,Role.PROFESSOR,pwd,profGender,"India","India",dept,"Associate Professor", profId);
     	
     	AdminDAOImpl adminDao = new AdminDAOImpl();
-    	adminDao.addProfessor(prof);
-    	System.out.println("Professor Added Successfully");
+		try {
+			adminDao.addProfessor(prof);
+			System.out.println("Professor Added Successfully");
+		} catch (ProfessorIdAlreadyExistsException e) {
+			throw e;
+		}
     }
 
-    public void dropProfessor(){
+    public void dropProfessor() throws ProfessorCannotBeDroppedException{
     	System.out.println("Enter Professor Id: ");
     	int id = sc.nextInt();
     	AdminDAOImpl adminDao = new AdminDAOImpl();
-    	adminDao.dropProfessor(id);
-    }
+		try {
+			adminDao.dropProfessor(id);
+		} catch (ProfessorCannotBeDroppedException e) {
+			throw e;
+		}
+	}
     public void viewProfessors() {
-    	for(Professor prof: td.getProfessor())
-    	{
-    		System.out.println("Name: "+prof.getName());
-    		System.out.println("Id: "+prof.getUserId());
-    		System.out.println("Desgination: "+prof.getDesignation());
-    		System.out.println("Department: "+prof.getDepartment());
-    		System.out.println("Address: "+prof.getAddress());
-    	}
-    		
+
     }
 
 
     // gradecard related services
-    public void generateGradeCard(){
+    public void generateGradeCard() throws GradeCardNotGeneratedException{
     	System.out.println("Enter semester for which grade card needs to be generated: ");
 		int sem = sc.nextInt();
     	AdminDAOImpl  aDao = new AdminDAOImpl();
-    	aDao.generateGradeCard(sem);
-    }
+		try {
+			aDao.generateGradeCard(sem);
+		} catch (GradeCardNotGeneratedException e) {
+			throw e;
+		}
+	}
 }
 
 

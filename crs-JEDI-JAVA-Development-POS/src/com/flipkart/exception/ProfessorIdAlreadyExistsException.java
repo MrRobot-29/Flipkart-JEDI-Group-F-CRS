@@ -1,5 +1,7 @@
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 public class ProfessorIdAlreadyExistsException extends Exception{
 private static final long serialVersionUID = 1L;
 private int profId;
@@ -26,6 +28,6 @@ private int profId;
 	
 	@Override
 	public String getMessage() {
-		return "Professor ID: " + profId + " is already in use.";
+		return Color.ANSI_YELLOW+"Professor ID: " + profId + " is already present"+Color.ANSI_RESET;
 	}
 }

@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 /**
  * @author adity
  *
@@ -26,6 +28,6 @@ public class CourseCountExceededException extends Exception{
 	@Override
 	public String getMessage() 
 	{
-		return "You have already opted for " + num + " courses";
+		return Color.ANSI_YELLOW+"You have already opted for " + num + " courses"+Color.ANSI_RESET;
 	}
 }
