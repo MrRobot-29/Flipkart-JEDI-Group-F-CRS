@@ -24,13 +24,15 @@ public interface UserDAOInterface {
 	public void editAccount();
 
 	/**
-	 * Method to login using database
-	 * @param userName: name of user
-	 * @param Password: password of user
-	 * @param role: role of user
-	 * @throws WrongPasswordException 
-	 * @throws UserNotFoundException 
-	 */
-	public void loginAccount(String userName, String Password, String role) throws UserNotFoundException, WrongPasswordException;
+     * Method to login using database
+     *
+     * @param userName: name of user
+     * @param Password: password of user
+     * @param role:     role of user
+     * @return
+     * @throws WrongPasswordException
+     * @throws UserNotFoundException
+     */
+	public boolean loginAccount(String userName, String Password, String role) throws UserNotFoundException, WrongPasswordException;
 
 }
