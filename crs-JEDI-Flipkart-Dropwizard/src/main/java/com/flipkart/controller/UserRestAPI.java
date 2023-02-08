@@ -5,15 +5,12 @@ import javax.validation.ValidationException;
 import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.flipkart.bean.LoginCredential;
+import com.flipkart.bean.ResponseMessage;
 import com.flipkart.bean.Student;
 import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.exception.WrongPasswordException;
@@ -32,38 +29,44 @@ public class UserRestAPI {
     }
     @POST
     @Path("/login")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response loginAccount(@Valid LoginCredential lg) throws ValidationException {
         try
         {
-            boolean loggedin= uso.loginAccount(lg.getUserId(), lg.getPassword(), lg.getRole());
-            if(loggedin)
+            boolean loggedIn= uso.loginAccount(lg.getUserId(), lg.getPassword(), lg.getRole());
+            if(loggedIn)
             {
-                return Response.status(200).entity("Login successful").build();
+                ResponseMessage rs = new ResponseMessage("Login successful");
+                return Response.status(200).entity(rs).build();
             }
             else
             {
-                return Response.status(401).entity("Invalid credentials!").build();
+                ResponseMessage rs = new ResponseMessage("Invalid credentials!");
+                return Response.status(401).entity(rs).build();
             }
         }
         catch ( UserNotFoundException | WrongPasswordException e)
         {
-            return Response.status(500).entity(e.getMessage()).build();
+            ResponseMessage rs = new ResponseMessage(e.getMessage());
+            return Response.status(500).entity(rs).build();
         }
     }
 
     @POST
     @Path("/studentRegistration")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response register(@Valid Student student)
     {
         try
         {
             uso.registerAccount(student);
-            return Response.ok().entity("Student registration successful").build();
+            ResponseMessage rs = new ResponseMessage("Student registration successful");
+            return Response.ok().entity(rs).build();
         }
         catch(Exception ex)
         {
-            return Response.status(500).entity("Something went wrong! Please try again.").build();
+            ResponseMessage rs = new ResponseMessage("Something went wrong! Please try again.");
+            return Response.status(500).entity(rs).build();
         }
     }
 }

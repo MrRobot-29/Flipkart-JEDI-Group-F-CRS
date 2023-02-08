@@ -29,6 +29,10 @@ public class Student extends User {
 	 * @param semester: semester of student
 	 * @param isApproved: is approved by admin
 	 */
+
+	public Student(){
+
+	}
 	public Student(String userId, String name, Role role, String password, Gender gender, String address,
 			String country,String branchName,int studentId,int semester, boolean isApproved) {
 		super(userId, name, role, password, gender, address, country);
