@@ -4,14 +4,14 @@ package com.flipkart.bean;
  * Class for payment notification
  */
 public class PaymentNotification {
-	private String studentId;
+	private int studentId;
 	private String studentName;
 	private double billAmount;
 	private String modeOfPayment;
 	private String paymentDetails;
 	private String paymentId;
 	
-	public PaymentNotification(String studentId, String studentName, double billAmount, String modeOfPayment,
+	public PaymentNotification(int studentId, String studentName, double billAmount, String modeOfPayment,
 			String paymentDetails, String paymentId) {
 		super();
 		this.studentId = studentId;
@@ -22,11 +22,11 @@ public class PaymentNotification {
 		this.paymentId = paymentId;
 	}
 
-	public String getStudentId() {
+	public int getStudentId() {
 		return studentId;
 	}
 	
-	public void setStudentId(String studentId) {
+	public void setStudentId(int studentId) {
 		this.studentId = studentId;
 	}
 	

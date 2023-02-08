@@ -1,5 +1,6 @@
 package com.flipkart.dao;
 
+import com.flipkart.bean.PaymentNotification;
 import com.flipkart.bean.Student;
 
 public interface PaymentNotificationDaoInterface {
@@ -10,5 +11,5 @@ public interface PaymentNotificationDaoInterface {
 	 * 
 	 * 
 	 */
-	public void sendFeePaymentNotification(Student s,double billAmount);
+	public PaymentNotification sendFeePaymentNotification(Student s,double billAmount);
 }
