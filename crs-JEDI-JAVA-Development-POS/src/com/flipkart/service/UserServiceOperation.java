@@ -31,7 +31,15 @@ public class UserServiceOperation implements UserService{
 		String sname = sc.next();
 		System.out.println("Enter Student Branch");
 		String sbranch = sc.next();
+<<<<<<< HEAD
 		System.out.println("Enter Student's current semester [from 1 to 8]");
+=======
+		System.out.println("Choose your Current semester : ");
+		for(int i = 1;i <= 8;i++) {
+			System.out.println("Semster " + i );
+		}
+//		System.out.println("Enter Student's current semester (1-8)");
+>>>>>>> 609a8c0 (add Grade and list of semester update)
 		int sem = sc.nextInt();
 		System.out.println("Enter Account Password");
 		String pwd = sc.next();
