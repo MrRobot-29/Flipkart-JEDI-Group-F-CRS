@@ -1,5 +1,6 @@
 package com.flipkart.client;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.Scanner;
 
 import com.flipkart.bean.*;
@@ -11,8 +12,11 @@ import com.flipkart.service.AdminServiceOperation;
 public class AdminCRSMenu {
 	Scanner scanner = new Scanner(System.in); 
 	AdminServiceOperation aso = new AdminServiceOperation();
-	
-	
+	StringBuffer buffer = new StringBuffer();
+	Formatter fmt = new Formatter(buffer); 
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLUE = "\u001B[34m";
 		
 	boolean isLoggedIn = true;
 
@@ -49,15 +53,11 @@ public class AdminCRSMenu {
 				 * view course in catalog
 				 */
 				ArrayList<Course> cl = aso.viewCourses();
-				int num = 1;
-				for(var c: cl) {
-					System.out.println(num);
-					System.out.println("Course Name: " + c.getCourseName());
-					System.out.println("Course ID: " + c.getCourseId());
-					System.out.println("Course Price: "+ c.getCourseFee());
-					num++;
-				}
-
+				
+				fmt.format("\n%15s %15s %15s %15s\n\n", "Course ID", "Course Name", "Professor", "Course Price");  
+				aso.viewCourses().forEach(course -> fmt.format("%14s %14s %14s %14s\n", course.getCourseId(),course.getCourseName(),course.getInstructorId(),course.getCourseFee()));
+				System.out.println(fmt);
+				buffer.setLength(0);
 				break;
 				
 			case 2:
@@ -65,7 +65,11 @@ public class AdminCRSMenu {
 				 * add course to catalog
 				 */
 				if(aso.addCourse()) {
-					System.out.println("Course Added to the catalog");	
+					System.out.println(ANSI_GREEN+"Course Added to the catalog"+ANSI_RESET);	
+				}
+				else
+				{
+					System.out.println(ANSI_BLUE+"Course Failed to Add to the catalog"+ANSI_RESET);	
 				}
 				break;
 				
@@ -73,7 +77,13 @@ public class AdminCRSMenu {
 				/**
 				 * delete course from catalog
 				 */
-				aso.dropCourse();
+				if(aso.dropCourse()) {
+					System.out.println(ANSI_GREEN+"Course Deleted to the catalog"+ANSI_RESET);	
+				}
+				else
+				{
+					System.out.println(ANSI_BLUE+"Course Failed to Delete to the catalog"+ANSI_RESET);	
+				}
 				break;
 				
 			case 4:
@@ -90,23 +100,19 @@ public class AdminCRSMenu {
 				
 				switch(cas) {
 					case 1:
-						ArrayList<Student> st = aso.viewAllStudents();
 						
-						for(Student at : st) {
-							System.out.println("Student Id: " + at.getStudentID() + "\nName: " + 
-									at.getName() + "\nBranch: " + at.getBranch());
-							System.out.println("");
-						}
+						fmt.format("\n%15s %15s %15s\n\n", "Student ID", "Name", "Branch");  
+						aso.viewAllStudents().forEach(student -> fmt.format("%14s %14s %14s\n", student.getStudentID(), student.getName(),student.getBranch()));
+						System.out.println(fmt);
+						buffer.setLength(0);
 						break;
 						
 					case 2:
-						ArrayList<Student> st1 = aso.viewPendingStudents();
 						
-						for(Student at : st1) {
-							System.out.println("Student Id: " + at.getStudentID() + "\nName" + 
-									at.getName() + "\nBranch: " + at.getBranch());
-						}
-						break;
+						fmt.format("\n%15s %15s %15s\n\n", "Student ID", "Name", "Branch");  
+						aso.viewPendingStudents().forEach(student -> fmt.format("%14s %14s %14s\n", student.getStudentID(), student.getName(),student.getBranch()));
+						System.out.println(fmt);
+						buffer.setLength(0);
 						
 					case 3:
 						break;

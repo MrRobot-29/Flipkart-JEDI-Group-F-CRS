@@ -94,4 +94,6 @@ public interface StudentService {
 	 */
 	public int secondaryCourseFreq(int student_id) ;
 	
+	public boolean checkCourse(int studentId, String courseId);
+	
 }

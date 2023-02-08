@@ -1,7 +1,9 @@
 package com.flipkart.client;
 
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
@@ -22,6 +24,8 @@ public class StudentCRSMenu {
 	{
 		Scanner sc = new Scanner(System.in);
 		StudentService sso = new StudentServiceOperation();
+		StringBuffer buffer = new StringBuffer();
+		Formatter fmt = new Formatter(buffer);  
 		while(isLoggedIn == true)
 		{
 			System.out.println("Logged in as : " + std.getName() + "\n");
@@ -48,16 +52,11 @@ public class StudentCRSMenu {
 					if(cl.size() == 0) {
 						System.out.println("No courses to show for " + std.getSemester() + " semester");
 					}else {
-						int num = 1;
-						for(var c: cl) {
-							System.out.println(num);
-							System.out.println("Course Name: " + c.getCourseName());
-							System.out.println("Course ID: " + c.getCourseId());
-							num++;
-						}
+						fmt.format("\n%15s %15s %15s\n\n", "Course ID", "Course Name", "Professor");  
+						cl.forEach(course -> fmt.format("%14s %14s %14s\n", course.getCourseId(),course.getCourseName(),course.getInstructorId()));
+						System.out.println(fmt);
 					}
 				} catch (NoCourseFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				break;
@@ -77,10 +76,16 @@ public class StudentCRSMenu {
 					String courseId = sc.nextLine();
 					if(courseId.equalsIgnoreCase("0"))
 						break;
+					
 					if(!sso.getCourseAvailabilityStatus(courseId))
 					{
 						System.out.println("Course Unavailable!!");
-						break;
+						continue;
+					}
+					if(!sso.checkCourse(std.getStudentID(), courseId))
+					{
+						System.out.println("Course Already Taken");
+						continue;
 					}
 					System.out.println("Enter Course Type: ");
 					System.out.println("0 for Primary and 1 for Secondary");
@@ -88,12 +93,12 @@ public class StudentCRSMenu {
 					if(type == 0 && primaryCnt == 4)
 					{
 						System.out.println("You have already filled all the slot for primary courses");
-						break;
+						continue;
 					}
 					if(type == 1 && primaryCnt == 2)
 					{
 						System.out.println("You have already filled all the slot for secondary courses");
-						break;
+						continue;
 					}
 					boolean status;
 					try {
@@ -142,12 +147,8 @@ public class StudentCRSMenu {
 			case 5:
 				ArrayList<String> selectedCourse;
 				try {
-					selectedCourse = sso.viewSelectedCourses(std.getStudentID());
-					for(String finalcourse: selectedCourse)
-					{
-						System.out.println(finalcourse);
-					}
-					
+					System.out.println("\nSelected Courses:\n");
+					sso.viewSelectedCourses(std.getStudentID()).forEach(courseName -> System.out.println(courseName+" "));
 				} catch (NoCourseFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -171,10 +172,10 @@ public class StudentCRSMenu {
 						System.out.println("Grade Card Awaited!! Contact Admin");
 						break;
 					}
-					for(String course: grades.keySet()) {
-						System.out.print("Course Name - " + course);
-						System.out.println(" : Course Grade - " + grades.get(course));
-					}
+					buffer.setLength(0);
+					fmt.format("\n%15s %15s\n\n", "Course Name", "Grade");  
+					grades.forEach((courseName,grade) -> fmt.format("%14s %14s\n", courseName,grade));
+					System.out.println(fmt);
 				} catch (GradeNotAllotedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
