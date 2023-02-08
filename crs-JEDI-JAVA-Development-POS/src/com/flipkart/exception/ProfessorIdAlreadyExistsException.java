@@ -26,6 +26,6 @@ private int profId;
 	
 	@Override
 	public String getMessage() {
-		return "Professor ID: " + profId + " is already in use.";
+		return "Professor ID: " + profId + " is already present";
 	}
 }
