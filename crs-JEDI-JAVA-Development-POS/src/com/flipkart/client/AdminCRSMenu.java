@@ -1,4 +1,5 @@
 package com.flipkart.client;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
@@ -13,6 +14,7 @@ import com.flipkart.service.AdminServiceOperation;
 public class AdminCRSMenu {
 	Scanner scanner = new Scanner(System.in); 
 	AdminServiceOperation aso = new AdminServiceOperation();
+	LocalDateTime localDateTime = LocalDateTime.now();
 	StringBuffer buffer = new StringBuffer();
 	Formatter fmt = new Formatter(buffer); 
 	public static final String ANSI_GREEN = "\u001B[32m";
@@ -33,6 +35,7 @@ public class AdminCRSMenu {
 			System.out.println("************* Admin ***************");
 			System.out.println("***********************************");
 			System.out.println("Logged in as : " + ad.getName() + "\n");
+			System.out.println("Current Date and time : " + localDateTime);
 			System.out.println("1. View course in catalog");
 			System.out.println("2. Add Course to catalog");
 			System.out.println("3. Delete Course from catalog");
