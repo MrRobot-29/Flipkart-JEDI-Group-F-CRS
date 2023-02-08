@@ -75,8 +75,10 @@ public interface AdminService {
 
     /**
      * method to view professors
+     *
+     * @return
      */
-    public void viewProfessors() throws NoProfessorFoundException;
+    public ArrayList<Professor> viewProfessors() throws NoProfessorFoundException;
 
 
     // gradecard related services
