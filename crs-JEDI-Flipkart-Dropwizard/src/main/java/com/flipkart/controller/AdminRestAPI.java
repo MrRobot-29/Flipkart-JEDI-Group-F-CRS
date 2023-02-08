@@ -150,7 +150,7 @@ public class AdminRestAPI {
         try {
             return aso.viewCourses();
         } catch (NoCourseFoundException e) {
-            throw new RuntimeException(e);
+            return new ArrayList<Course>();
         }
 
     }
@@ -165,20 +165,15 @@ public class AdminRestAPI {
     @Path("/deleteCourse")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteCourse(
-            @Size(min = 4 , max = 10 , message = "Course Code length should be between 4 and 10 character")
+            @Size(min = 2 , max = 10 , message = "Course Code length should be between 3 and 10 character")
             @NotNull
             @QueryParam("courseCode") String courseCode) throws ValidationException{
-        List<Course> courseList = adminOperation.viewCourses(1);
-
         try {
-
-            adminOperation.deleteCourse(courseCode, courseList);
+            aso.dropCourse(courseCode);
             return Response.status(201).entity("Course with courseCode: " + courseCode + " deleted from catalog").build();
 
-        } catch (CourseNotFoundException | CourseNotDeletedException e) {
-
-            return Response.status(409).entity(e.getMessage()).build();
-
+        } catch (CourseNotFoundException e) {
+            return Response.status(404).entity(e.getMessage()).build();
         }
     }
 
@@ -193,16 +188,14 @@ public class AdminRestAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addCourse(@Valid Course course) throws ValidationException{
-        List<Course> courseList = adminOperation.viewCourses(1);
 
         try {
+            aso.addCourse(course);
+            return Response.status(201).entity("Course with courseCode: " + course.getCourseId() + " added to catalog").build();
 
-            adminOperation.addCourse(course, courseList);
-            return Response.status(201).entity("Course with courseCode: " + course.getCourseCode() + " added to catalog").build();
+        } catch ( CourseAlreadyExistsException e) {
 
-        } catch (CourseFoundException e) {
-
-            return Response.status(409).entity(e.getMessage()).build();
+            return Response.status(404).entity(e.getMessage()).build();
 
         }
 
@@ -215,9 +208,13 @@ public class AdminRestAPI {
     @GET
     @Path("/viewProfessors")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Professor> viewProfessors() {
+    public ArrayList<Professor> viewProfessors() {
 
-        return adminOperation.viewProfessors();
+        try {
+            return aso.viewProfessors();
+        } catch (NoProfessorFoundException e) {
+            return new ArrayList<Professor>();
+        }
     }
 }
 	

@@ -1,18 +1,11 @@
 package com.flipkart.service;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
 import com.flipkart.bean.Professor;
-import com.flipkart.constant.Color;
-import com.flipkart.constant.Gender;
-import com.flipkart.constant.Role;
 import com.flipkart.dao.AdminDAOImpl;
-import com.flipkart.data.SharedTempData;
-import com.flipkart.data.TempData;
 import com.flipkart.exception.*;
 
 /**
@@ -99,8 +92,15 @@ public class AdminServiceOperation implements AdminService {
 			throw e;
 		}
 	}
-    public void viewProfessors() {
-
+    public ArrayList<Professor> viewProfessors() throws NoProfessorFoundException {
+		AdminDAOImpl adminDao = new AdminDAOImpl();
+		ArrayList<Professor> arr= null;
+		try {
+			arr = adminDao.viewProfessors();
+		} catch (NoProfessorFoundException e) {
+			throw e;
+		}
+		return arr;
     }
 
 
