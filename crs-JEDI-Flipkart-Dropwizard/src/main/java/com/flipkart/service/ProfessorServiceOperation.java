@@ -26,8 +26,7 @@ public class ProfessorServiceOperation implements ProfessorService {
     public boolean selectCourseToTeach(String courseId, int instructorId)
     {
 
-        pdi.selectCourseToTeach(courseId, instructorId);
-        return false;
+        return pdi.selectCourseToTeach(courseId, instructorId);
     }
 
 	public List<String> viewEnrolledStudents(int instructorId,String courseId) {
