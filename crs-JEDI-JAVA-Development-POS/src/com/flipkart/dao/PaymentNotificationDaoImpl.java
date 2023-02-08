@@ -6,10 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-<<<<<<< HEAD
 import com.flipkart.bean.PaymentNotification;
-=======
->>>>>>> afcde3f (Added Payment Notification)
 import com.flipkart.bean.Student;
 import com.flipkart.helper.DaoHelper;
 
@@ -42,16 +39,17 @@ public class PaymentNotificationDaoImpl implements PaymentNotificationDaoInterfa
 		}catch(SQLException se) {
 			se.printStackTrace();
 		}catch (Exception e) {
-			
+			// Handle errors for Class.forName
 			e.printStackTrace();
 		} finally {
-			
+			// finally block used to close resources
 			try {
 				if (stmt != null)
 					stmt.close();
 			} catch (SQLException se2) {
-			}
+			} // nothing we can do
 		} 
+		
 		return pn;
 	}
 
