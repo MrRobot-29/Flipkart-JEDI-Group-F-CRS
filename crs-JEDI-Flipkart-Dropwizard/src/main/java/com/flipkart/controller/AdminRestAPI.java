@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.ValidationException;
+import javax.validation.Validator;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -22,8 +23,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.flipkart.bean.ResponseMessage;
 import com.flipkart.exception.*;
 import com.flipkart.service.AdminServiceOperation;
+import org.eclipse.jetty.util.ajax.JSON;
 import org.hibernate.validator.constraints.Email;
 
 import com.flipkart.bean.Course;
@@ -37,6 +40,13 @@ import com.flipkart.bean.Student;
 public class AdminRestAPI {
 
      AdminServiceOperation aso = new AdminServiceOperation();
+
+    private final Validator validator;
+
+    public AdminRestAPI(Validator validator) {
+        this.validator = validator;
+    }
+
 
     /**
      * /admin/addProfessor
@@ -168,12 +178,15 @@ public class AdminRestAPI {
             @Size(min = 2 , max = 10 , message = "Course Code length should be between 3 and 10 character")
             @NotNull
             @QueryParam("courseCode") String courseCode) throws ValidationException{
+        System.out.println(courseCode);
         try {
             aso.dropCourse(courseCode);
-            return Response.status(201).entity("Course with courseCode: " + courseCode + " deleted from catalog").build();
+            ResponseMessage rs = new ResponseMessage("Course with courseCode: " + courseCode + " deleted from catalog");
+            return Response.status(200).entity(rs).build();
 
         } catch (CourseNotFoundException e) {
-            return Response.status(404).entity(e.getMessage()).build();
+            ResponseMessage rs = new ResponseMessage(e.getMessage());
+            return Response.status(404).entity(rs).build();
         }
     }
 
@@ -191,7 +204,8 @@ public class AdminRestAPI {
 
         try {
             aso.addCourse(course);
-            return Response.status(201).entity("Course with courseCode: " + course.getCourseId() + " added to catalog").build();
+            ResponseMessage rs = new ResponseMessage("Course with courseCode: " + course.getCourseId() + " added to catalog");
+            return Response.status(201).entity(rs).build();
 
         } catch ( CourseAlreadyExistsException e) {
 

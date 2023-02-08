@@ -2,6 +2,7 @@ package com.flipkart.controller;
 
 import javax.validation.Valid;
 import javax.validation.ValidationException;
+import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.ws.rs.Consumes;
@@ -24,6 +25,11 @@ public class UserRestAPI {
 
     UserServiceOperation uso = new UserServiceOperation();
 
+    private final Validator validator;
+
+    public UserRestAPI(Validator validator) {
+        this.validator = validator;
+    }
     @POST
     @Path("/login")
     public Response loginAccount(@Valid LoginCredential lg) throws ValidationException {
