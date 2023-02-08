@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.flipkart.bean.PaymentNotification;
 import com.flipkart.bean.Student;
 import com.flipkart.helper.DaoHelper;
 
@@ -15,8 +16,8 @@ public class PaymentNotificationDaoImpl implements PaymentNotificationDaoInterfa
 	PreparedStatement stmt = null;
 	
 	@Override
-	public void sendFeePaymentNotification(Student s, double billAmount) {
-		
+	public PaymentNotification sendFeePaymentNotification(Student s, double billAmount) {
+		PaymentNotification pn = null;
 		try {
 			Connection conn = DaoHelper.getConnection();
 			String sql = "SELECT * FROM PAYMENT WHERE STUDENT_ID=?";
@@ -32,15 +33,9 @@ public class PaymentNotificationDaoImpl implements PaymentNotificationDaoInterfa
 				paymentDesc = rs.getString("payment_details");
 				
 			}
-			System.out.println("Payment Successful");
-			System.out.println("Generating Payment info");
-			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
-			System.out.printf("%14s %14s %14s %21s %28s %14s", "Student Id","Student Name","Bill Amount","Mode of Payment","Payment Details","Payment Id");
-			System.out.println();
-			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
-			System.out.printf("%14s %14s %14s %21s %28s %14s", s.getStudentID(),s.getName(),billAmount,modeOfPayment,paymentDesc,paymentId);
-			System.out.println();
-			System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
+			
+			pn = new PaymentNotification(s.getStudentID(),s.getName(),billAmount,modeOfPayment,paymentDesc,paymentId);
+			
 		}catch(SQLException se) {
 			se.printStackTrace();
 		}catch (Exception e) {
@@ -55,7 +50,7 @@ public class PaymentNotificationDaoImpl implements PaymentNotificationDaoInterfa
 			} // nothing we can do
 		} 
 		
-		
+		return pn;
 	}
 
 }
