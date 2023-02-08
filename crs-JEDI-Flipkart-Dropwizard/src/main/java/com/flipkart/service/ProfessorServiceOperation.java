@@ -1,6 +1,8 @@
 package com.flipkart.service;
 import java.util.List;
 
+import com.flipkart.bean.Course;
+import com.flipkart.bean.Student;
 import com.flipkart.dao.ProfessorDaoImpl;
 
 import com.flipkart.data.SharedTempData;
@@ -17,9 +19,9 @@ public class ProfessorServiceOperation implements ProfessorService {
     static TempData data = SharedTempData.td;
     ProfessorDaoImpl pdi = new ProfessorDaoImpl();
     
-    public  List<String> viewCourseList(int instructorId) {
+    public  List<Course> viewCourseList(int instructorId) {
         // view List of courses taken by professor
-        List<String> takenCourses = pdi.viewCourseList(instructorId);
+        List<Course> takenCourses = pdi.viewCourseList(instructorId);
         return takenCourses;
     }
 
@@ -29,7 +31,7 @@ public class ProfessorServiceOperation implements ProfessorService {
         return pdi.selectCourseToTeach(courseId, instructorId);
     }
 
-	public List<String> viewEnrolledStudents(int instructorId,String courseId) {
+	public List<Student> viewEnrolledStudents(int instructorId, String courseId) {
         // view List of professor enrolled in professor's courses
     	return pdi.viewEnrolledStudents(instructorId, courseId);
 

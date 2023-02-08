@@ -1,5 +1,8 @@
 package com.flipkart.dao;
 
+import com.flipkart.bean.Course;
+import com.flipkart.bean.Student;
+
 import java.util.List;
 
 /**
@@ -12,7 +15,7 @@ public interface ProfessorDaoInterface {
 	 * @param instructorId: instructor id
 	 * @return returns the course list taught by the corresponding professor
 	 */
-	public List<String> viewCourseList(int instructorId);
+	public List<Course> viewCourseList(int instructorId);
 
 	/**
 	 *
@@ -28,7 +31,7 @@ public interface ProfessorDaoInterface {
 	 * @param courseId: course id
 	 * @return return the enrolled students for the corresponding professor and course.
 	 */
-	public List<String> viewEnrolledStudents(int instructorId,String courseId);
+	public List<Student> viewEnrolledStudents(int instructorId, String courseId);
 
 	/**
 	 *

@@ -1,5 +1,7 @@
 package com.flipkart.controller;
 
+import com.flipkart.bean.Course;
+import com.flipkart.bean.Student;
 import com.flipkart.service.ProfessorServiceOperation;
 
 import java.util.ArrayList;
@@ -16,13 +18,13 @@ public class ProfessorRestAPI {
     ProfessorServiceOperation pso = new ProfessorServiceOperation();
 
     @GET
-    @Path("/viewCouseList")
+    @Path("/viewCourseList")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<String> viewEnrolledStudents(
+    public List<Course> viewEnrolledStudents(
             @NotNull
             @QueryParam("profId") int profId) throws ValidationException {
 
-        List<String> courses=new ArrayList<>();
+        List<Course> courses=new ArrayList<>();
         try
         {
             courses = pso.viewCourseList(profId);
@@ -37,14 +39,14 @@ public class ProfessorRestAPI {
     @GET
     @Path("/getEnrolledStudents")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<String> viewEnrolledStudents(
+    public List<Student> viewEnrolledStudents(
             @NotNull
             @QueryParam("profId") int profId,
 
             @NotNull
             @QueryParam("courseId") String courseId) throws ValidationException {
 
-        List<String> students=new ArrayList<String>();
+        List<Student> students= new ArrayList<>();
         try
         {
             students=pso.viewEnrolledStudents(profId,courseId);
