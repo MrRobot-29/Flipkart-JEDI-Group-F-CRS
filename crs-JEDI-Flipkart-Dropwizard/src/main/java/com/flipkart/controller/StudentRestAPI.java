@@ -1,13 +1,22 @@
 package com.flipkart.controller;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
+import javax.validation.ValidationException;
 import javax.validation.Validator;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.flipkart.controller.StudentRestAPI;
+import io.dropwizard.Application;
+import io.dropwizard.Configuration;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.flipkart.bean.*;
 import com.flipkart.bean.Student;
 import com.flipkart.dao.StudentDaoImpl;
@@ -26,7 +35,6 @@ import java.util.HashMap;
 
 @Path("/student")
 @Produces(MediaType.APPLICATION_JSON)
-
 public class StudentRestAPI {
 
 
@@ -36,15 +44,15 @@ public class StudentRestAPI {
         this.validator = validator;
     }
 
+
     StudentDaoInterface studentDao = new StudentDaoImpl();
 
-    static TempData td = SharedTempData.td;
-
     @GET
-    @Path("/courseList")
-    public ArrayList<Course> courseList(int sem) {
+    @Path("/courseList/{sem}")
+    public ArrayList<Course> courseList(@PathParam("sem")int sem) {
         // get the list of all the courses and return it.
         ArrayList<Course> crs =  studentDao.courseList(sem);
+
         return crs;
     }
 
@@ -57,8 +65,7 @@ public class StudentRestAPI {
 
     @POST
     @Path("/addCourse")
-    @Consumes("application/json")
-    public Response addCourse(int student_id, String course_id, int course_type) throws URISyntaxException {
+    public Response addCourse(@QueryParam("stdID") int student_id, @QueryParam("courseID") String course_id, @QueryParam("courseType") int course_type) throws ValidationException {
         // add the course
 
         try {
@@ -76,16 +83,16 @@ public class StudentRestAPI {
 
 
     @GET
-    @Path("/primaryCourseFreq")
-    public int primaryCourseFreq(int student_id) {
+    @Path("/primaryCourseFreq/{stdID}")
+    public int primaryCourseFreq(@PathParam("stdID") int student_id) {
         // add the course
         return studentDao.primaryCourseFreq(student_id);
 
     }
 
     @GET
-    @Path("/secondaryCourseFreq")
-    public int secondaryCourseFreq(int student_id) {
+    @Path("/secondaryCourseFreq/{stdID}")
+    public int secondaryCourseFreq(@PathParam("stdID") int student_id) {
         // add the course
         return studentDao.secondaryCourseFreq(student_id);
 
@@ -94,8 +101,7 @@ public class StudentRestAPI {
 
     @POST
     @Path("/dropCourse")
-    @Consumes("application/json")
-    public Response dropCourse(int student, String courseId) throws URISyntaxException  {
+    public Response dropCourse(@QueryParam("stdID") int student, @QueryParam("courseId") String courseId) throws ValidationException  {
         // drop the course
         try {
             studentDao.drop_course(student, courseId);
@@ -106,13 +112,15 @@ public class StudentRestAPI {
         }
     }
 
+
+    //passed
     @POST
     @Path("/freezeCourseCart")
-    @Consumes("application/json")
-    public Response freezeCourseCart(int studentId) {
+    public Response freezeCourseCart(@QueryParam("stdID") int studentId) throws ValidationException {
         studentDao.freezeCourses(studentId);
         return Response.ok().entity("Courses Freeze Successfully").build();
     }
+
 
     @GET
     @Path("/viewSelectedCourses/{id}")
@@ -125,9 +133,10 @@ public class StudentRestAPI {
 
     @POST
     @Path("/payFee")
-    @Consumes("application/json")
-    public Response payFee(Student std) {
+    public Response payFee(@Valid Student std)  throws ValidationException {
+
         double amt = studentDao.calculate_total_fee(std.getStudentID());
+
         PaymentService pso = new PaymentServiceOperation();
         try {
             pso.initiatePayment(amt, std, studentDao.getRegisteredCourseList(std.getStudentID()));
@@ -141,8 +150,7 @@ public class StudentRestAPI {
 
     @POST
     @Path("/add_drop_status")
-    @Consumes("application/json")
-    public boolean add_drop_status(int studentId) {
+    public boolean add_drop_status(@QueryParam("stId") int studentId) throws ValidationException {
         int cnt = studentDao.countFreezeCourses(studentId);
         if(cnt >= 4) {
             return false;
@@ -152,14 +160,14 @@ public class StudentRestAPI {
 
     @GET
     @Path("/viewGrade")
-    public HashMap<String,String> viewGrade(@PathParam("id") int studentId, @PathParam("sem") int sem) {
+    public HashMap<String,String> viewGrade(@QueryParam("id") int studentId, @QueryParam("sem") int sem) {
         //view the grade card with exception handling
         return studentDao.viewGrade(studentId, sem);
     }
 
     @GET
     @Path("/checkCourse")
-    public Response checkCourse(@PathParam("studentId") int studentId, @PathParam("courseId") String courseId) throws CourseAlreadyOptedException
+    public Response checkCourse(@QueryParam("studentId") int studentId, @QueryParam("courseId") String courseId) throws CourseAlreadyOptedException
     {
         try {
             boolean msg = studentDao.checkCourse(studentId, courseId);
