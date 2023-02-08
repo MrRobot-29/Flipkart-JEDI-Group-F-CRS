@@ -108,9 +108,16 @@ public interface StudentDaoInterface {
 	public String isGradeReleased(int semester);
 	public boolean payFee(int student_id, String payment_id, String payment_method, String payment_details);
 
+<<<<<<< HEAD
 	
 	public int countFreezeCourses(int student_id);
 
 	public boolean checkCourse(int studentId, String courseId);
 
+=======
+	public boolean checkCourse(int studentId, String courseId);
+
+	
+	public int countFreezeCourses(int student_id);
+>>>>>>> 2f33dbb (conflict#1, #2 Fixed: Fixed Course add/drop bug even after course freeze)
 }

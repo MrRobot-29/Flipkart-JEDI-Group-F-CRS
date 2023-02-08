@@ -32,14 +32,22 @@ public class UserServiceOperation implements UserService{
 		System.out.println("Enter Student Branch");
 		String sbranch = sc.next();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		System.out.println("Enter Student's current semester [from 1 to 8]");
 =======
+=======
+
+>>>>>>> 2f33dbb (conflict#1, #2 Fixed: Fixed Course add/drop bug even after course freeze)
 		System.out.println("Choose your Current semester : ");
 		for(int i = 1;i <= 8;i++) {
 			System.out.println("Semster " + i );
 		}
 //		System.out.println("Enter Student's current semester (1-8)");
+<<<<<<< HEAD
 >>>>>>> 609a8c0 (add Grade and list of semester update)
+=======
+
+>>>>>>> 2f33dbb (conflict#1, #2 Fixed: Fixed Course add/drop bug even after course freeze)
 		int sem = sc.nextInt();
 		System.out.println("Enter Account Password");
 		String pwd = sc.next();

@@ -95,8 +95,15 @@ public interface StudentService {
 	public int secondaryCourseFreq(int student_id) ;
 	
 
+<<<<<<< HEAD
 	public boolean add_drop_status(int studentId);
 
 	public boolean checkCourse(int studentId, String courseId);
+=======
+	public boolean checkCourse(int studentId, String courseId);
+	
+
+	public boolean add_drop_status(int studentId);
+>>>>>>> 2f33dbb (conflict#1, #2 Fixed: Fixed Course add/drop bug even after course freeze)
 
 }
