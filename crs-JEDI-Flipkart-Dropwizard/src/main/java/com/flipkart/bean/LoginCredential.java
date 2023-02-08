@@ -12,14 +12,16 @@ public class LoginCredential {
     @Email
     private String userId;
 
+    @NotBlank @Length(min=4)
+    private String Password;
+    @NotBlank
+    private String Role;
+
     public LoginCredential(String userId, String password, String role) {
         this.userId = userId;
         Password = password;
         Role = role;
     }
-
-    @NotBlank @Length(min=4)
-    private String Password;
 
     public String getUserId() {
         return userId;
@@ -45,8 +47,6 @@ public class LoginCredential {
         Role = role;
     }
 
-    @NotBlank
-    private String Role;
 
 
 

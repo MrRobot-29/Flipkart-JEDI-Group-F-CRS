@@ -3,8 +3,12 @@ package com.flipkart.bean;
 import com.flipkart.constant.Gender;
 import com.flipkart.constant.Role;
 
+import javax.validation.constraints.NotNull;
+
 public class Professor extends User {
+	@NotNull
 	private int profId;
+	@NotNull
 	private String department;
 	private String designation;
 
