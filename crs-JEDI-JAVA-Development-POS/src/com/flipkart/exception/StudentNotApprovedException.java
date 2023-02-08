@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 /**
  * @author adity
  *
@@ -28,6 +30,6 @@ private String studentId;
 	 */
 	@Override
 	public String getMessage() {
-		return "StudentId: " + studentId + "has not been approved!";
+		return Color.ANSI_YELLOW+"StudentId: " + studentId + "has not been approved!"+Color.ANSI_RESET;
 	}
 }

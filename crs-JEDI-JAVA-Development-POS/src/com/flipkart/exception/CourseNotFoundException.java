@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 /**
  * @author adity
  *
@@ -25,6 +27,6 @@ public class CourseNotFoundException extends Exception{
 	 */
 	@Override
 	public String getMessage() {
-		return "Course with course id: " + courseId + " not found.";
+		return Color.ANSI_YELLOW+"Course with course id: " + courseId + " not found."+Color.ANSI_RESET;
 	}
 }

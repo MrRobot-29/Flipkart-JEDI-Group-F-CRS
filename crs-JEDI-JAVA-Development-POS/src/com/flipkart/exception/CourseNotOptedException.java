@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 /**
  * @author jasan
  *
@@ -26,6 +28,6 @@ public class CourseNotOptedException extends Exception{
 	 */
 	@Override
 	public String getMessage() {
-		return  "Course " + courseId + " has not been opted by you.";
+		return  Color.ANSI_YELLOW+"Course " + courseId + " has not been opted by you."+Color.ANSI_RESET;
 	}
 }
