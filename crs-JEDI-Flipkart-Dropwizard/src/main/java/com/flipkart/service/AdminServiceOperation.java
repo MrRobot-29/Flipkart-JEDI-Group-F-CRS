@@ -19,36 +19,18 @@ import com.flipkart.exception.*;
  * Implementations of Admin Service Operations
  */
 public class AdminServiceOperation implements AdminService {
-	Scanner sc = new Scanner(System.in);
 	static int profId = 1;
-	
-	
-    public boolean dropCourse() throws CourseNotFoundException {
-    	System.out.println("Enter Course Id to be deleted");
-    	String cid = sc.next();
+    public boolean dropCourse(String courseID) throws CourseNotFoundException {
     	AdminDAOImpl aDao = new AdminDAOImpl();
-
 		try {
-			aDao.dropCourse(cid);
+			aDao.dropCourse(courseID);
 		}catch(CourseNotFoundException e){
 			throw e;
 		}
     	return true;
     }
 
-    public boolean addCourse() throws CourseAlreadyExistsException {
-    	System.out.println("Enter Course Name");
-    	String cname = "";
-    	cname += sc.nextLine();
-    	System.out.println("Enter Course ID");
-    	String cid = sc.next();
-    	System.out.println("Enter Instructor ID (0 if not assigned)");
-    	int insid = sc.nextInt();
-    	System.out.println("Enter Course Fee");
-    	Double courseFee = sc.nextDouble();
-    	System.out.println("Enter semester to which the course is offered");
-    	int sem = sc.nextInt();
-    	Course newCourse = new Course(cname, cid, insid, true, courseFee, sem);
+    public boolean addCourse(Course newCourse) throws CourseAlreadyExistsException {
 
 		AdminDAOImpl aDao = new AdminDAOImpl();
 		try {			
@@ -70,7 +52,8 @@ public class AdminServiceOperation implements AdminService {
     }
     // student related services
     public ArrayList<Student> viewPendingStudents() throws NoStudentFoundException {
-    	
+
+
     	AdminDAOImpl aDao  = new AdminDAOImpl();
     	
     	return aDao.viewPendingStudents();
@@ -98,57 +81,22 @@ public class AdminServiceOperation implements AdminService {
 
 
     // professor related services
-    public void addProfessor() throws  ProfessorIdAlreadyExistsException{
+    public void addProfessor(Professor prof) throws  ProfessorIdAlreadyExistsException{
     	
     	try {
-    		
-    	System.out.println("Professor Details");
-    	System.out.println("Enter Professor email:");
-    	String email = sc.next();
-    	System.out.println("Enter Professor pwd:");
-    	String pwd = sc.next();
-    	System.out.println("Enter Name: ");
-    	String name = sc.next();
-    	System.out.println("Enter Dept: ");
-    	String dept = sc.next();
-    	System.out.println("Enter Gender ");
-    	String gender = sc.next();
-    	System.out.println("Enter Professor Id(Integer): ");
-    	int profId = sc.nextInt();
-    	Gender profGender;
-    	
-    	if(gender.equalsIgnoreCase("male"))
-    		profGender = Gender.MALE;
-    	else if(gender.equalsIgnoreCase("female"))
-    		profGender = Gender.FEMALE;
-    	else
-    		profGender = Gender.OTHER;
-    	
-    	Professor prof = new Professor(email,name,Role.PROFESSOR,pwd,profGender,"India","India",dept,"Associate Professor", profId);
     	AdminDAOImpl adminDao = new AdminDAOImpl();
 		adminDao.addProfessor(prof);
-		System.out.println(Color.ANSI_GREEN + "Professor Added Successfully" + Color.ANSI_RESET);
 		} catch (ProfessorIdAlreadyExistsException e) {
 			throw e;
-		} catch (InputMismatchException im) {
-			System.out.println(Color.ANSI_YELLOW + "Invalid input" + Color.ANSI_RESET);
-			sc.nextLine();
-			return;
 		}
     }
 
-    public void dropProfessor() throws ProfessorCannotBeDroppedException {
+    public void dropProfessor(int profId) throws ProfessorCannotBeDroppedException {
     	try {
-	    	System.out.println("Enter Professor Id: ");
-	    	int id = sc.nextInt();
 	    	AdminDAOImpl adminDao = new AdminDAOImpl();
-			adminDao.dropProfessor(id);
+			adminDao.dropProfessor(profId);
 		} catch (ProfessorCannotBeDroppedException e) {
 			throw e;
-		} catch (InputMismatchException im) {
-			System.out.println(Color.ANSI_YELLOW + "Professor ID must be a number " + Color.ANSI_RESET);
-			sc.nextLine();
-			return;
 		}
 	}
     public void viewProfessors() {
@@ -157,9 +105,7 @@ public class AdminServiceOperation implements AdminService {
 
 
     // gradecard related services
-    public void generateGradeCard() throws GradeCardNotGeneratedException{
-    	System.out.println("Enter semester for which grade card needs to be generated: ");
-		int sem = sc.nextInt();
+    public void generateGradeCard(int sem) throws GradeCardNotGeneratedException{
     	AdminDAOImpl  aDao = new AdminDAOImpl();
 		try {
 			aDao.generateGradeCard(sem);

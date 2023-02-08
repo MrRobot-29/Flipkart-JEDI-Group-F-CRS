@@ -164,6 +164,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (Exception e){
+			throw  e;
 		}
 		return arr;
 	}

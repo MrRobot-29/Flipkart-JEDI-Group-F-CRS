@@ -3,6 +3,7 @@ package com.flipkart.service;
 import java.util.ArrayList;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.exception.CourseAlreadyExistsException;
 import com.flipkart.exception.CourseNotFoundException;
@@ -24,13 +25,13 @@ public interface AdminService {
      * Method to drop a course
      * @return status of drop course
      */
-	public boolean dropCourse() throws CourseNotFoundException;
+	public boolean dropCourse(String courseId) throws CourseNotFoundException;
 
     /**
      * Method to add courses
      * @return status of add course
      */
-    public boolean addCourse() throws CourseAlreadyExistsException;
+    public boolean addCourse(Course newCourse) throws CourseAlreadyExistsException;
 
     /**
      * Method to get list of courses in catalog
@@ -65,12 +66,12 @@ public interface AdminService {
     /**
      * Method to add professor
      */
-    public void addProfessor() throws EmailAlreadyInUseException, ProfessorIdAlreadyExistsException;
+    public void addProfessor(Professor prof) throws EmailAlreadyInUseException, ProfessorIdAlreadyExistsException;
 
     /**
      * method to drop professor
      */
-    public void dropProfessor() throws ProfessorCannotBeDroppedException;
+    public void dropProfessor(int profId) throws ProfessorCannotBeDroppedException;
 
     /**
      * method to view professors
@@ -83,6 +84,6 @@ public interface AdminService {
     /**
      * method to generate grade card
      */
-    public void generateGradeCard() throws GradeCardNotGeneratedException;
+    public void generateGradeCard(int sem) throws GradeCardNotGeneratedException;
 
 }
