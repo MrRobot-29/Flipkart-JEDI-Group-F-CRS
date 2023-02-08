@@ -113,7 +113,9 @@ public interface StudentDaoInterface {
 	public String isGradeReleased(int semester);
 	public boolean payFee(int student_id, String payment_id, String payment_method, String payment_details);
 
+
 	public boolean checkCourse(int studentId, String courseId) throws CourseAlreadyOptedException;
+
 
 	
 	public int countFreezeCourses(int student_id);

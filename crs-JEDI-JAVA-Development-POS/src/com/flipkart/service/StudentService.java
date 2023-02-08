@@ -98,6 +98,7 @@ public interface StudentService {
 	
 
 	public boolean checkCourse(int studentId, String courseId) throws CourseAlreadyOptedException ;
+
 	
 
 	public boolean add_drop_status(int studentId);
