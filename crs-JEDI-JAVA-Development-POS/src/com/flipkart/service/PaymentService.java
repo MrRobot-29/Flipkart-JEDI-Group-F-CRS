@@ -21,12 +21,15 @@ public interface PaymentService {
 
 	/**
 	 * Method to pay online
+	 * @param std : Student object
+	 * @param fee : total fee
 	 */
-	public void payOnline(Student std, double fee) throws PaymentNotCompletedException;
+	public boolean payOnline(Student std, double fee) throws PaymentNotCompletedException;
 
 	/**
 	 * Method to pay offline
+	 * @return 
 	 */
-	public void payOffline(Student std, double fee) throws PaymentNotCompletedException;
+	public boolean payOffline(Student std, double fee) throws PaymentNotCompletedException;
 
 }
