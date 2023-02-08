@@ -3,14 +3,12 @@
  */
 package com.flipkart.service;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
-import com.flipkart.dao.PaymentNotificationDaoImpl;
+import com.flipkart.dao.PaymentDaoImpl;
 import com.flipkart.dao.StudentDaoImpl;
 import com.flipkart.dao.StudentDaoInterface;
 
@@ -34,31 +32,38 @@ public class PaymentServiceOperation implements PaymentService {
 		for(String course : studentApprovedCourses) {
 			System.out.print(course+" ");
 		}
+		
 		System.out.println();
 		System.out.println("************");
-		System.out.println("Total Bill : "+ fee);
 		
-		System.out.println("Select mode of payment");
-		System.out.println("1-Online");
-		System.out.println("2-Offline");
-		int option = sc.nextInt();
-		boolean status=false;
-		switch(option) {
-		case 1:
-			status = payOnline(st,fee);
-			break;
-		
-		case 2:
-			status = payOffline(st,fee);
-			break;
+		PaymentDaoImpl pdi = new PaymentDaoImpl();
+		if(pdi.calculateBillDue(st.getStudentID(), fee)>0) {
+			System.out.println("Total Bill Due: "+ fee);
+			System.out.println("Select mode of payment");
+			System.out.println("1-Online");
+			System.out.println("2-Offline");
+			int option = sc.nextInt();
+			boolean status=false;
+			switch(option) {
+			case 1:
+				status = payOnline(st,fee);
+				break;
 			
-		default:
-			System.out.println("Invalid Input!! Payment Failed");
-			break;
+			case 2:
+				status = payOffline(st,fee);
+				break;
+				
+			default:
+				System.out.println("Invalid Input!! Payment Failed");
+				break;
+			}
+			if(status) {
+				PaymentNotificationService pns = new PaymentNotificationServiceOperation();
+				pns.sendFeePaymentNotification(st, fee);
+			}
 		}
-		if(status) {
-			PaymentNotificationService pns = new PaymentNotificationServiceOperation();
-			pns.sendFeePaymentNotification(st, fee);
+		else {
+			System.out.println("Total Bill Due: "+ 0);
 		}
 		
 		

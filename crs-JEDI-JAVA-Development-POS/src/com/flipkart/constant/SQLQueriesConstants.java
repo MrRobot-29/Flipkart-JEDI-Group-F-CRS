@@ -50,4 +50,5 @@ public class SQLQueriesConstants {
 	// test the sql first
 	public static final String GET_PROFF_LIST="SELECT crs_db.Professor.prof_id, crs_db.User.name, crs_db.Professor.department FROM crs_db.User, crs_db.Professor WHERE crs_db.User.email=crs_db.Professor.email";
 	
+	public static final String GET_PAYMENT_COUNT = "SELECT COUNT(*) FROM PAYMENT WHERE STUDENT_ID=?"; 
 }
