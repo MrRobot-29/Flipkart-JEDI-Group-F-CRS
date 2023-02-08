@@ -376,7 +376,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
     
 
     
-    public void addStudent(Student student, int semester) {
+    public boolean addStudent(Student student, int semester) {
     	
     	Connection conn = DBUtils.getConnection();
     	
@@ -404,9 +404,12 @@ public class StudentDaoImpl implements StudentDaoInterface{
 			statement2.setString(3, student.getBranch());
 			statement2.setInt(4, semester);	
 			
+			return true;
+			
     	}catch(SQLException err) {
     		System.out.println(err.getMessage());
     	}
+    	return false;
     }
     
     
@@ -543,5 +546,30 @@ public class StudentDaoImpl implements StudentDaoInterface{
 
     	return course;
 	}
+    
+    public int countFreezeCourses(int student_id) {
+    	int cnt = 0;
+    	//COUNT_FREEZE_COURSES
+    	Connection connection = DBUtils.getConnection();
+    	
+    	
+		try {
+				PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.COUNT_FREEZE_COURSES);
+								
+				statement.setInt(1, student_id);
+				
+				ResultSet rs = statement.executeQuery();
+				
+				if(rs.next()){
+					cnt = rs.getInt("count");
+				}
+			}
+		
+		catch(SQLException e){
+			System.out.checkError();
+		}
+
+    	return cnt;
+    }
     
 }

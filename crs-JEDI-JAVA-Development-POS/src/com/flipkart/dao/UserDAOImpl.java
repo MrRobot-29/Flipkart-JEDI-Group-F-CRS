@@ -1,10 +1,14 @@
 package com.flipkart.dao;
 
 import java.sql.Connection;
+
+import java.sql.*;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.lang.Exception;
 
 import com.flipkart.bean.Admin;
 import com.flipkart.bean.Professor;
@@ -30,7 +34,7 @@ public class UserDAOImpl implements UserDAOInterface{
 		 
 		 try {
 
-				System.out.println("Creating statement...");
+				//System.out.println("Creating statement...");
 				String sql = "insert into user values(?,?,?,?)";
 				stmt = conn.prepareStatement(sql);
 
@@ -50,9 +54,7 @@ public class UserDAOImpl implements UserDAOInterface{
 				stmt.setString(4, pwd);
 
 				int rows = stmt.executeUpdate();
-				System.out.println("Rows impacted : " + rows);
-
-				
+				//System.out.println("Rows impacted : " + rows);
 
 				sql = "INSERT INTO Student values(?,?,?,?,?)";
 				stmt1 = conn.prepareStatement(sql);
@@ -64,19 +66,21 @@ public class UserDAOImpl implements UserDAOInterface{
 				
 				rows = stmt1.executeUpdate();
 			} catch (SQLException se) {
-				se.printStackTrace();
+				//se.printStackTrace();
+				System.out.println(se.getMessage());
 				return false;
-			} catch (Exception e) {
-				e.printStackTrace();
-				return false;
-			} finally {
-				try {
-					if (stmt != null)
-						stmt.close();
-					stmt1.close();
-				} catch (SQLException se2) {
-				} 
-			} 
+			}
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				return false;
+//			}  finally {
+//					try {
+//						if (stmt != null)
+//							stmt.close();
+//						stmt1.close();
+//					} catch (SQLException se2) {
+//				} 
+//			} 
 		return true;
 	}
 	
