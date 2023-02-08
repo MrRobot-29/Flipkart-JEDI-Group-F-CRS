@@ -62,6 +62,12 @@ public class StudentCRSMenu {
 				}
 				break;
 			case 2:
+				
+				if(!sso.add_drop_status(std.getStudentID())) {
+					System.out.println("Course Status Frezzed. Could not add more courses!!!!");
+					break;
+				}
+				
 				int primaryCnt = sso.primaryCourseFreq(std.getStudentID()), secCnt = sso.secondaryCourseFreq(std.getStudentID());
 				System.out.println(primaryCnt);
 				if(primaryCnt == 4 && secCnt == 2)
@@ -111,6 +117,12 @@ public class StudentCRSMenu {
 				}
 				break;
 			case 3:
+				
+				if(!sso.add_drop_status(std.getStudentID())) {
+					System.out.println("Course Status Frezzed. Could not drop the current course");
+					break;
+				}
+				
 				System.out.println("Enter Course ID to drop");
 				String courseId = sc.next();
 				boolean status;
