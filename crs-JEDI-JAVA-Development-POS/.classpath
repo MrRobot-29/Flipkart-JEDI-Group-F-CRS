@@ -6,10 +6,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
+
 	<classpathentry kind="lib" path="/Users/gaurav.dash/Downloads/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar"/>
-=======
-	<classpathentry kind="lib" path="/Users/ashwin.kumar2/Downloads/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar"/>
->>>>>>> 35c18f7 (Fixed Course add/drop bug even after course freeze)
+
 	<classpathentry kind="output" path="bin"/>
 </classpath>
