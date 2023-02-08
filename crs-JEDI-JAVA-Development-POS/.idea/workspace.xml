@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="80fb0fcd-e0fc-4fba-b124-528935a07924" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/client/AdminCRSMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/client/AdminCRSMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/client/CrsApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/client/CrsApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/client/ProfessorCRSMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/client/ProfessorCRSMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/constant/Color.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/constant/Color.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/dao/AdminDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/dao/AdminDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/dao/UserDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/dao/UserDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/dao/UserDAOInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/dao/UserDAOInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseAlreadyExistsException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseAlreadyExistsException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseAlreadyIndicatedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseAlreadyIndicatedException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseAlreadyOptedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseAlreadyOptedException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseCountExceededException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseCountExceededException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseNotAvailableException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseNotAvailableException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseNotFoundException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseNotIndicatedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseNotIndicatedException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseNotOptedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/CourseNotOptedException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/EmailAlreadyInUseException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/EmailAlreadyInUseException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/GradeAlreadyAddedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/GradeAlreadyAddedException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/GradeCardNotGeneratedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/GradeCardNotGeneratedException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/GradeNotAllotedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/GradeNotAllotedException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/NoCourseFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/NoCourseFoundException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/NoProfessorFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/NoProfessorFoundException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/NoStudentFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/NoStudentFoundException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/PaymentNotCompletedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/PaymentNotCompletedException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/ProfessorCannotBeDroppedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/ProfessorCannotBeDroppedException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/ProfessorIdAlreadyExistsException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/ProfessorIdAlreadyExistsException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/StudentNotApprovedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/StudentNotApprovedException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/StudentNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/StudentNotFoundException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/UserAlreadyExistsException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/UserAlreadyExistsException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/UserNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/UserNotFoundException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/exception/WrongPasswordException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/exception/WrongPasswordException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/helper/DaoHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/helper/DaoHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/service/AdminServiceOperation.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/service/AdminServiceOperation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/service/UserServiceOperation.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/service/UserServiceOperation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/client/AdminCRSMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/client/AdminCRSMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/client/CrsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/client/CrsApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/constant/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/constant/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/dao/AdminDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/dao/AdminDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/dao/UserDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/dao/UserDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/dao/UserDAOInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/dao/UserDAOInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/exception/CourseNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/exception/CourseNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/helper/DaoHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/helper/DaoHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/service/AdminServiceOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/service/AdminServiceOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/service/UserServiceOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/service/UserServiceOperation.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2L2iGvPKvumM3SUQLsVeKHkyByP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-11&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gaurav.dash/Desktop/Jedi/jedi-group-f/crs-JEDI-JAVA-Development-POS&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="CrsApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.flipkart.client.CrsApplication" />
+      <module name="crs-JEDI-JAVA-Development-POS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.flipkart.client.*" />
+          <option name="ENABLED" value="false" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="crs-JEDI-JAVA-Development-POS" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="crs-JEDI-JAVA-Development-POS" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="80fb0fcd-e0fc-4fba-b124-528935a07924" name="Changes" comment="" />
+      <created>1675075485799</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675075485799</updated>
+    </task>
+    <servers />
+  </component>
+</project>

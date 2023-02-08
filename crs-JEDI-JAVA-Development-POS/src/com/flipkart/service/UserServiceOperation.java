@@ -8,19 +8,20 @@ import java.util.Scanner;
 import com.flipkart.dao.*;
 
 import com.flipkart.bean.Student;
+import com.flipkart.constant.Color;
 import com.flipkart.constant.Gender;
 import com.flipkart.constant.Role;
 import com.flipkart.dao.UserDAOImpl;
-import com.flipkart.data.SharedTempData;
-import com.flipkart.data.TempData;
+import com.flipkart.exception.UserAlreadyExistsException;
+import com.flipkart.exception.UserNotFoundException;
+import com.flipkart.exception.WrongPasswordException;
 
 /**
  * @author ashwin.kumar2
  * Implementation of user service operation
  */
 public class UserServiceOperation implements UserService{
-	TempData td = SharedTempData.td;
-	public void registerAccount() {
+	public void registerAccount() throws UserAlreadyExistsException{
 		// register student account
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Student's email");
@@ -36,7 +37,6 @@ public class UserServiceOperation implements UserService{
 		for(int i = 1;i <= 8;i++) {
 			System.out.println("Semster " + i );
 		}
-//		System.out.println("Enter Student's current semester (1-8)");
 
 		int sem = sc.nextInt();
 		System.out.println("Enter Account Password");
@@ -48,21 +48,19 @@ public class UserServiceOperation implements UserService{
 		
 		StudentDaoInterface uDaao = new StudentDaoImpl();
 		
-//		if(uDaao.addStudent(std, sem)){
-//			System.out.println("Student registration complete. Approval request sent to admin");	
-//		}
-//		else {
-//			System.out.println("Student cannot be registered. Please try again!");
-//		}
 		
 		
-		if(uDao.registerAccount(std)) {
-			System.out.println("Student registration complete. Approval request sent to admin");	
-		}else {
-			System.out.println("Student cannot be registered. Please try again!");
+		try {
+			if(uDao.registerAccount(std)) {
+				System.out.println(Color.ANSI_GREEN + "Student registration complete. Approval request sent to admin" + Color.ANSI_RESET);	
+			}else {
+				System.out.println(Color.ANSI_YELLOW + "Student cannot be registered. Please try again!" + Color.ANSI_RESET);
+			}
+		} catch (UserAlreadyExistsException e) {
+			System.out.println(e.getMessage());
 		}
 		
-		
+			
 	}
 	
 	public void editAccount() {
@@ -70,7 +68,7 @@ public class UserServiceOperation implements UserService{
 		
 	}
 	
-	public void loginAccount() {
+	public void loginAccount() throws UserNotFoundException, WrongPasswordException{
 		// login to the account
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter user email : ");
@@ -81,8 +79,11 @@ public class UserServiceOperation implements UserService{
 		String role = sc.next();
 
 		UserDAOImpl uDao = new UserDAOImpl();
-		uDao.loginAccount(userName, password, role);
-		
+		try {
+			uDao.loginAccount(userName, password, role);
+		} catch (UserNotFoundException | WrongPasswordException e) {
+			throw e;
+		}
 	}
 
 }

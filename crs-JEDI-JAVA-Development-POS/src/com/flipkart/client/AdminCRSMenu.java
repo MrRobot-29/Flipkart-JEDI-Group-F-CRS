@@ -56,8 +56,8 @@ public class AdminCRSMenu {
 				
 				
 				try {
-					fmt.format("\n%20s %20s %20s %20s\n\n", "Course ID", "Course Name", "Professor", "Course Price");  
-					aso.viewCourses().forEach(course -> fmt.format("%20s %20s %20s %20s\n", course.getCourseId(),course.getCourseName(),course.getInstructorId(),course.getCourseFee()));
+					fmt.format("\n%30s %30s %30s %30s\n\n", "Course ID", "Course Name", "Professor ID", "Course Price");  
+					aso.viewCourses().forEach(course -> fmt.format("%30s %30s %30s %30s\n", course.getCourseId(),course.getCourseName(),course.getInstructorId(),course.getCourseFee()));
 					System.out.println(fmt);
 					buffer.setLength(0);
 				} catch (NoCourseFoundException e) {
@@ -82,8 +82,9 @@ public class AdminCRSMenu {
 				 * delete course from catalog
 				 */
 				try {
-					aso.dropCourse();
-					System.out.println(ANSI_GREEN+"Course Deleted to the catalog"+ANSI_RESET);
+					if(aso.dropCourse()) {
+						System.out.println(ANSI_GREEN+"Course Deleted from the catalog"+ANSI_RESET);
+					}
 				} catch (CourseNotFoundException e) {
 					System.out.println(e.getMessage());
 				}

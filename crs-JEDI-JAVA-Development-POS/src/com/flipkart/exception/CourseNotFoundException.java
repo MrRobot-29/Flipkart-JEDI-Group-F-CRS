@@ -5,10 +5,7 @@ package com.flipkart.exception;
 
 import com.flipkart.constant.Color;
 
-/**
- * @author adity
- *
- */
+
 public class CourseNotFoundException extends Exception{
 	private String courseId;
 

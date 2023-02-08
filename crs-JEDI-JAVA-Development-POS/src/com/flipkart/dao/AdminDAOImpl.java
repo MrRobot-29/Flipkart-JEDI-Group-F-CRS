@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
+import com.flipkart.constant.Color;
 import com.flipkart.constant.Gender;
 import com.flipkart.constant.Role;
 import com.flipkart.constant.SQLQueriesConstants;
@@ -48,16 +49,14 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			stmt = conn.prepareStatement(sql);
 
 			int rows = stmt.executeUpdate();
-			if (rows > 0)
-				System.out.println("Course Deleted Successfully!");
-			else {
+			if (rows == 0) {
 				throw new CourseNotFoundException(courseId);
 			}
 			stmt.close();
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (stmt != null)
@@ -295,7 +294,11 @@ public class AdminDAOImpl implements AdminDAOInterface {
 
 
 			ResultSet rs = stmt.executeQuery(sql);
-
+			
+			if(!rs.isBeforeFirst()) {
+				throw new ProfessorCannotBeDroppedException(ProfId);
+			}
+			
 			while (rs.next()) {
 				String email = rs.getString("email");
 				System.out.println(email + " is going to be deleted!");
@@ -306,11 +309,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 				stmt1.addBatch(s3);
 				stmt1.addBatch(s1);
 				stmt1.addBatch(s2);
-				int[] rows = stmt1.executeBatch();
-
-				if (rows[0] > 0) {
-					System.out.println("Professor deleted successfully!");
-				}
+				stmt1.executeBatch();
+				System.out.println(Color.ANSI_GREEN + "Professor deleted successfully!" + Color.ANSI_RESET);
 				stmt1.close();
 			}
 			rs.close();
@@ -320,7 +320,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 //			se.printStackTrace();
 		} catch (Exception e) {
 			// Handle errors for Class.forName
-			e.printStackTrace();
+		    throw e;
 		} finally {
 			// finally block used to close resources
 			try {

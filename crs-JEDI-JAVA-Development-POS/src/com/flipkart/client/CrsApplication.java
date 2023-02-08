@@ -3,6 +3,9 @@ package com.flipkart.client;
 import java.sql.Connection;
 import java.util.Scanner;
 
+import com.flipkart.exception.UserAlreadyExistsException;
+import com.flipkart.exception.UserNotFoundException;
+import com.flipkart.exception.WrongPasswordException;
 import com.flipkart.helper.DaoHelper;
 import com.flipkart.service.UserServiceOperation;
 
@@ -23,6 +26,7 @@ public class CrsApplication {
 		{
 			Connection conn = null;
 			conn = DaoHelper.getConnection();
+			System.out.println("");
 			System.out.println("Welcome to the CRS Applicatoin Choose the Option given below ->");
 			System.out.println("1. Login ");
 			System.out.println("2. Registration of Student");
@@ -33,11 +37,20 @@ public class CrsApplication {
 			{
 			case 1:
 				// login
-				uso.loginAccount();
+				try {
+					uso.loginAccount();
+				} catch (UserNotFoundException | WrongPasswordException e1) {
+					System.out.println(e1.getMessage());
+				}
 				break;
 			case 2:
 				// student registration
-				uso.registerAccount();
+				try {
+					uso.registerAccount();
+				} catch (UserAlreadyExistsException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+				}
 				break;
 			case 3:
 				
@@ -52,8 +65,6 @@ public class CrsApplication {
 			}
 		}
 		
-		
-
 	}
 
 }
