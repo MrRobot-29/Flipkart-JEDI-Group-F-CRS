@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 /**
  * @author adity
  *
@@ -25,6 +27,6 @@ public class CourseNotIndicatedException extends Exception{
 	 */
 	@Override
 	public String getMessage() {
-		return  "You do not teach the course : " + courseId;
+		return  Color.ANSI_YELLOW+"You do not teach the course : " + courseId+Color.ANSI_RESET;
 	}
 }

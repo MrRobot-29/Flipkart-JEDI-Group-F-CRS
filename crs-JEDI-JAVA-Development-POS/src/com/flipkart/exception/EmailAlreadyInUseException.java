@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 /**
  * @author adity
  *
@@ -32,6 +34,6 @@ private String emailId;
 	
 	@Override
 	public String getMessage() {
-		return "EmailId: " + emailId + " is already in use.";
+		return Color.ANSI_YELLOW+"EmailId: " + emailId + " is already in use."+Color.ANSI_RESET;
 	}
 }

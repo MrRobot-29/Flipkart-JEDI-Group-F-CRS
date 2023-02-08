@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 /**
  * @author adity
  *
@@ -34,6 +36,6 @@ public class GradeNotAllotedException extends Exception{
 	 
 	 public String getMessage() 
 	 {
-			return "Student with id: " + studentId + " has not been alloted all the grades";
+			return Color.ANSI_YELLOW+"Student with id: " + studentId + " has not been alloted all the grades"+Color.ANSI_RESET;
 	 }
 }

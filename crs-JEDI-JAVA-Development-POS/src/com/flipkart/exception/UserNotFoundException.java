@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 /**
  * @author adity
  *
@@ -24,6 +26,6 @@ public class UserNotFoundException extends Exception{
 	 */
 	
 	public String getMessage() {
-		return "User with userId: " + userId + " not found.";
+		return Color.ANSI_YELLOW+"User with userId: " + userId + " not found."+Color.ANSI_RESET;
 	}
 }
