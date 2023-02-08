@@ -28,6 +28,7 @@ private int profId;
 	
 	@Override
 	public String getMessage() {
-		return Color.ANSI_YELLOW+"Professor ID: " + profId + " is already in use."+Color.ANSI_RESET;
+		return Color.ANSI_YELLOW+"Professor ID: " + profId + " is already present"+Color.ANSI_RESET;
+
 	}
 }

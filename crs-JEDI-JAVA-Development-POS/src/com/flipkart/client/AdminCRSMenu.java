@@ -4,6 +4,7 @@ import java.util.Formatter;
 import java.util.Scanner;
 
 import com.flipkart.bean.*;
+import com.flipkart.exception.*;
 import com.flipkart.service.AdminServiceOperation;
 
 /**
@@ -36,7 +37,7 @@ public class AdminCRSMenu {
 			System.out.println("2. Add Course to catalog");
 			System.out.println("3. Delete Course from catalog");
 			System.out.println("4. View List of Students");
-			System.out.println("5: Aprove Student");
+			System.out.println("5: Approve Student");
 			System.out.println("6. Add Professor");
 			System.out.println("7. Drop Professor");
 			System.out.println("8. Generate grade cards");
@@ -52,24 +53,27 @@ public class AdminCRSMenu {
 				/**
 				 * view course in catalog
 				 */
-				ArrayList<Course> cl = aso.viewCourses();
 				
-				fmt.format("\n%15s %15s %15s %15s\n\n", "Course ID", "Course Name", "Professor", "Course Price");  
-				aso.viewCourses().forEach(course -> fmt.format("%14s %14s %14s %14s\n", course.getCourseId(),course.getCourseName(),course.getInstructorId(),course.getCourseFee()));
-				System.out.println(fmt);
-				buffer.setLength(0);
+				
+				try {
+					fmt.format("\n%20s %20s %20s %20s\n\n", "Course ID", "Course Name", "Professor", "Course Price");  
+					aso.viewCourses().forEach(course -> fmt.format("%20s %20s %20s %20s\n", course.getCourseId(),course.getCourseName(),course.getInstructorId(),course.getCourseFee()));
+					System.out.println(fmt);
+					buffer.setLength(0);
+				} catch (NoCourseFoundException e) {
+					System.out.println(e.getMessage());
+				}
 				break;
-				
 			case 2:
 				/**
 				 * add course to catalog
 				 */
-				if(aso.addCourse()) {
-					System.out.println(ANSI_GREEN+"Course Added to the catalog"+ANSI_RESET);	
-				}
-				else
-				{
-					System.out.println(ANSI_BLUE+"Course Failed to Add to the catalog"+ANSI_RESET);	
+				try {
+					if(aso.addCourse()) {
+						System.out.println(ANSI_GREEN+"Course Added to the catalog"+ANSI_RESET);
+					}
+				} catch (CourseAlreadyExistsException e) {
+					System.out.println(e.getMessage());
 				}
 				break;
 				
@@ -77,12 +81,11 @@ public class AdminCRSMenu {
 				/**
 				 * delete course from catalog
 				 */
-				if(aso.dropCourse()) {
-					System.out.println(ANSI_GREEN+"Course Deleted to the catalog"+ANSI_RESET);	
-				}
-				else
-				{
-					System.out.println(ANSI_BLUE+"Course Failed to Delete to the catalog"+ANSI_RESET);	
+				try {
+					aso.dropCourse();
+					System.out.println(ANSI_GREEN+"Course Deleted to the catalog"+ANSI_RESET);
+				} catch (CourseNotFoundException e) {
+					System.out.println(e.getMessage());
 				}
 				break;
 				
@@ -100,20 +103,26 @@ public class AdminCRSMenu {
 				
 				switch(cas) {
 					case 1:
-						
-						fmt.format("\n%15s %15s %15s\n\n", "Student ID", "Name", "Branch");  
-						aso.viewAllStudents().forEach(student -> fmt.format("%14s %14s %14s\n", student.getStudentID(), student.getName(),student.getBranch()));
-						System.out.println(fmt);
-						buffer.setLength(0);
+						try {
+							fmt.format("\n%15s %15s %15s\n\n", "Student ID", "Name", "Branch");  
+							aso.viewAllStudents().forEach(student -> fmt.format("%14s %14s %14s\n", student.getStudentID(), student.getName(),student.getBranch()));
+							System.out.println(fmt);
+							buffer.setLength(0);
+						} catch (NoStudentFoundException e) {
+							System.out.println(e.getMessage());
+						}
 						break;
-						
 					case 2:
 						
-						fmt.format("\n%15s %15s %15s\n\n", "Student ID", "Name", "Branch");  
-						aso.viewPendingStudents().forEach(student -> fmt.format("%14s %14s %14s\n", student.getStudentID(), student.getName(),student.getBranch()));
-						System.out.println(fmt);
-						buffer.setLength(0);
-						
+						try {
+							fmt.format("\n%15s %15s %15s\n\n", "Student ID", "Name", "Branch");  
+							aso.viewPendingStudents().forEach(student -> fmt.format("%14s %14s %14s\n", student.getStudentID(), student.getName(),student.getBranch()));
+							System.out.println(fmt);
+							buffer.setLength(0);
+						} catch (NoStudentFoundException e) {
+							System.out.println(e.getMessage());
+						}
+						break;
 					case 3:
 						break;
 					
@@ -129,25 +138,41 @@ public class AdminCRSMenu {
 				 */
 				System.out.println("Enter Student ID to approve");
 				int stId = scanner.nextInt();
-				aso.validateStudent(stId);
+				try {
+					aso.validateStudent(stId);
+				} catch (StudentNotFoundException e) {
+					e.getMessage();
+				}
 				break;
 			case 6:
 				/**
 				 * add professor
 				 */
-				aso.addProfessor();
+				try {
+					aso.addProfessor();
+				} catch (ProfessorIdAlreadyExistsException e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 			case 7:
 				/**
 				 * remove professor
 				 */
-				aso.dropProfessor();
+				try {
+					aso.dropProfessor();
+				} catch (ProfessorCannotBeDroppedException e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 			case 8:
 				/**
 				 * generate grade cards
 				 */
-				aso.generateGradeCard();
+				try {
+					aso.generateGradeCard();
+				} catch (GradeCardNotGeneratedException e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 			case 9:
 				/**

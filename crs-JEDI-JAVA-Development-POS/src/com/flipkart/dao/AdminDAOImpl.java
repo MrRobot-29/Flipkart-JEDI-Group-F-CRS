@@ -1,12 +1,7 @@
 package com.flipkart.dao;
 
-import java.sql.Connection;
+import java.sql.*;
 
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 
@@ -17,6 +12,7 @@ import com.flipkart.bean.Student;
 import com.flipkart.constant.Gender;
 import com.flipkart.constant.Role;
 import com.flipkart.constant.SQLQueriesConstants;
+import com.flipkart.exception.*;
 import com.flipkart.helper.DaoHelper;
 import com.flipkart.utils.DBUtils;
 
@@ -42,7 +38,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 	}
     
 
-	public void dropCourse(String courseId) {
+	public void dropCourse(String courseId) throws CourseNotFoundException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 
@@ -55,38 +51,30 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			if (rows > 0)
 				System.out.println("Course Deleted Successfully!");
 			else {
-				System.out.println("Course not found");
+				throw new CourseNotFoundException(courseId);
 			}
 			stmt.close();
 		} catch (SQLException se) {
-			// Handle errors for JDBC
 			se.printStackTrace();
 		} catch (Exception e) {
-			// Handle errors for Class.forName
 			e.printStackTrace();
 		} finally {
-			// finally block used to close resources
 			try {
 				if (stmt != null)
 					stmt.close();
 			} catch (SQLException se2) {
-			} // nothing we can do
-		} // end try
+			}
+		}
 	}
 
-	public boolean addCourse(Course c) {
+	public boolean addCourse(Course c) throws CourseAlreadyExistsException{
 		Connection conn = null;
 		PreparedStatement stmt = null;
 
 		try {
 			conn = DaoHelper.getConnection();
 			String sql = "insert into Course values(?,?,?,?, ?)";
-			// String sql = "UPDATE Employees set age=? WHERE id=?";
-			// String sql1="delete from employee where id=?";
-			// stmt.setInt(1, 101);
 			stmt = conn.prepareStatement(sql);
-
-			// Hard coded data
 
 			String courseID = c.getCourseId();
 			String courseName = c.getCourseName();
@@ -101,22 +89,23 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			stmt.setInt(5, sem);
 
 			int rows = stmt.executeUpdate();
-			if (rows > 0)
-				System.out.println("Course Inserted Successfully!");
 			stmt.close();
-		} catch (SQLException se) {
-			// Handle errors for JDBC
-			se.printStackTrace();
-		} catch (Exception e) {
-			// Handle errors for Class.forName
-			e.printStackTrace();
-		} finally {
-			// finally block used to close resources
+			if (rows > 0)
+				return true;
+		} catch (SQLIntegrityConstraintViolationException sicve){
+			throw new CourseAlreadyExistsException(c.getCourseId());
 		}
-		return false;
+		catch (SQLException se) {
+			se.printStackTrace();
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
-	public ArrayList<Course> viewCourses() {
+	public ArrayList<Course> viewCourses() throws NoCourseFoundException{
 		ArrayList<Course> arr = new ArrayList<Course>();
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -128,10 +117,10 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			stmt = conn.prepareStatement(sql);
 			
 		    ResultSet rs = stmt.executeQuery(sql);
-
-		      //STEP 5: Extract data from result set
+			if(!rs.isBeforeFirst()){
+				throw new NoCourseFoundException();
+			}
 		      while(rs.next()){
-		         //Retrieve by column name
 		         String cid  = rs.getString("course_id");
 		         String cname = rs.getString("course_name");
 		         int profId = rs.getInt("prof_id");
@@ -142,16 +131,14 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		      }
 		 rs.close();
 		} catch (SQLException se) {
-			// Handle errors for JDBC
 			se.printStackTrace();
 		} catch (Exception e) {
-			// Handle errors for Class.forName
 			e.printStackTrace();
 		}
 		return arr;
 	}
 
-	public ArrayList<Student> viewPendingStudents() {
+	public ArrayList<Student> viewPendingStudents() throws NoStudentFoundException {
 		Connection conn = DaoHelper.getConnection();
 		PreparedStatement stmt = null;
 		
@@ -161,7 +148,9 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		try {
 			stmt = conn.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
-			
+			if (!rs.isBeforeFirst()) {
+				throw new NoStudentFoundException();
+			}
 			while(rs.next()) {
 				String email = rs.getString("email");
 				String name = rs.getString("name");
@@ -175,16 +164,12 @@ public class AdminDAOImpl implements AdminDAOInterface {
 				arr.add(std);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			
 		}
-
 		return arr;
 	}
 
-	public ArrayList<Student> viewAllStudents() {
+	public ArrayList<Student> viewAllStudents() throws  NoStudentFoundException{
 		Connection conn = DaoHelper.getConnection();
 		PreparedStatement stmt = null;
 		
@@ -194,7 +179,9 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		try {
 			stmt = conn.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
-			
+			if (!rs.isBeforeFirst()) {
+				throw new NoStudentFoundException();
+			}
 			while(rs.next()) {
 				String email = rs.getString("email");
 				String name = rs.getString("name");
@@ -215,7 +202,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		return arr;
 	}
 
-	public boolean validateStudent(int studentId) {
+	public boolean validateStudent(int studentId) throws StudentNotFoundException {
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -233,24 +220,21 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			}
 			stmt.close();
 		} catch (SQLException se) {
-			// Handle errors for JDBC
 			se.printStackTrace();
 		} catch (Exception e) {
-			// Handle errors for Class.forName
 			e.printStackTrace();
 		} finally {
-			// finally block used to close resources
 			try {
 				if (stmt != null)
 					stmt.close();
 			} catch (SQLException se2) {
-			} // nothing we can do
+			}
 			
-		} // end try
+		}
 		return true;
 	}	
 
-	public void addProfessor(Professor prof) {
+	public void addProfessor(Professor prof) throws ProfessorIdAlreadyExistsException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		PreparedStatement stmt1 = null;
@@ -258,12 +242,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		try {
 			conn = DaoHelper.getConnection();
 			String sql = "insert into user values(?,?,?,?)";
-			// String sql = "UPDATE Employees set age=? WHERE id=?";
-			// String sql1="delete from employee where id=?";
-			// stmt.setInt(1, 101);
 			stmt = conn.prepareStatement(sql);
-
-			// Hard coded data
 
 			String email = prof.getUserId();
 			String name = prof.getName();
@@ -280,9 +259,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 
 			// Let us update age of the record with ID = 102;
 			int rows = stmt.executeUpdate();
-			System.out.println("Rows impacted : " + rows);
-
-			
 
 			sql = "INSERT INTO Professor values(?,?,?)";
 			stmt1 = conn.prepareStatement(sql);
@@ -290,27 +266,25 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			stmt1.setString(2, email);
 			stmt1.setString(3, dept);
 			rows = stmt1.executeUpdate();
-			System.out.println("Rows impacted : " + rows);
 			stmt.close();
 			stmt1.close();
+		} catch (SQLIntegrityConstraintViolationException e){
+			throw new ProfessorIdAlreadyExistsException(prof.getProfId());
 		} catch (SQLException se) {
-			// Handle errors for JDBC
 			se.printStackTrace();
 		} catch (Exception e) {
-			// Handle errors for Class.forName
 			e.printStackTrace();
 		} finally {
-			// finally block used to close resources
 			try {
 				if (stmt != null)
 					stmt.close();
 			} catch (SQLException se2) {
-			} // nothing we can do
-		} // end try
+			}
+		}
 
 	}
 
-	public void dropProfessor(int ProfId) {
+	public void dropProfessor(int ProfId) throws ProfessorCannotBeDroppedException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 
@@ -319,9 +293,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			String sql = "SELECT * FROM Professor WHERE prof_id ='" + ProfId + "'";
 			stmt = conn.prepareStatement(sql);
 
-			// Bind values into the parameters.
-//			      stmt.setInt(1, ProfId);  // This would set age
-//			      stmt.executeUpdate();
+
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
@@ -344,7 +316,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			rs.close();
 		} catch (SQLException se) {
 			// Handle errors for JDBC
-			se.printStackTrace();
+			throw new ProfessorCannotBeDroppedException(ProfId);
+//			se.printStackTrace();
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();
@@ -360,7 +333,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 	
 	
 	// added new funcationality <tue 7 feb>
-		public ArrayList<Professor> viewProfessors() {
+		public ArrayList<Professor> viewProfessors() throws NoProfessorFoundException{
 			ArrayList<Professor> professors = new ArrayList<Professor>();
 		
 	    	
@@ -370,7 +343,9 @@ public class AdminDAOImpl implements AdminDAOInterface {
 					PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_PROFF_LIST);
 									
 					ResultSet rs = statement.executeQuery();
-					
+					if(!rs.isBeforeFirst()){
+						throw new NoProfessorFoundException();
+					}
 					while(rs.next()){
 						Professor temp = new Professor();
 						temp.setName(rs.getString("name"));
@@ -385,11 +360,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			}
 	    	return professors;
 		}
-		
 
-
-
-	public void generateGradeCard(int semester) {
+	public void generateGradeCard(int semester) throws GradeCardNotGeneratedException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 
