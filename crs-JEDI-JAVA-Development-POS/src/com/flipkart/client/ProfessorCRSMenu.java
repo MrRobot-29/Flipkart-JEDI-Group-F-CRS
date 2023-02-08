@@ -1,5 +1,7 @@
 package com.flipkart.client;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -88,8 +90,19 @@ public class ProfessorCRSMenu {
 				courseId = sc.nextLine();
 				System.out.println("Enter Student Id(Int): ");
 				int studentId = sc.nextInt();
-				System.out.println("Enter Grade: ");
-				String grade = sc.next();
+				
+				ArrayList<String> grades = new ArrayList<>(Arrays.asList("A","A-","B","B-","C","C-","D","D-","E","E-","F","F-"));
+		    	boolean aGrade = false;
+		    	String grade = null;
+		    	while(!aGrade)
+		    	{
+		    		System.out.println("Enter Grade: ");
+		    		grade = sc.next();
+		    		aGrade = grades.contains(grade);
+		    		if(!aGrade)System.out.println("Invalid Grade ");
+		    	}
+		    					
+				
 				try {
 					status = service.addGrade(courseId, studentId, grade);
 					if(status)
