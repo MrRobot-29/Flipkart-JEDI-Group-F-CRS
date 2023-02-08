@@ -7,6 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.flipkart.bean.Course;
+import com.flipkart.bean.Student;
+import com.flipkart.constant.Gender;
+import com.flipkart.constant.Role;
+import com.flipkart.exception.StudentNotFoundException;
 import com.flipkart.helper.DaoHelper;
 
 /**
@@ -17,18 +22,24 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 	PreparedStatement stmt = null;
 	
 	@Override
-	public List<String> viewCourseList(int instructorId) {
+	public List<Course> viewCourseList(int instructorId) {
 		// TODO Auto-generated method stub
-		List<String> takenCourses = new ArrayList<String>();
+		List<Course> takenCourses = new ArrayList<Course>();
 		try { 
 			conn = DaoHelper.getConnection();
-			String sql = "SELECT COURSE_NAME FROM COURSE WHERE PROF_ID=?";
+			String sql = "SELECT * FROM COURSE WHERE PROF_ID=?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1,instructorId);
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				takenCourses.add(rs.getString("course_name"));
+				String courseName = rs.getString("COURSE_NAME");
+				String courseId = rs.getString("COURSE_ID");
+				boolean isCourseAvailable = true;
+				double fee = rs.getDouble("COURSE_FEE");
+				int semester = rs.getInt("SEMESTER");
+				Course c = new Course(courseName,courseId,instructorId,isCourseAvailable,fee,semester);
+				takenCourses.add(c);
 			}
 			
 		} catch (SQLException se) {
@@ -86,12 +97,12 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 	}
 
 	@Override
-	public List<String> viewEnrolledStudents(int instructorId,String courseId) {
+	public List<Student> viewEnrolledStudents(int instructorId, String courseId) {
 		// TODO Auto-generated method stub
-		List<String> enrolledStudents = new ArrayList<String>();
+		List<Student> enrolledStudents = new ArrayList<Student>();
 		try { 
 			conn = DaoHelper.getConnection();
-			String sql = "SELECT DISTINCT NAME FROM USER U, STUDENT S, REGISTEREDCOURSE RC, COURSE C"
+			String sql = "SELECT S.EMAIL,U.NAME,U.PASSWORD,S.BRANCH,S.STUDENT_ID,S.SEMESTER,S.APPROVAL_STATUS FROM USER U, STUDENT S, REGISTEREDCOURSE RC, COURSE C"
 					+ " WHERE U.EMAIL=S.EMAIL AND S.STUDENT_ID=RC.STUDENT_ID AND RC.COURSE_ID=C.COURSE_ID "
 					+ "AND C.PROF_ID=? AND C.COURSE_ID=?";
 			stmt = conn.prepareStatement(sql);
@@ -101,7 +112,20 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				enrolledStudents.add(rs.getString("name"));
+				String userId = rs.getString("S.EMAIL");
+				String name = rs.getString("U.NAME");
+				Role role = Role.STUDENT;
+				String password = rs.getString("U.PASSWORD");
+				Gender gender = Gender.MALE;
+				String address = "Blr";
+				String country = "India";
+				String branchName = rs.getString("S.BRANCH");
+				int studentId = rs.getInt("S.STUDENT_ID");
+				int semester = rs.getInt("S.SEMESTER");
+				Boolean isApproved = rs.getInt("S.APPROVAL_STATUS")==1;
+
+				Student s = new Student(userId,name,role,password,gender,address,country,branchName,studentId,semester,isApproved);
+				enrolledStudents.add(s);
 			}
 			//rs.close();
 			
