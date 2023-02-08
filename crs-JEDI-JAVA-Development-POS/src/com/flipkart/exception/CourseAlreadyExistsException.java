@@ -3,6 +3,7 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
 
 public class CourseAlreadyExistsException extends Exception{
 	private String courseId;
@@ -29,6 +30,6 @@ public class CourseAlreadyExistsException extends Exception{
 		 */
 		@Override
 		public String getMessage() {
-			return "Course: " + courseId + " already exists in catalog.";
+			return Color.ANSI_YELLOW+"Course: " + courseId + " already exists in catalog."+Color.ANSI_RESET;
 		}
 }

@@ -1,5 +1,7 @@
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 public class UserAlreadyExistsException extends Exception{
 	private String userId;
 
@@ -12,7 +14,7 @@ public class UserAlreadyExistsException extends Exception{
 	 */
 	
 	public String getMessage() {
-		return "User with email: " + userId + " already present";
+		return Color.ANSI_YELLOW+"User with email: " + userId + " already present"+Color.ANSI_RESET;
 	}
 
 }

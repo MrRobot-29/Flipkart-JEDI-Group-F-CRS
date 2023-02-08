@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 /**
  * @author adity
  *
@@ -16,6 +18,6 @@ public class GradeCardNotGeneratedException extends Exception{
 	 */
 	@Override
 	public String getMessage() {
-		return  "Grade card not generated";
+		return  Color.ANSI_YELLOW+"Grade card not generated"+Color.ANSI_RESET;
 	}
 }

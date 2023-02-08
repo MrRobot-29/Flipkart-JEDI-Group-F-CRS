@@ -1,5 +1,7 @@
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 public class PaymentNotCompletedException extends Exception {
 
 	
@@ -7,6 +9,6 @@ public class PaymentNotCompletedException extends Exception {
 
 	@Override
 	public String getMessage() {
-		return "Payment not Successful";
+		return Color.ANSI_YELLOW+"Payment not Successful"+Color.ANSI_RESET;
 	}
 }

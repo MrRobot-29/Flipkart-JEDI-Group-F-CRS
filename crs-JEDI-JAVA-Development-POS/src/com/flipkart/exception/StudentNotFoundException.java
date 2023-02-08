@@ -1,5 +1,7 @@
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 public class StudentNotFoundException extends Exception{
 	private int studentId;
 
@@ -16,6 +18,6 @@ public class StudentNotFoundException extends Exception{
 	 */
 	
 	public String getMessage() {
-		return "Student with studentID: " + studentId + " not found.";
+		return Color.ANSI_YELLOW+"Student with studentID: " + studentId + " not found."+Color.ANSI_RESET;
 	}
 }

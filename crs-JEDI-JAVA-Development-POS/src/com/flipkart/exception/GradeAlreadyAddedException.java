@@ -3,6 +3,8 @@
  */
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 /**
  * @author adity
  *
@@ -27,6 +29,6 @@ public class GradeAlreadyAddedException extends Exception{
 	 */
 	@Override
 	public String getMessage() {
-		return  "Student " + studentId + " has already been graded for course : " + courseId;
+		return  Color.ANSI_YELLOW+"Student " + studentId + " has already been graded for course : " + courseId+Color.ANSI_RESET;
 	}
 }

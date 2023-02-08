@@ -4,6 +4,8 @@
 
 package com.flipkart.exception;
 
+import com.flipkart.constant.Color;
+
 /**
  * @author jasan
  *
@@ -27,7 +29,7 @@ public class CourseAlreadyIndicatedException extends Exception{
 	 */
 	@Override
 	public String getMessage() {
-		return  "You already teach the course : " + courseId;
+		return  Color.ANSI_YELLOW+"You already teach the course : " + Color.ANSI_RESET;
 	}
 
 }
