@@ -21,7 +21,9 @@ public class DBUtils {
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "root@123";
+
+    static final String PASS = "root186828";
+
 	
 	public Connection getConnection() {
 		

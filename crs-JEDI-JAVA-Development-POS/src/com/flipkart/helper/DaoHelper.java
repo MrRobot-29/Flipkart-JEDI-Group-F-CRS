@@ -14,7 +14,9 @@ public class DaoHelper {
 
 	   //  Database credentials
 	static final String USER = "root";
-	static final String PASS = "root@123";
+
+	static final String PASS = "root186828";
+
 	
 	private static Connection connection = null;
 

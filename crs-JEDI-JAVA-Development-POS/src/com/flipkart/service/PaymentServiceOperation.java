@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
+import com.flipkart.dao.PaymentNotificationDaoImpl;
 import com.flipkart.dao.StudentDaoImpl;
 import com.flipkart.dao.StudentDaoInterface;
 
@@ -41,24 +42,30 @@ public class PaymentServiceOperation implements PaymentService {
 		System.out.println("1-Online");
 		System.out.println("2-Offline");
 		int option = sc.nextInt();
+		boolean status=false;
 		switch(option) {
 		case 1:
-			payOnline(st,fee);
+			status = payOnline(st,fee);
 			break;
 		
 		case 2:
-			payOffline(st,fee);
+			status = payOffline(st,fee);
 			break;
 			
 		default:
 			System.out.println("Invalid Input!! Payment Failed");
 			break;
 		}
+		if(status) {
+			PaymentNotificationDaoImpl pndi = new PaymentNotificationDaoImpl();
+			pndi.sendFeePaymentNotification(st, fee);
+		}
+		
 		
 	}
 	
 	
-	public void payOnline(Student std,double fee) {
+	public boolean payOnline(Student std,double fee) {
 		// payment for the online mode
 		System.out.println("You opted for Online payment");
 		System.out.println("1-UPI");
@@ -68,7 +75,7 @@ public class PaymentServiceOperation implements PaymentService {
 		String method = "Online";
 		Random rand = new Random();
 		String trans_id = Integer.toString(rand.nextInt(10000000));
-		boolean status;
+		boolean status=false;
 		switch(option) {
 		case 1:
 			System.out.println("UPI payment opted");
@@ -118,10 +125,11 @@ public class PaymentServiceOperation implements PaymentService {
 			break;
 		}
 		System.out.println("Contact admin for fee payment approval");
+		return status;
 		
 	}
 	
-	public void payOffline(Student std, double fee) {
+	public boolean payOffline(Student std, double fee) {
 		// payment for the offline mode
 		String method = "Offline";
 		Random rand = new Random();
@@ -132,6 +140,7 @@ public class PaymentServiceOperation implements PaymentService {
 			System.out.println("Payment Requested");
 		else
 			System.out.println("Payment Failed");
+		return status;
 	}
 
 }

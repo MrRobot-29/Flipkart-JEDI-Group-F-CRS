@@ -79,7 +79,8 @@ public class StudentCRSMenu {
 				while(true)
 				{
 					System.out.println("Enter Course-Id: (0 to go back)");
-					String courseId = sc.next();
+					sc.nextLine();
+					String courseId = sc.nextLine();
 					if(courseId.equalsIgnoreCase("0"))
 						break;
 					if(!sso.getCourseAvailabilityStatus(courseId))
@@ -124,7 +125,8 @@ public class StudentCRSMenu {
 				}
 				
 				System.out.println("Enter Course ID to drop");
-				String courseId = sc.next();
+				sc.nextLine();
+				String courseId = sc.nextLine();
 				boolean status;
 				try {
 					status = sso.dropCourse(std.getStudentID(),courseId);
