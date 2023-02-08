@@ -10,15 +10,15 @@ import com.flipkart.constant.Color;
  *
  */
 public class CourseCountExceededException extends Exception{
-	private int num;
+	private String type;
 
 	/**
 	 * Constructor
 	 * @param num number of courses
  	 */
-	public CourseCountExceededException(int num )
+	public CourseCountExceededException(String type )
 	{	
-		this.num = num;
+		this.type = type;
 	}
 
 
@@ -28,6 +28,6 @@ public class CourseCountExceededException extends Exception{
 	@Override
 	public String getMessage() 
 	{
-		return Color.ANSI_YELLOW+"You have already opted for " + num + " courses"+Color.ANSI_RESET;
+		return Color.ANSI_YELLOW+"You have already opted for " + type + " courses"+Color.ANSI_RESET;
 	}
 }

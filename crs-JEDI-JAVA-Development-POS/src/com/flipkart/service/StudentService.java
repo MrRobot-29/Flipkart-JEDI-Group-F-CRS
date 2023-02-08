@@ -9,6 +9,7 @@ import com.flipkart.exception.CourseAlreadyOptedException;
 import com.flipkart.exception.CourseCountExceededException;
 import com.flipkart.exception.CourseNotAvailableException;
 import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.CourseNotOptedException;
 import com.flipkart.exception.GradeNotAllotedException;
 import com.flipkart.exception.NoCourseFoundException;
 import com.flipkart.exception.PaymentNotCompletedException;
@@ -32,15 +33,16 @@ public interface StudentService {
 	 * @param course_type: course type
 	 * @return status of is course added to student
 	 */
-	public boolean addCourse(int student_id, String courseId, int course_type) throws CourseAlreadyOptedException, CourseCountExceededException, CourseNotFoundException, CourseNotAvailableException;
+	public boolean addCourse(int student_id, String courseId, int course_type) throws CourseAlreadyOptedException, CourseCountExceededException, CourseNotAvailableException;
 
 	/**
 	 * Method to drop course and return status of is course removed
 	 * @param student
 	 * @param courseId
 	 * @return status of is course removed
+	 * @throws CourseNotOptedException 
 	 */
-	public boolean dropCourse(int student, String courseId) throws CourseNotFoundException ;
+	public boolean dropCourse(int student, String courseId) throws CourseNotOptedException ;
 
 	/**
 	 * Method to pay fee
@@ -95,7 +97,8 @@ public interface StudentService {
 	public int secondaryCourseFreq(int student_id) ;
 	
 
-	public boolean checkCourse(int studentId, String courseId);
+	public boolean checkCourse(int studentId, String courseId) throws CourseAlreadyOptedException ;
+
 	
 
 	public boolean add_drop_status(int studentId);

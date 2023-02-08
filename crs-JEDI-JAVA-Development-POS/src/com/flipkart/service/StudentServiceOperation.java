@@ -14,6 +14,11 @@ import com.flipkart.dao.StudentDaoImpl;
 import com.flipkart.dao.StudentDaoInterface;
 import com.flipkart.data.SharedTempData;
 import com.flipkart.data.TempData;
+import com.flipkart.exception.CourseAlreadyOptedException;
+import com.flipkart.exception.CourseCountExceededException;
+import com.flipkart.exception.CourseNotAvailableException;
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.CourseNotOptedException;
 import com.flipkart.exception.PaymentNotCompletedException;
 
 /**
@@ -37,10 +42,20 @@ public class StudentServiceOperation implements StudentService{
 		
 	}
 	
-	public boolean addCourse(int student_id, String courseId, int course_type) {
+	public boolean addCourse(int student_id, String courseId, int course_type) throws CourseAlreadyOptedException, CourseCountExceededException, CourseNotAvailableException{
 		// add the course
-		return studentDao.addCourseBucket(student_id, courseId, course_type);
-	
+		try {
+			return studentDao.addCourseBucket(student_id, courseId, course_type);
+		}
+		catch(CourseAlreadyOptedException e){
+			throw e;
+		}
+		catch(CourseCountExceededException e){
+			throw e;
+		}
+		catch(CourseNotAvailableException e){
+			throw e;
+		}
 	}
 	
 	public int primaryCourseFreq(int student_id) {
@@ -55,10 +70,14 @@ public class StudentServiceOperation implements StudentService{
 	
 	}
 	
-	public boolean dropCourse(int student, String courseId) {
+	public boolean dropCourse(int student, String courseId) throws CourseNotOptedException{
 		// drop the course
-		
-		studentDao.drop_course(student, courseId);
+		try {
+			studentDao.drop_course(student, courseId);
+		}
+		catch(CourseNotOptedException e){
+			throw e;
+		}
 		
 		return true;
 		
@@ -103,9 +122,14 @@ public class StudentServiceOperation implements StudentService{
 		
 	}
 	
-	public boolean checkCourse(int studentId, String courseId) 
+	public boolean checkCourse(int studentId, String courseId) throws CourseAlreadyOptedException 
 	{
-		return studentDao.checkCourse(studentId, courseId);
+		try {
+			return studentDao.checkCourse(studentId, courseId);
+		}
+		catch(CourseAlreadyOptedException e){
+			throw e;
+		}	
 	}
 	
 }

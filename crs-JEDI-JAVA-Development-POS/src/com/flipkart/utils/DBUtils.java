@@ -22,7 +22,8 @@ public class DBUtils {
     //  Database credentials
     static final String USER = "root";
 
-    static final String PASS = "root@123";
+    static final String PASS = "root186828";
+
 	
 	public Connection getConnection() {
 		
@@ -34,7 +35,7 @@ public class DBUtils {
 			 
 		    // Step 4 make/open  a connection 
 		   
-	        System.out.println("Connecting to database...");
+	        //System.out.println("Connecting to database...");
 	        
 	        conn = DriverManager.getConnection(DB_URL,USER,PASS);
 	        

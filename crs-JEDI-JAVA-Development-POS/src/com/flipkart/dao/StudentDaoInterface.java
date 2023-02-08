@@ -5,6 +5,11 @@ import java.util.HashMap;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
+import com.flipkart.exception.CourseAlreadyOptedException;
+import com.flipkart.exception.CourseCountExceededException;
+import com.flipkart.exception.CourseNotAvailableException;
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.CourseNotOptedException;
 
 /**
  * Interface for student Dao
@@ -60,7 +65,7 @@ public interface StudentDaoInterface {
 	 * @param course_type
 	 * @return return status of is course added
 	 */
-	public boolean addCourseBucket(int student_id, String course_id, int course_type);
+	public boolean addCourseBucket(int student_id, String course_id, int course_type) throws CourseAlreadyOptedException, CourseCountExceededException, CourseNotAvailableException;
 
 	/**
 	 * Method to drop course by student
@@ -68,7 +73,7 @@ public interface StudentDaoInterface {
 	 * @param courseId
 	 * @return status of is course is removed by student
 	 */
-	public boolean drop_course(int studentId, String courseId);
+	public boolean drop_course(int studentId, String courseId) throws CourseNotOptedException;
 
 	/**
 	 * Method to get list of courses in given semester
@@ -108,7 +113,9 @@ public interface StudentDaoInterface {
 	public String isGradeReleased(int semester);
 	public boolean payFee(int student_id, String payment_id, String payment_method, String payment_details);
 
-	public boolean checkCourse(int studentId, String courseId);
+
+	public boolean checkCourse(int studentId, String courseId) throws CourseAlreadyOptedException;
+
 
 	
 	public int countFreezeCourses(int student_id);
