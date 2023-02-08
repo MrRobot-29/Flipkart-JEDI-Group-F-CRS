@@ -57,8 +57,8 @@ public class PaymentServiceOperation implements PaymentService {
 			break;
 		}
 		if(status) {
-			PaymentNotificationDaoImpl pndi = new PaymentNotificationDaoImpl();
-			pndi.sendFeePaymentNotification(st, fee);
+			PaymentNotificationService pns = new PaymentNotificationServiceOperation();
+			pns.sendFeePaymentNotification(st, fee);
 		}
 		
 		
