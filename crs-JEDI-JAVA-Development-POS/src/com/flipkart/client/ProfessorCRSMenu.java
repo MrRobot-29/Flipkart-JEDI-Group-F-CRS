@@ -17,8 +17,11 @@ import com.flipkart.service.ProfessorServiceOperation;
 public class ProfessorCRSMenu {
 	
 	ProfessorService service = new ProfessorServiceOperation();
-	boolean isLogin = true;
+	boolean isLogin = true,status;
 	Scanner sc = new Scanner(System.in);
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLUE = "\u001B[34m";
 
 
 	/**
@@ -51,12 +54,9 @@ public class ProfessorCRSMenu {
 				/**
 				 * view all the courses taught by the professor
 				 */
-				List<String> takenCourses;
 				try {
-					takenCourses = service.viewCourseList(p.getProfId());
-					for(String course: takenCourses)
-						System.out.println(course);
-					
+					System.out.println("Course Taken: \n");
+					service.viewCourseList(p.getProfId()).forEach(course -> System.out.println(course));
 				} catch (NoCourseFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -69,11 +69,10 @@ public class ProfessorCRSMenu {
 				System.out.println("Enter Course Id: ");
 				sc.nextLine();
 				String courseId = sc.nextLine();
-				List<String> enrolledStudents;
 				try {
-					enrolledStudents = service.viewEnrolledStudents(p.getProfId(), courseId);
-					for(String student: enrolledStudents)
-						System.out.println(student);
+					
+					System.out.println("Enrolled Students: ");
+					service.viewEnrolledStudents(p.getProfId(), courseId).forEach(student -> System.out.println(student));
 					
 				} catch (NoStudentFoundException e) {
 					// TODO Auto-generated catch block
@@ -91,13 +90,12 @@ public class ProfessorCRSMenu {
 				int studentId = sc.nextInt();
 				System.out.println("Enter Grade: ");
 				String grade = sc.next();
-				boolean status;
 				try {
 					status = service.addGrade(courseId, studentId, grade);
 					if(status)
-						System.out.println("Grade Assigned");
+						System.out.println(ANSI_GREEN+"Grade Assigned"+ANSI_RESET);
 					else
-						System.out.println("Operation Unsuccessful");
+						System.out.println(ANSI_BLUE+"Operation Unsuccessful"+ANSI_RESET);
 				} catch (GradeAlreadyAddedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -112,7 +110,11 @@ public class ProfessorCRSMenu {
 				sc.nextLine();
 				courseId = sc.nextLine();
 				try {
-					service.selectCourseToTeach(courseId,p.getProfId());
+					status = service.selectCourseToTeach(courseId,p.getProfId());
+					if(status)
+						System.out.println(ANSI_GREEN+"Course Selected"+ANSI_RESET);
+					else
+						System.out.println(ANSI_BLUE+"Operation Unsuccessfull!! Please Try Again"+ANSI_RESET);
 				} catch (CourseNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
