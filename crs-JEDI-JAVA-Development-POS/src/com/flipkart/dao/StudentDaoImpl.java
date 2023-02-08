@@ -17,6 +17,11 @@ import com.flipkart.utils.DBUtils;
 
 import java.util.*;
 import com.flipkart.constant.*;
+import com.flipkart.exception.CourseAlreadyOptedException;
+import com.flipkart.exception.CourseCountExceededException;
+import com.flipkart.exception.CourseNotAvailableException;
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.CourseNotOptedException;
 
 /**
  * @author ashwin.kumar2
@@ -84,7 +89,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
     	return cnt;
     }
     
-    public int secondaryCourseFreq(int student_id) {
+    public int secondaryCourseFreq(int student_id){
     	
     	Connection conn = DBUtils.getConnection();
 
@@ -105,7 +110,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
     	return cnt;
     }
     
-    public boolean checkCourse(int studentId, String courseId) {
+    public boolean checkCourse(int studentId, String courseId) throws CourseAlreadyOptedException {
     	
     	Connection conn = DBUtils.getConnection();
     	
@@ -121,41 +126,41 @@ public class StudentDaoImpl implements StudentDaoInterface{
 				count = rs.getInt("count");
 			}
 			
-			if(count > 0) return false;
+			if(count == 0) return true;
+			else throw new CourseAlreadyOptedException(courseId);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
-    	return true;
+    	return false;
     }
 
     
-    public boolean addCourseBucket(int student_id, String course_id, int course_type) {
+    public boolean addCourseBucket(int student_id, String course_id, int course_type) throws CourseAlreadyOptedException, CourseCountExceededException, CourseNotAvailableException{
     	
-    	Connection conn = DBUtils.getConnection();
-    	
-
-    	
+    	Connection conn = DBUtils.getConnection();    	
     	try {
-    		    if(!checkCourse(student_id, course_id)) {
-    		    	System.out.println("Course already added!");
-    		    	return false;
-    		    }
+    			boolean status1 = getCourseAvailabilityStatus(course_id);
+    			if(!status1)
+    				throw new CourseNotAvailableException(course_id);
+    			
+    		    boolean status2 = checkCourse(student_id,course_id);
+    		    
     			int cnt = 0;
     			if(course_type == 0) {
     				cnt = primaryCourseFreq(student_id);
     				
     				if(cnt>=4) {
-    					return false;
+    					throw new CourseCountExceededException("Primary");
     				}
     			}
     			else if(course_type == 1) {
     				cnt = secondaryCourseFreq(student_id);
     				
     				if(cnt>=2) {
-    					return false;
+    					throw new CourseCountExceededException("Secondary");
     				}
     			}
     			else {
@@ -177,13 +182,16 @@ public class StudentDaoImpl implements StudentDaoInterface{
 	    		return true;
 			
 	    	}catch(SQLException err) {
-	    		System.out.println(err.getMessage());
+	    		System.out.println(Color.ANSI_YELLOW+"Course Not Available in Catalog"+Color.ANSI_RESET);
+	    	}
+	    	catch(CourseAlreadyOptedException err) {
+	    		throw err;
 	    	}
     	return false;
     }
     
     
-    public boolean drop_course(int studentId, String courseId) {
+    public boolean drop_course(int studentId, String courseId) throws CourseNotOptedException {
     	
     	Connection connection=DBUtils.getConnection();
     	
@@ -201,8 +209,8 @@ public class StudentDaoImpl implements StudentDaoInterface{
 			{
 				return true;
 			}
-			return false;
-				
+			else
+				throw new CourseNotOptedException(courseId);	
 		}
 		catch(SQLException e)
 		{

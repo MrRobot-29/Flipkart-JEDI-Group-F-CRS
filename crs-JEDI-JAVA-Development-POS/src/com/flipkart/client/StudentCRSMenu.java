@@ -8,10 +8,12 @@ import java.util.Scanner;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
+import com.flipkart.constant.Color;
 import com.flipkart.exception.CourseAlreadyOptedException;
 import com.flipkart.exception.CourseCountExceededException;
 import com.flipkart.exception.CourseNotAvailableException;
 import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.CourseNotOptedException;
 import com.flipkart.exception.GradeNotAllotedException;
 import com.flipkart.exception.NoCourseFoundException;
 import com.flipkart.exception.PaymentNotCompletedException;
@@ -83,29 +85,19 @@ public class StudentCRSMenu {
 					if(courseId.equalsIgnoreCase("0"))
 						break;
 					
-					if(!sso.getCourseAvailabilityStatus(courseId))
-					{
-						System.out.println("Course Unavailable!!");
-						continue;
-					}
-					if(!sso.checkCourse(std.getStudentID(), courseId))
-					{
-						System.out.println("Course Already Taken");
-						continue;
-					}
 					System.out.println("Enter Course Type: ");
 					System.out.println("0 for Primary and 1 for Secondary");
 					int type = sc.nextInt();
-					if(type == 0 && primaryCnt == 4)
-					{
-						System.out.println("You have already filled all the slot for primary courses");
-						continue;
-					}
-					if(type == 1 && primaryCnt == 2)
-					{
-						System.out.println("You have already filled all the slot for secondary courses");
-						continue;
-					}
+//					if(type == 0 && primaryCnt == 4)
+//					{
+//						System.out.println("You have already filled all the slot for primary courses");
+//						continue;
+//					}
+//					if(type == 1 && primaryCnt == 2)
+//					{
+//						System.out.println("You have already filled all the slot for secondary courses");
+//						continue;
+//					}
 					boolean status;
 					try {
 						status = sso.addCourse(std.getStudentID(), courseId, type);
@@ -114,10 +106,9 @@ public class StudentCRSMenu {
 						else
 							System.out.println("Operation Failed !!");
 						
-					} catch (CourseAlreadyOptedException | CourseCountExceededException | CourseNotFoundException
-							| CourseNotAvailableException e) {
+					} catch (CourseAlreadyOptedException | CourseCountExceededException | CourseNotAvailableException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						System.out.println(e.getMessage());
 					}
 					
 				}
@@ -136,10 +127,10 @@ public class StudentCRSMenu {
 				try {
 					status = sso.dropCourse(std.getStudentID(),courseId);
 					if(status)
-						System.out.println("Course Dropped Successfully");
-				} catch (CourseNotFoundException e) {
+						System.out.println(Color.ANSI_GREEN+"Course Dropped Successfully"+Color.ANSI_RESET);
+				} catch (CourseNotOptedException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				}
 				
 				break;
