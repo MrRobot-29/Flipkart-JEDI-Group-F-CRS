@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.flipkart.bean.Course"/>
+    <fullyQualifiedTypeName name="com.flipkart.bean.Student"/>
+    <fullyQualifiedTypeName name="com.flipkart.bean.Professor"/>
+    <fullyQualifiedTypeName name="com.flipkart.demo.DemoTest"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+</qualifiedTypeNameHistroy>
