@@ -51,6 +51,7 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 	@Override
 	public boolean selectCourseToTeach(String courseId, int instructorId) {
 		// TODO Auto-generated method stub
+		boolean status = false;
 		try { 
 			conn = DaoHelper.getConnection();
 			String sql = "UPDATE COURSE SET PROF_ID=? WHERE COURSE_ID=?";
@@ -62,6 +63,7 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 			int rows = stmt.executeUpdate();
 			if (rows > 0) {
 				System.out.println("Professor Successfully Opted the course to teach!");
+				status = true;
 			}
 				
 			
@@ -80,7 +82,7 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 			} // nothing we can do
 			
 		} 
-		return false;
+		return status;
 	}
 
 	@Override
