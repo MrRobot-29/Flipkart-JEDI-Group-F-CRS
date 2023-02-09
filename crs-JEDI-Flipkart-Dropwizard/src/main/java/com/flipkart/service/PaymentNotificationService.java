@@ -10,5 +10,5 @@ public interface PaymentNotificationService {
 	 * 
 	 * 
 	 */
-	public void sendFeePaymentNotification(Student s,double billAmount);
+	public String sendFeePaymentNotification(Student s,double billAmount);
 }

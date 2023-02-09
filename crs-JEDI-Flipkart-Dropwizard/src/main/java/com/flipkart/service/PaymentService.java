@@ -17,7 +17,7 @@ public interface PaymentService {
 	 * @param st: student object
 	 * @param studentApprovedCourses: list of approved course of student
 	 */
-	public void initiatePayment(double fee, Student st, ArrayList<String> studentApprovedCourses) throws PaymentNotCompletedException;
+	public String initiatePayment (double fee, Student st, ArrayList<String> studentApprovedCourses) throws PaymentNotCompletedException;
 
 	/**
 	 * Method to pay online

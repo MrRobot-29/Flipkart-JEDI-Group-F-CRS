@@ -22,49 +22,31 @@ public class PaymentServiceOperation implements PaymentService {
 	Scanner sc = new Scanner(System.in);
 	StudentDaoInterface studentDao = new StudentDaoImpl();
 	
-	public void initiatePayment(double fee, Student st, ArrayList<String> studentApprovedCourses) {
-		
-		System.out.println("Initiating payment..");
-		System.out.println();
-		System.out.println("****** Bill *******");
-		System.out.println("Name of Student :" + st.getName());
-		System.out.println("Student ID : "+st.getStudentID());
-		System.out.println("Opted Courses:");
-		for(String course : studentApprovedCourses) {
-			System.out.print(course+" ");
-		}
-		System.out.println();
-		System.out.println("************");
-		PaymentDaoImpl pdi = new PaymentDaoImpl();
-		if(pdi.calculateBillDue(st.getStudentID(), fee)>0) {
-			System.out.println("Total Bill Due: "+ fee);
-			System.out.println("Select mode of payment");
-			System.out.println("1-Online");
-			System.out.println("2-Offline");
-			int option = sc.nextInt();
-			boolean status=false;
-			switch(option) {
-			case 1:
-				status = payOnline(st,fee);
-				break;
-			case 2:
-				status = payOffline(st,fee);
-				break;
+	public String initiatePayment(double fee, Student st, ArrayList<String> studentApprovedCourses) {
 
-			default:
-				System.out.println("Invalid Input!! Payment Failed");
-				break;
-			}
+		String result = " ";
+
+		for(String course : studentApprovedCourses) {
+			result = result + course + " ";
+		}
+
+		PaymentDaoImpl pdi = new PaymentDaoImpl();
+
+		if(pdi.calculateBillDue(st.getStudentID(), fee)>0) {
+			result = result + " " + "Total Bill Due: "+ fee;
+			
+			boolean status=true;
+
 			if(status) {
 				PaymentNotificationService pns = new PaymentNotificationServiceOperation();
-				pns.sendFeePaymentNotification(st, fee);
+				result = result +  " " + pns.sendFeePaymentNotification(st, fee);
 			}
 		}
 		else {
-			System.out.println("Total Bill Due: "+ 0);
+			result = result + " " + "Total Bill Due: "+ 0;
 		}
-		
-		
+
+		return result;
 	}
 	
 	

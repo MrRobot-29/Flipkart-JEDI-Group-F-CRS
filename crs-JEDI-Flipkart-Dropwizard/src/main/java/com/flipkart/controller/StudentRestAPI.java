@@ -105,7 +105,7 @@ public class StudentRestAPI {
         // drop the course
         try {
             studentDao.drop_course(student, courseId);
-            return Response.ok().entity("Course Dropped Successfully").build();
+            return Response.ok().entity(studentDao.drop_course(student, courseId)).build();
         }
         catch(CourseNotOptedException e){
             return Response.status(400).entity("Course Not Opted").build();
@@ -138,9 +138,10 @@ public class StudentRestAPI {
         double amt = studentDao.calculate_total_fee(std.getStudentID());
 
         PaymentService pso = new PaymentServiceOperation();
+
         try {
-            pso.initiatePayment(amt, std, studentDao.getRegisteredCourseList(std.getStudentID()));
-            return Response.ok().entity("Payment Successful").build();
+            String res = pso.initiatePayment(amt, std, studentDao.getRegisteredCourseList(std.getStudentID()));
+            return Response.ok().entity(res).build();
         } catch (PaymentNotCompletedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
