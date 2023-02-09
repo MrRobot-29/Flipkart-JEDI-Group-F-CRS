@@ -434,7 +434,7 @@ public class StudentDaoImpl implements StudentDaoInterface{
 				
 				// @test  karna hai isse
 				statement.setInt(1, student_id);
-				System.out.println(statement);
+				//System.out.println(statement);
 				//statement.setArray(1, registered_course_list);
 				
 				ResultSet rs = statement.executeQuery();

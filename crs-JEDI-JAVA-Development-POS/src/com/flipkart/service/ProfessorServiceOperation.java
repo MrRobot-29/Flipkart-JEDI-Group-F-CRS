@@ -26,8 +26,8 @@ public class ProfessorServiceOperation implements ProfessorService {
     public boolean selectCourseToTeach(String courseId, int instructorId)
     {
 
-        pdi.selectCourseToTeach(courseId, instructorId);
-        return false;
+        return pdi.selectCourseToTeach(courseId, instructorId);
+        //return false;
     }
 
 	public List<String> viewEnrolledStudents(int instructorId,String courseId) {
@@ -37,8 +37,8 @@ public class ProfessorServiceOperation implements ProfessorService {
     }
 
     public boolean addGrade(String courseId, int studentId, String grade) {
-        pdi.addGrade(courseId, studentId, grade);
-        return true;
+        return pdi.addGrade(courseId, studentId, grade);
+        //return true;
     }
 
 }

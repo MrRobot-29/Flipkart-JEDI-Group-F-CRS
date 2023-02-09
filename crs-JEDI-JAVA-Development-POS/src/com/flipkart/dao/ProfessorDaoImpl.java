@@ -61,7 +61,11 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 			
 			int rows = stmt.executeUpdate();
 			if (rows > 0) {
-				System.out.println("Professor Successfully Opted the course to teach!");
+				return true;
+				//System.out.println("Professor Successfully Opted the course to teach!");
+			}
+			else{
+				return false;
 			}
 				
 			
@@ -134,8 +138,10 @@ public class ProfessorDaoImpl implements ProfessorDaoInterface{
 			
 			int rows = stmt.executeUpdate();
 			if (rows > 0)
-				System.out.println("Grade added Successfully");
-			
+			{return true;}
+				//System.out.println("Grade added Successfully");
+			else
+				return false;
 			
 		} catch (SQLException se) {
 			// Handle errors for JDBC

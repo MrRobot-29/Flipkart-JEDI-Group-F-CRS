@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.flipkart.bean.Professor;
+import com.flipkart.constant.Color;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.GradeAlreadyAddedException;
 import com.flipkart.exception.NoCourseFoundException;
@@ -108,7 +109,7 @@ public class ProfessorCRSMenu {
 					if(status)
 						System.out.println(ANSI_GREEN+"Grade Assigned"+ANSI_RESET);
 					else
-						System.out.println(ANSI_BLUE+"Operation Unsuccessful"+ANSI_RESET);
+						System.out.println(Color.ANSI_YELLOW+"Operation Unsuccessful"+Color.ANSI_RESET);
 				} catch (GradeAlreadyAddedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -127,7 +128,7 @@ public class ProfessorCRSMenu {
 					if(status)
 						System.out.println(ANSI_GREEN+"Course Selected"+ANSI_RESET);
 					else
-						System.out.println(ANSI_BLUE+"Operation Unsuccessfull!! Please Try Again"+ANSI_RESET);
+						System.out.println(Color.ANSI_YELLOW+"Operation Unsuccessfull!! Please Try Again"+Color.ANSI_RESET);
 				} catch (CourseNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

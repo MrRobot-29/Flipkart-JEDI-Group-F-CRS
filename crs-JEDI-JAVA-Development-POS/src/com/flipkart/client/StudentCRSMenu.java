@@ -35,7 +35,7 @@ public class StudentCRSMenu {
 			System.out.println("1. View available Course List");
 			System.out.println("2. Add Course to course Cart");
 			System.out.println("3. Drop Course from course Cart");
-			System.out.println("4. View and Freeze Course Cart");
+			System.out.println("4. Freeze Course Cart");
 			System.out.println("5. View registered Course");
 			System.out.println("6. Pay Fee");
 			System.out.println("7. View Grade Card");
@@ -65,7 +65,7 @@ public class StudentCRSMenu {
 			case 2:
 				
 				if(!sso.add_drop_status(std.getStudentID())) {
-					System.out.println("Course Status Frezzed. Could not add more courses!!!!");
+					System.out.println(Color.ANSI_YELLOW + "Course Status Frezzed. Could not add more courses!!!!" + Color.ANSI_RESET);
 					break;
 				}
 				
@@ -73,8 +73,8 @@ public class StudentCRSMenu {
 				System.out.println(primaryCnt);
 				if(primaryCnt == 4 && secCnt == 2)
 				{
-					System.out.println("You have already selected all the required primary and secondary course !!");
-					System.out.println("Please Drop Course");
+					System.out.println(Color.ANSI_YELLOW + "You have already selected all the required primary and secondary course !!" + Color.ANSI_RESET);
+					System.out.println(Color.ANSI_YELLOW + "Please Drop Course" + Color.ANSI_RESET);
 					break;
 				}
 				while(true)
@@ -102,9 +102,9 @@ public class StudentCRSMenu {
 					try {
 						status = sso.addCourse(std.getStudentID(), courseId, type);
 						if(status)
-							System.out.println("Course Added Successfully");
+							System.out.println(Color.ANSI_GREEN + "Course Added Successfully" + Color.ANSI_RESET);
 						else
-							System.out.println("Operation Failed !!");
+							System.out.println(Color.ANSI_YELLOW + "Operation Failed !!" + Color.ANSI_RESET);
 						
 					} catch (CourseAlreadyOptedException | CourseCountExceededException | CourseNotAvailableException e) {
 						// TODO Auto-generated catch block
@@ -116,7 +116,7 @@ public class StudentCRSMenu {
 			case 3:
 				
 				if(!sso.add_drop_status(std.getStudentID())) {
-					System.out.println("Course Status Frezzed. Could not drop the current course");
+					System.out.println(Color.ANSI_YELLOW + "Course Status Frezzed. Could not drop the current course" + Color.ANSI_RESET);
 					break;
 				}
 				
@@ -127,7 +127,7 @@ public class StudentCRSMenu {
 				try {
 					status = sso.dropCourse(std.getStudentID(),courseId);
 					if(status)
-						System.out.println(Color.ANSI_GREEN+"Course Dropped Successfully"+Color.ANSI_RESET);
+						System.out.println(Color.ANSI_GREEN + "Course Dropped Successfully"+Color.ANSI_RESET);
 				} catch (CourseNotOptedException e) {
 					// TODO Auto-generated catch block
 					System.out.println(e.getMessage());
@@ -138,9 +138,9 @@ public class StudentCRSMenu {
 				try {
 					status = sso.freezeCourseCart(std.getStudentID());
 					if(status)
-						System.out.println("Course Cart Freezed Successfully");
+						System.out.println(Color.ANSI_GREEN + "Course Cart Freezed Successfully" + Color.ANSI_RESET);
 					else
-						System.out.println("Operation Failed! Please make sure you have selected 4 primary and 2 secondary courses");
+						System.out.println(Color.ANSI_YELLOW + "Operation Failed! Please make sure you have selected 4 primary and 2 secondary courses" + Color.ANSI_RESET);
 				} catch (CourseNotAvailableException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -172,7 +172,7 @@ public class StudentCRSMenu {
 					grades = sso.viewGrade(std.getStudentID(), std.getSemester());
 					if(grades == null)
 					{
-						System.out.println("Grade Card Awaited!! Contact Admin");
+						System.out.println(Color.ANSI_YELLOW + "Grade Card Awaited!! Contact Admin" + Color.ANSI_RESET);
 						break;
 					}
 					buffer.setLength(0);
@@ -188,7 +188,7 @@ public class StudentCRSMenu {
 				isLoggedIn = false;
 				break;
 			default:
-				System.out.println("Invalid Choice!! Try Again");
+				System.out.println(Color.ANSI_YELLOW + "Invalid Choice!! Try Again" + Color.ANSI_RESET);
 			}
 			
 		}
