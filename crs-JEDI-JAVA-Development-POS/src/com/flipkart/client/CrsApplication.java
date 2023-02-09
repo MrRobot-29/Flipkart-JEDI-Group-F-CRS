@@ -1,8 +1,10 @@
 package com.flipkart.client;
 
 import java.sql.Connection;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import com.flipkart.constant.Color;
 import com.flipkart.exception.UserAlreadyExistsException;
 import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.exception.WrongPasswordException;
@@ -32,7 +34,17 @@ public class CrsApplication {
 			System.out.println("2. Registration of Student");
 			System.out.println("3. Update Password ");
 			System.out.println("4. Exit ");
-			int selectedOption = sc.nextInt();
+			System.out.println("Please select an option(1-4) ");
+			int selectedOption;
+			try {
+				 selectedOption = sc.nextInt();				
+			} catch(InputMismatchException e) {
+				System.out.println(Color.ANSI_YELLOW + "Input should be an Integer" + Color.ANSI_RESET);
+				sc.nextLine();
+				continue;
+			}
+			
+			
 			switch(selectedOption)
 			{
 			case 1:
@@ -64,6 +76,8 @@ public class CrsApplication {
 					
 			}
 		}
+		
+		System.out.println(Color.ANSI_GREEN + "System Exited Successfully" + Color.ANSI_RESET);
 		
 	}
 
