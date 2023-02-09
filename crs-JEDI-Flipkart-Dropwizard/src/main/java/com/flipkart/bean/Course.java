@@ -21,6 +21,11 @@ public class Course {
 	 * @param fee: fee for the course
 	 * @param semester: semester of the course
 	 */
+
+
+	public Course(){
+
+	}
 	public Course(String courseName, String courseId, int instructorId, boolean isCourseAvailable, Double fee, int semester) {
 		this.courseName = courseName;
 		this.courseId = courseId;
