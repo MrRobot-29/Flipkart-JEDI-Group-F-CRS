@@ -2,9 +2,13 @@ package com.flipkart;
 
 //import com.flipkart.controller.EmployeeController;
 //import com.flipkart.controller.HelloRestAPI;
+
 import com.flipkart.controller.ProfessorRestAPI;
 import com.flipkart.controller.AdminRestAPI;
 import com.flipkart.controller.UserRestAPI;
+
+import com.flipkart.controller.StudentRestAPI;
+
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
 import io.dropwizard.setup.Bootstrap;
@@ -31,11 +35,12 @@ public class App extends Application<Configuration> {
         e.jersey().register(new UserRestAPI(e.getValidator()));
         e.jersey().register(new AdminRestAPI(e.getValidator()));
 //        e.jersey().register(new ProfessorRestAPI());
-//        e.jersey().register(new StudentRestAPI());
+            e.jersey().register(new StudentRestAPI(e.getValidator()));
 //        e.jersey().register(new UserRestAPI());
     }
 
     public static void main(String[] args) throws Exception {
         new App().run(args);
+
     }
 }
