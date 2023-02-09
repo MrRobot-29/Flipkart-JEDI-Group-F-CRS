@@ -1,5 +1,6 @@
 package com.flipkart.service;
 
+import com.flipkart.bean.PaymentNotification;
 import com.flipkart.bean.Student;
 
 public interface PaymentNotificationService {
@@ -10,5 +11,5 @@ public interface PaymentNotificationService {
 	 * 
 	 * 
 	 */
-	public String sendFeePaymentNotification(Student s,double billAmount);
+	public PaymentNotification sendFeePaymentNotification(Student s, double billAmount);
 }

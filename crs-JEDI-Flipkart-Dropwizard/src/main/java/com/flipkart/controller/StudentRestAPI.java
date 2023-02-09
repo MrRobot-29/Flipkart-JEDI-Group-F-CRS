@@ -140,7 +140,7 @@ public class StudentRestAPI {
         PaymentService pso = new PaymentServiceOperation();
 
         try {
-            String res = pso.initiatePayment(amt, std, studentDao.getRegisteredCourseList(std.getStudentID()));
+            PaymentReciept res = pso.initiatePayment(amt, std, studentDao.getRegisteredCourseList(std.getStudentID()));
             return Response.ok().entity(res).build();
         } catch (PaymentNotCompletedException e) {
             // TODO Auto-generated catch block

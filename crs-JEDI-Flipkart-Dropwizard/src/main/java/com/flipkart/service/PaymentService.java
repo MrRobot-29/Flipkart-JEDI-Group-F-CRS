@@ -3,6 +3,7 @@ package com.flipkart.service;
 import java.util.ArrayList;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.PaymentReciept;
 import com.flipkart.bean.Student;
 import com.flipkart.exception.PaymentNotCompletedException;
 
@@ -17,7 +18,7 @@ public interface PaymentService {
 	 * @param st: student object
 	 * @param studentApprovedCourses: list of approved course of student
 	 */
-	public String initiatePayment (double fee, Student st, ArrayList<String> studentApprovedCourses) throws PaymentNotCompletedException;
+	public PaymentReciept initiatePayment (double fee, Student st, ArrayList<String> studentApprovedCourses) throws PaymentNotCompletedException;
 
 	/**
 	 * Method to pay online
