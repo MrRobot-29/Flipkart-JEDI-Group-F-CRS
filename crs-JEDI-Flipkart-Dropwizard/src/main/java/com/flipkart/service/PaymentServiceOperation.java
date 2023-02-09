@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 
+import com.flipkart.bean.PaymentReciept;
 import com.flipkart.bean.Student;
 import com.flipkart.dao.PaymentDaoImpl;
 import com.flipkart.dao.StudentDaoImpl;
@@ -22,31 +23,41 @@ public class PaymentServiceOperation implements PaymentService {
 	Scanner sc = new Scanner(System.in);
 	StudentDaoInterface studentDao = new StudentDaoImpl();
 	
-	public String initiatePayment(double fee, Student st, ArrayList<String> studentApprovedCourses) {
+	public PaymentReciept initiatePayment(double fee, Student st, ArrayList<String> studentApprovedCourses) {
+
+		PaymentReciept pr = new PaymentReciept();
 
 		String result = " ";
 
+		ArrayList<String> courses = new ArrayList<String>();
+
 		for(String course : studentApprovedCourses) {
-			result = result + course + " ";
+			courses.add(course);
 		}
+
+		pr.setCrs(courses);
 
 		PaymentDaoImpl pdi = new PaymentDaoImpl();
 
 		if(pdi.calculateBillDue(st.getStudentID(), fee)>0) {
 			result = result + " " + "Total Bill Due: "+ fee;
-			
+
+			pr.setBillDue("Total Bill Due: "+ fee);
+
 			boolean status=true;
 
 			if(status) {
 				PaymentNotificationService pns = new PaymentNotificationServiceOperation();
 				result = result +  " " + pns.sendFeePaymentNotification(st, fee);
+				pr.setPn(pns.sendFeePaymentNotification(st, fee));
 			}
 		}
 		else {
 			result = result + " " + "Total Bill Due: "+ 0;
+			pr.setBillDue("Total Bill Due: "+ 0);
 		}
 
-		return result;
+		return pr;
 	}
 	
 	
