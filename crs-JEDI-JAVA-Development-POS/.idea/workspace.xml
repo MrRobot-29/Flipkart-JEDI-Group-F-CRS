@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80fb0fcd-e0fc-4fba-b124-528935a07924" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/dao/AdminDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/dao/AdminDAOImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/helper/DaoHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/helper/DaoHelper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/flipkart/dao/AdminDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/dao/AdminDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/flipkart/helper/DaoHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/helper/DaoHelper.java" afterDir="false" />
-    </list>
+    <list default="true" id="80fb0fcd-e0fc-4fba-b124-528935a07924" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
