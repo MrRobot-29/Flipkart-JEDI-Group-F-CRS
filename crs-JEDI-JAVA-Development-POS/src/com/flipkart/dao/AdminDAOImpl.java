@@ -27,7 +27,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 	static final String DB_URL = "jdbc:mysql://localhost/crs_db";
 
 	static final String USER = "root";
-	static final String PASS = "Gd@21051971";;
+	static final String PASS = "rootuser";;
 
 
 	DBUtils DBUtils;
@@ -213,9 +213,9 @@ public class AdminDAOImpl implements AdminDAOInterface {
 
 			int rows = stmt.executeUpdate();
 			if (rows > 0) {
-				System.out.println("Student approved to login !");
+				System.out.println(Color.ANSI_GREEN + "Student approved to login !" + Color.ANSI_RESET);
 			}else {
-				System.out.println("Student approval request does not exist");
+				System.out.println(Color.ANSI_YELLOW + "Student approval request does not exist" + Color.ANSI_RESET);
 			}
 			stmt.close();
 		} catch (SQLException se) {
@@ -372,7 +372,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 
 			int rows = stmt.executeUpdate();
 			if (rows > 0) {
-					System.out.println("Grade cards for semester " + semester + " released !");
+					System.out.println(Color.ANSI_GREEN +"Grade cards for semester " + semester + " released !" + Color.ANSI_RESET);
 				}
 			stmt.close();
 		} catch (SQLException se) {

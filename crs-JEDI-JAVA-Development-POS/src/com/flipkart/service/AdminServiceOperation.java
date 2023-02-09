@@ -39,7 +39,7 @@ public class AdminServiceOperation implements AdminService {
     public boolean addCourse() throws CourseAlreadyExistsException {
     	System.out.println("Enter Course Name");
     	String cname = "";
-    	cname += sc.nextLine();
+    	cname = sc.nextLine();
     	System.out.println("Enter Course ID");
     	String cid = sc.next();
     	System.out.println("Enter Instructor ID (0 if not assigned)");

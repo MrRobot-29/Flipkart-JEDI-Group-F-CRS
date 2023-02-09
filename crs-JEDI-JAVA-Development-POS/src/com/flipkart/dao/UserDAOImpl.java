@@ -192,7 +192,7 @@ public class UserDAOImpl implements UserDAOInterface{
 				}
 				
 				if(!std.isApproved()) {
-					System.out.println("The Student account is not approved. Contact admin");
+					System.out.println(Color.ANSI_YELLOW + "The Student account is not approved. Contact admin" + Color.ANSI_RESET);
 					return;
 				}
 				
@@ -215,7 +215,7 @@ public class UserDAOImpl implements UserDAOInterface{
 					if(ad != null)
 						adminMenu.createMenu(ad);
 					else {
-						System.out.println("Error in opening Admin Menu. ");
+						System.out.println(Color.ANSI_YELLOW + "Error in opening Admin Menu. " + Color.ANSI_RESET);
 					}
 					
 			}
