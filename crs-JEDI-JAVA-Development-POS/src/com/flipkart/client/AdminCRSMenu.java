@@ -57,7 +57,8 @@ public class AdminCRSMenu {
 				
 				try {
 					fmt.format("\n%30s %30s %30s %30s\n\n", "Course ID", "Course Name", "Professor ID", "Course Price");  
-					aso.viewCourses().forEach(course -> fmt.format("%30s %30s %30s %30s\n", course.getCourseId(),course.getCourseName(),course.getInstructorId(),course.getCourseFee()));
+					
+					aso.viewCourses().forEach(course -> fmt.format("%30s %30s %30s %30s\n", course.getCourseId(),course.getCourseName(),course.getInstructorId() == 0 ? "No Professor Assigned": course.getInstructorId() ,course.getCourseFee()));
 					System.out.println(fmt);
 					buffer.setLength(0);
 				} catch (NoCourseFoundException e) {
